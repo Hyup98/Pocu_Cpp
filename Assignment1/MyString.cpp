@@ -1,29 +1,29 @@
 #include "MyString.h"
+#include<iostream>
 
 using namespace std;
 namespace assignment1
 {
     MyString::MyString(const char* s)
     {
-        int flag = 0;
-
-        while (1)
+        int flage = 0;
+        while (1)//길이 확인
         {
-            if (s[flag] == '\0')
+            if (s[flage] == '\0')
             {
                 break;
             }
 
-            flag++;
+            flage++;
         }
-        mString = new char[flag+1];
+        mString = new char[flage+1];
 
-        for (int i = 0; i <= flag; i++)
+        for (int i = 0; i <= flage; i++)
         {
             mString[i] = s[i];
         }
 
-        mLength = flag;
+        mLength = flage;
    
     }
 
@@ -31,7 +31,7 @@ namespace assignment1
     {
         mLength = other.mLength;
         mString = new char[other.mLength + 1];
-        for (unsigned int i = 0; i < other.mLength; i++)
+        for (int i = 0; i < other.mLength; i++)
         {
             mString[i] = other.mString[i];
         }
@@ -56,7 +56,7 @@ namespace assignment1
     void MyString::Append(const char* s)
     {
         char* tem = new char[mLength+1];//널 문자 빼고 복사본
-        for (unsigned int i = 0; i < mLength; i++)
+        for (int i = 0; i < mLength; i++)
         {
             tem[i] = mString[i];
         }
@@ -75,14 +75,14 @@ namespace assignment1
         }
          
         mString = new char[flage + mLength + 1];
-        unsigned int i;
+        int i;
 
         for (i = 0; i < mLength; i++)
         {
             mString[i] = tem[i];
         }
 
-        unsigned int j = 0;
+        int j = 0;
         for (i = mLength; i < flage + mLength ; i++)
         {
             mString[i] = s[j];
@@ -102,7 +102,7 @@ namespace assignment1
         const int size = mLength + other.mLength + 1;
         char* tem = new char[size];
         int flage = mLength - 1;
-        for (unsigned int i = 0; i < mLength; i++)
+        for (int i = 0; i < mLength; i++)
         {
             tem[i] = mString[i];
         }
@@ -131,12 +131,12 @@ namespace assignment1
         }
         int sNum = 0;
 
-        for(unsigned int i = 0; i < mLength; i++)
+        for(int i = 0; i < mLength; i++)
         {
             if (mString[i] == s[sNum])
             {
                 sNum = 0;
-                for (unsigned int j = i; j < i + size; j++)
+                for (int j = i; j < i + size; j++)
                 {
                     if (mString[j] != s[sNum])
                     {
@@ -206,13 +206,13 @@ namespace assignment1
     void MyString::Interleave(const char* s)
     {
         char* tem = new char[mLength];//널 문자 빼고 복사본
-        for (unsigned int i = 0; i < mLength; i++)
+        for (int i = 0; i < mLength; i++)
         {
             tem[i] = mString[i];
         }
         delete[] mString;
 
-        unsigned int sSize = 0;//s의 문자열 개수 널문자 제외
+        int sSize = 0;//s의 문자열 개수 널문자 제외
         while (1)
         {
             if (s[sSize] == '\0')
@@ -221,11 +221,11 @@ namespace assignment1
             sSize++;
         }
 
-        unsigned int size = mLength + sSize + 1;
+        int size = mLength + sSize + 1;
         mString = new char[size];
-        unsigned int mNum = 0;
-        unsigned int sNum = 0;
-        for (unsigned int i = 0; i < size + 2 ; i++)
+        int mNum = 0;
+        int sNum = 0;
+        for (int i = 0; i < size + 2 ; i++)
         {
             if (i % 2 == 0)//짝수
             {
@@ -263,7 +263,7 @@ namespace assignment1
         if (i >=  mLength)
             return false;
 
-        for (unsigned int j = 0; j < mLength - 1; j++)
+        for (int j = 0; j < mLength - 1; j++)
         {
             if (j >= i)
             {
@@ -273,7 +273,7 @@ namespace assignment1
 
         char* tem = new char[mLength];
 
-        for (unsigned int i = 0; i < mLength - 1; i++)
+        for (int i = 0; i < mLength - 1; i++)
         {
             tem[i] = mString[i];
         }
@@ -282,7 +282,7 @@ namespace assignment1
         delete[] mString;
         mLength--;
         mString = new char[mLength + 1];
-        for (unsigned int i = 0; i < mLength; i++)
+        for (int i = 0; i < mLength; i++)
         {
             mString[i] = tem[i];
         }
@@ -297,7 +297,7 @@ namespace assignment1
         if (mLength < totalLength)
         {
             char* tem = new char[mLength];
-            for (unsigned int i = 0; i < mLength; i++)
+            for (int i = 0; i < mLength; i++)
             {
                 tem[i] = mString[i];
             }
@@ -307,13 +307,13 @@ namespace assignment1
             mString = new char[totalLength + 1];
 
 
-            for (unsigned int i = 0; i < totalLength - mLength; i++)
+            for (int i = 0; i < totalLength - mLength; i++)
             {
                 mString[i] = ' ';
             }
 
             int sNum = 0;
-            for (unsigned int i = totalLength - mLength; i < totalLength; i++)
+            for (int i = totalLength - mLength; i < totalLength; i++)
             {
                 mString[i] = tem[sNum];
                 sNum++;
@@ -333,7 +333,7 @@ namespace assignment1
         if (mLength < totalLength)
         {
             char* tem = new char[mLength];
-            for (unsigned int i = 0; i < mLength; i++)
+            for (int i = 0; i < mLength; i++)
             {
                 tem[i] = mString[i];
             }
@@ -343,13 +343,13 @@ namespace assignment1
             mString = new char[totalLength + 1];
 
 
-            for (unsigned int i = 0; i < totalLength - mLength; i++)
+            for (int i = 0; i < totalLength - mLength; i++)
             {
                 mString[i] = c;
             }
 
             int sNum = 0;
-            for (unsigned int i = totalLength - mLength; i < totalLength; i++)
+            for (int i = totalLength - mLength; i < totalLength; i++)
             {
                 mString[i] = tem[sNum];
                 sNum++;
@@ -369,7 +369,7 @@ namespace assignment1
         if (mLength < totalLength)
         {
             char* tem = new char[mLength];
-            for (unsigned int i = 0; i < mLength; i++)
+            for (int i = 0; i < mLength; i++)
             {
                 tem[i] = mString[i];
             }
@@ -379,7 +379,7 @@ namespace assignment1
             mString = new char[totalLength + 1];
             int gap = totalLength - mLength;
 
-            for (unsigned int i = totalLength - 1; i >= totalLength - gap; i--)
+            for (int i = totalLength - 1; i >= totalLength - gap; i--)
             {
                 mString[i] = ' ';
             }
@@ -406,7 +406,7 @@ namespace assignment1
         if (mLength < totalLength)
         {
             char* tem = new char[mLength];
-            for (unsigned int i = 0; i < mLength; i++)
+            for (int i = 0; i < mLength; i++)
             {
                 tem[i] = mString[i];
             }
@@ -416,7 +416,7 @@ namespace assignment1
             mString = new char[totalLength + 1];
             int gap = totalLength - mLength;
 
-            for (unsigned int i = totalLength - 1; i >= totalLength - gap; i--)
+            for (int i = totalLength - 1; i >= totalLength - gap; i--)
             {
                 mString[i] = c;
             }
@@ -463,7 +463,7 @@ namespace assignment1
         bool answer = true;
         if (mLength != rhs.mLength)
             return false;
-        for (unsigned int i = 0; i < mLength; i++)
+        for (int i = 0; i < mLength; i++)
         {
             if (mString[i] != rhs.mString[i])
             {
@@ -476,14 +476,13 @@ namespace assignment1
 
     MyString& MyString::operator=(const MyString& rhs)
     {
-
         return *this;
     }
 
     void MyString::ToLower()
     {
 
-        for (unsigned int i = 0; i < mLength; i++)
+        for (int i = 0; i < mLength; i++)
         {
             if (mString[i] >= 65 && mString[i] <= 90)
             {
@@ -494,7 +493,7 @@ namespace assignment1
 
     void MyString::ToUpper()
     {
-        for (unsigned int i = 0; i < mLength; i++)
+        for (int i = 0; i < mLength; i++)
         {
             if (mString[i] >= 97 && mString[i] <= 122 )
             {
