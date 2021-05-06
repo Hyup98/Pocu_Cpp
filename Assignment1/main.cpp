@@ -281,6 +281,9 @@ int main()
 	assert(beforeAddress1 == (int)testString1.GetCString());
 	cout << "M3_NoMallocInInterleaveEmpty Åë°ú" << endl;
 
+
+
+
 	int a;
 	std::cin >> a;
 	return 0;

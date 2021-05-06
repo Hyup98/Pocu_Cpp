@@ -24,6 +24,7 @@ namespace assignment1
         }
         mString[flag] = '\0';
 
+        //delete[] s;
         mLength = flag;
    
     }
@@ -82,25 +83,22 @@ namespace assignment1
     
     MyString MyString::operator+(const MyString& other) const
     {
+        unsigned int size = mLength + other.mLength + 1;
+        char* string = (char*)malloc(sizeof(char) * size);
+
+        for (size_t i = 0; i < mLength ; i++)
+        {
+            string[i] = mString[i];
+        }
+
+        for (size_t i = mLength; i < size - 1; i++)
+        {
+            string[i] = other.mString[i];
+        }
    
-        int size = mLength + other.mLength + 1;
-        char* tem = (char*)malloc(sizeof(char) * size);
-
-        for (unsigned int i = 0; i < mLength; i++)
-        {
-            tem[i] = mString[i];
-        }
-        int count = 0;
-        for (int i = mLength; i < size - 1; i++)
-        {
-            tem[i] = other.mString[count];
-            count++;
-        }
-        tem[size - 1] = '\0';
-
-        MyString answer(tem);
-        free(tem);
-        return answer;
+        string[size - 1] = '\0';
+        
+        return MyString(string);
     }
 
     int MyString::IndexOf(const char* s)
