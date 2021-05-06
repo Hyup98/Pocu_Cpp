@@ -1,138 +1,103 @@
-#include "MyString.h"
 #include <iostream>
-using namespace std;
+#include <cassert>
+#include "MyString.h"
+
 using namespace assignment1;
-void test()
+using namespace std;
+
+int main()
 {
-	/* GetLength() Ex */
-	cout << "-----------------------" << endl;
-	cout << "GetLength()" << endl;
-	MyString s1("Hello");
-	cout << s1.GetLength() << endl;   // 5
+	//	메모리 체크용 변수
+	int beforeAddress1;
+	int beforeAddress2;
 
-	/* GetCString() Ex */
-	cout << "-----------------------" << endl;
-	cout << "GetCString()" << endl;
-	MyString s2("Hello");
-	cout << s2.GetCString() << endl;  // Hello
+	MyString testString1("Happy Happy Days");
+	MyString testString2("Happy Days");
+	MyString testString3("Happy Days");
+	MyString testString4("");
 
-		/* Append() Ex */
-	cout << "-----------------------" << endl;
-	cout << "Append()" << endl;
-	MyString s3("Hello");
-	s3.Append(" World");
-	cout << s3.GetCString() << endl;  // Hello World
-	s3.Append("\n\tWorld\n");
-	cout << s3.GetCString() << endl;
+	//	Operator == 관련
+	beforeAddress1 = (int)testString2.GetCString();
+	beforeAddress2 = (int)testString3.GetCString();
+	if (testString2 == testString3);
+	assert(beforeAddress1 == (int)testString2.GetCString());
+	assert(beforeAddress2 == (int)testString3.GetCString());
+	cout << "D2_NoMallocInCompareSameLength 통과" << endl;
 
+	beforeAddress1 = (int)testString1.GetCString();
+	beforeAddress2 = (int)testString2.GetCString();
+	if (testString1 == testString2);
+	assert(beforeAddress1 == (int)testString1.GetCString());
+	assert(beforeAddress2 == (int)testString2.GetCString());
+	cout << "D5_NoMallocInCompareDifferentLength 통과" << endl;
 
-	/* IndexOf() Ex */
-	cout << "-----------------------" << endl;
-	cout << "IndexOf()" << endl;
-	MyString s5("Hello");
-	cout << s5.IndexOf("ell") << endl;   // 1
-	cout << s5.IndexOf("l") << endl;     // 2
-	cout << s5.IndexOf("This") << endl;  // -1
-	cout << s5.IndexOf("") << endl;   // 0
-	cout << s5.IndexOf("lo") << endl;   // 3
+	//	IndexOf, LastOfIndex 관련
+	beforeAddress1 = (int)testString1.GetCString();
+	testString1.IndexOf("Happy");
+	testString1.IndexOf("");
+	assert(beforeAddress1 == (int)testString1.GetCString());
 
+	beforeAddress1 = (int)testString1.GetCString();
+	testString1.LastIndexOf("Happy");
+	testString1.LastIndexOf("");
+	assert(beforeAddress1 == (int)testString1.GetCString());
+	cout << "E5_NoMallocInIndexOf 통과" << endl;
 
-	MyString s52("");
-	cout << s52.IndexOf("") << endl;   // 0
-	cout << s52.IndexOf("A") << endl; // -1
+	//	ToUpper, ToLower 관련
+	beforeAddress1 = (int)testString1.GetCString();
+	testString1.ToUpper();
+	testString1.ToLower();
+	assert(beforeAddress1 == (int)testString1.GetCString());
+	cout << "F3_NoMallocInUpperLower 통과" << endl;
 
-	MyString s53("Hellello");
-	MyString s54("Heloo");
-	cout << s53.IndexOf("ell") << endl;   // 1
-	cout << s54.IndexOf("ell") << endl;   // -1
+	//	Reverse 관련
+	beforeAddress1 = (int)testString1.GetCString();
+	testString1.Reverse();
+	testString1.Reverse();
+	assert(beforeAddress1 == (int)testString1.GetCString());
+	beforeAddress1 = (int)testString4.GetCString();
+	testString4.Reverse();
+	assert(beforeAddress1 == (int)testString4.GetCString());
+	cout << "G4_NoMallocInReverse 통과" << endl;
 
-	/* LastIndexOf() Ex */
-	cout << "-----------------------" << endl;
-	cout << "LastIndexOf()" << endl;
-	MyString s6("Hello");
-	cout << s6.LastIndexOf("ell") << endl;   // 1
-	cout << s6.LastIndexOf("l") << endl;     // 3
-	cout << s6.LastIndexOf("This") << endl;  // -1
-	cout << s6.LastIndexOf("") << endl;   // 5
-	cout << s6.LastIndexOf("He") << endl;   // 0
+	//	Append 관련
+	beforeAddress1 = (int)testString1.GetCString();
+	testString1.Append("");
+	assert(beforeAddress1 == (int)testString1.GetCString());
+	cout << "H3_NoMallocInAppendEmpty 통과" << endl;
 
-	MyString s62("");
-	cout << s62.LastIndexOf("") << endl;  // 0
-	cout << s62.LastIndexOf("A") << endl; // -1
+	//	 RemoveAt 관련
+	beforeAddress1 = (int)testString4.GetCString();
+	testString4.RemoveAt(0);
+	assert(beforeAddress1 == (int)testString4.GetCString());
+	cout << "J2_RemoveAtNoMallocOnEmpty 통과" << endl;
 
-	MyString s63("Hellello");
-	MyString s64("Heloo");
-	cout << s63.LastIndexOf("ell") << endl;   // 4
-	cout << s64.LastIndexOf("ell") << endl;   // -1
+	//	PadLeft, PadRight 관련
+	beforeAddress1 = (int)testString1.GetCString();
+	testString1.PadLeft(16);
+	testString1.PadLeft(16, '*');
+	assert(beforeAddress1 == (int)testString1.GetCString());
+	cout << "K4_NoMallocInPadLeftShorter 통과" << endl;
 
+	beforeAddress1 = (int)testString1.GetCString();
+	testString1.PadRight(16);
+	testString1.PadRight(16, '*');
+	assert(beforeAddress1 == (int)testString1.GetCString());
+	cout << "L4_NoMallocInPadRightShorter 통과" << endl;
 
-	/* Interleave() Ex */
-	cout << "-----------------------" << endl;
-	cout << "Interleave()" << endl;
-	MyString s7("Hello");
-	s7.Interleave(" World");
-	cout << s7.GetCString() << endl;  //H eWlolrold
+	//	InterLeave 관련
 
-	MyString s72("A");
-	s72.Interleave("BCDEF");
-	cout << s72.GetCString() << endl;  // ABCDEF
+	beforeAddress1 = (int)testString1.GetCString();
+	testString1.PadRight(16);
+	testString1.PadRight(16, '*');
+	assert(beforeAddress1 == (int)testString1.GetCString());
+	cout << "L4_NoMallocInPadRightShorter 통과" << endl;
 
-	MyString s73("bcdef");
-	s73.Interleave("a");
-	cout << s73.GetCString() << endl;  // bacdef
+	//	InterLeave 관련
+	beforeAddress1 = (int)testString1.GetCString();
+	testString1.Interleave("");
+	assert(beforeAddress1 == (int)testString1.GetCString());
+	cout << "M3_NoMallocInInterleaveEmpty 통과" << endl;
 
-	/* RemoveAt() Ex */
-	cout << "-----------------------" << endl;
-	cout << "RemoveAt()" << endl;
-	MyString s8("Hello");
-	cout << boolalpha << s8.RemoveAt(0) << ", ";   // true,
-	cout << s8.GetCString() << endl;               // ello
-	cout << boolalpha << s8.RemoveAt(2) << ", ";   // true,
-	cout << s8.GetCString() << endl;               // elo
-	cout << boolalpha << s8.RemoveAt(4) << ", ";   // false,
-	cout << s8.GetCString() << endl;               // elo
-
-	MyString s82("");
-	cout << boolalpha << s82.RemoveAt(0) << endl;  //false
-
-	/* PadLeft() Ex */
-	cout << "-----------------------" << endl;
-	cout << "PadLeft()" << endl;
-	MyString s9("Hello");
-	s9.PadLeft(2);  // "Hello"
-	cout << s9.GetCString() << endl;
-	s9.PadLeft(8);  // "   Hello"
-	cout << s9.GetCString() << endl;
-
-	MyString s92("World");
-	s92.PadLeft(3, '-');  // "World"
-	cout << s92.GetCString() << endl;
-	s92.PadLeft(7, '-');  // "--World"
-	cout << s92.GetCString() << endl;
-
-	/* PadRight() Ex */
-	cout << "-----------------------" << endl;
-	cout << "PadRight()" << endl;
-	MyString s10("Hello");
-	s10.PadRight(2);  // "Hello"
-	cout << s10.GetCString() << endl;
-	s10.PadRight(8);  // "Hello   "
-	cout << s10.GetCString() << '|' << endl;// 공백 확인 위한 |
-
-	MyString s102("World");
-	s102.PadRight(3, '-');  // "World"
-	cout << s102.GetCString() << endl;
-	s102.PadRight(7, '-');  // "World--"
-	cout << s102.GetCString() << endl;
-
-
-};
-int main(void)
-{
-	test();
-	int a,b;
-	cin >> a;
-	cin >> b;
 	return 0;
 }
-

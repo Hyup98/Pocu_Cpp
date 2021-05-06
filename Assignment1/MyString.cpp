@@ -79,7 +79,7 @@ namespace assignment1
         mLength = flag + mLength;
 
     }
-    /*
+    
     MyString MyString::operator+(const MyString& other) const
     {
    
@@ -99,10 +99,9 @@ namespace assignment1
         tem[size - 1] = '\0';
 
         MyString answer(tem);
-        //free(tem);
+        free(tem);
         return answer;
     }
-    */ //+¿¬»êÀÚ
 
     int MyString::IndexOf(const char* s)
     {
