@@ -162,6 +162,10 @@ namespace assignment1
             size++;
         }
         
+        if (size == 0)
+        {
+            return -1;
+        }
  
         unsigned int sNum = size - 1;//s문자열의 마지막 문자 인덱스
 
@@ -195,13 +199,6 @@ namespace assignment1
 
     void MyString::Interleave(const char* s)
     {
-        char* tem = (char*)malloc(sizeof(char)* (mLength + 1));//널 문자 빼고 복사본
-
-        for (unsigned int i = 0; i <= mLength; i++)
-        {
-            tem[i] = mString[i];
-        }
-
         unsigned int sSize = 0;//s의 문자열 개수 널문자 제외
         while (1)
         {
@@ -209,6 +206,18 @@ namespace assignment1
                 break;
 
             sSize++;
+        }
+
+        if (sSize == 0)
+        {
+            return;
+        }
+
+        char* tem = (char*)malloc(sizeof(char)* (mLength + 1));//널 문자 빼고 복사본
+
+        for (unsigned int i = 0; i <= mLength; i++)
+        {
+            tem[i] = mString[i];
         }
 
         unsigned int size = mLength + sSize + 1;
