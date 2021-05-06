@@ -1,5 +1,4 @@
 #include "MyString.h"
-#include<iostream>
 #include <stdlib.h>
 
 using namespace std;
@@ -33,6 +32,7 @@ namespace assignment1
     {
         mLength = other.mLength;
         mString = (char*)malloc(sizeof(char)*(mLength + 1));
+
         for (unsigned int i = 0; i <= other.mLength; i++)
         {
             mString[i] = other.mString[i];
