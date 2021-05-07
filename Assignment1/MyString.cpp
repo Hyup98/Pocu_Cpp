@@ -16,7 +16,7 @@ namespace assignment1
 
             flag++;
         }
-        mString = (char*)malloc(sizeof(char) * (flag + 1));
+        mString = new char[flag + 1];
 
         for (unsigned int i = 0; i < flag; i++)
         {
@@ -24,7 +24,6 @@ namespace assignment1
         }
         mString[flag] = '\0';
 
-        //delete[] s;
         mLength = flag;
    
     }
@@ -32,7 +31,7 @@ namespace assignment1
     MyString::MyString(const MyString& other)
     {
         mLength = other.mLength;
-        mString = (char*)malloc(sizeof(char)*(mLength + 1));
+        mString = new char[mLength + 1];
 
         for (unsigned int i = 0; i <= other.mLength; i++)
         {
@@ -42,7 +41,7 @@ namespace assignment1
 
     MyString::~MyString()
     {
-        free(mString);
+        delete[] mString;
     }
 
     unsigned int MyString::GetLength() const
@@ -66,21 +65,36 @@ namespace assignment1
             flag++;
         }
          
-        mString = (char*)realloc(mString,sizeof(char)*(flag + mLength + 1));
-        unsigned int i;
+        char* tem = new char[mLength + 1];
 
-        
-        unsigned int j = 0;
-        for (i = mLength; i <= flag + mLength ; i++)
+        for (size_t i = 0; i <= mLength; i++)
         {
-            mString[i] = s[j];
-            j++;
+            tem[i] = mString[i];
         }
+
+        delete[] mString;
+
+        mString = new char[mLength + flag + 1];
+
+
+        for (size_t i = 0; i < mLength; i++)
+        {
+            mString[i] = tem[i];
+        }
+
+        for (size_t i = mLength; i < mLength + flag; i++)
+        {
+            mString[i] = s[i - mLength];
+        }
+
+        mString[mLength + flag] = '\0';
  
+        delete[] tem;
+
         mLength = flag + mLength;
 
     }
-    
+    /* +연산자는 한번 더 확인 필요함 반환형에 대한 이해 부족*/
     MyString MyString::operator+(const MyString& other) const
     {
         unsigned int size = mLength + other.mLength + 1;
@@ -211,7 +225,7 @@ namespace assignment1
             return;
         }
 
-        char* tem = (char*)malloc(sizeof(char)* (mLength + 1));//널 문자 빼고 복사본
+        char* tem = new char[mLength + 1];//널 문자 빼고 복사본
 
         for (unsigned int i = 0; i <= mLength; i++)
         {
@@ -219,7 +233,7 @@ namespace assignment1
         }
 
         unsigned int size = mLength + sSize + 1;
-        mString = (char*)realloc(mString, sizeof(char) * (size));
+        mString = new char[size];
         unsigned int mNum = 0;
         unsigned int sNum = 0;
 
@@ -254,7 +268,7 @@ namespace assignment1
         }
         mLength = size - 1;
         mString[size - 1] = '\0';
-        free(tem);
+        delete[] tem;
     }
 
     bool MyString::RemoveAt(unsigned int i)
@@ -262,18 +276,33 @@ namespace assignment1
         if (i >= mLength)
             return false;
 
+        char* tem = new char[mLength + 1];
+
+        for (size_t i = 0; i <= mLength; i++)
+        {
+            tem[i] = mString[i];
+        }
+
+        delete[] mString;
+
         for (unsigned int j = 0; j < mLength - 1; j++)
         {
             if (j >= i)
             {
-                mString[j] = mString[j + 1];
+                tem[j] = tem[j + 1];
             }
         }
 
-        mString = (char*)realloc(mString, sizeof(char) * (mLength));
-
-        mString[mLength - 1] = '\0';
         mLength--;
+        mString = new char[mLength + 1];
+
+        for (size_t i = 0; i < mLength ; i++)
+        {
+            mString[i] = tem[i];
+        }
+
+        mString[mLength] = '\0';
+        delete[] tem;
 
         return true;
     }
@@ -287,8 +316,9 @@ namespace assignment1
             {
                 tem[i] = mString[i];
             }
+            delete[] mString;
 
-            mString = (char*)realloc(mString,sizeof(char)*(totalLength + 1));
+            mString = new char[totalLength + 1];
 
 
             for (unsigned int i = 0; i < totalLength - mLength; i++)
@@ -321,8 +351,9 @@ namespace assignment1
             {
                 tem[i] = mString[i];
             }
+            delete[] mString;
 
-            mString = (char*)realloc(mString, sizeof(char) * (totalLength + 1));
+            mString = new char[totalLength + 1];
 
 
             for (unsigned int i = 0; i < totalLength - mLength; i++)
@@ -350,13 +381,14 @@ namespace assignment1
     {
         if (mLength < totalLength)
         {
-            char* tem =(char*)malloc(sizeof(char)*mLength);
-            for (unsigned int i = 0; i < mLength; i++)
+            char* tem =new char[mLength + 1];
+            for (unsigned int i = 0; i <= mLength; i++)
             {
                 tem[i] = mString[i];
             }
+            delete[] mString;
 
-            mString = (char*)realloc(mString,sizeof(char)*(totalLength + 1));
+            mString = new char[totalLength + 1];
             int gap = totalLength - mLength;
 
             for (unsigned int i = totalLength - 1; i >= totalLength - gap; i--)
@@ -385,13 +417,14 @@ namespace assignment1
     {
         if (mLength < totalLength)
         {
-            char* tem = (char*)malloc(sizeof(char) * mLength);
-            for (unsigned int i = 0; i < mLength; i++)
+            char* tem = new char[mLength + 1];
+            for (unsigned int i = 0; i <= mLength; i++)
             {
                 tem[i] = mString[i];
             }
+            delete[] mString;
 
-            mString = (char*)realloc(mString, sizeof(char) * (totalLength + 1));
+            mString = new char[totalLength + 1];
             int gap = totalLength - mLength;
 
             for (unsigned int i = totalLength - 1; i >= totalLength - gap; i--)
@@ -412,7 +445,8 @@ namespace assignment1
             delete[] tem;
         }
         else
-                return;
+            return;
+
     }
 
     void MyString::Reverse()
