@@ -117,96 +117,92 @@ namespace assignment1
 
     int MyString::IndexOf(const char* s)
     {
-        int answer = -1;
-        unsigned int size = 0;
-        while (1)//길이 확인
+
+        unsigned int sSize = 0;//문자 갯수
+        while (1)
         {
-            if (s[size] == '\0')
-            {
+            if (s[sSize] == '\0')
                 break;
-            }
-            size++;
+
+            sSize++;
         }
 
-        if (size == 0)
+        if (sSize == 0)
             return 0;
 
-        unsigned int sNum = 0;
 
-        for(unsigned int i = 0; i < mLength; i++)
+        int flag = 0;
+
+        for (size_t i = 0; i < mLength; i++)
         {
-            if (mString[i] == s[sNum])
+            if (s[0] == mString[i])
             {
-                for (unsigned int j = i; j < i + size; j++)
+                for (size_t j = 0; j < sSize; j++)
                 {
-                    if (mString[j] != s[sNum])
+                    if (mString[i + j] != s[j])
                     {
-                        sNum = 0;
+                        flag = -1;
                         break;
                     }
-                    if (j == (i + size - 1))
-                    {
-                        answer = i;
-                        break;
-                    }
-                    sNum++;
+                   
                 }
-            }
 
-            if (answer != -1)
-                break;
+                if (flag != -1)
+                {
+                    return i;
+                }
+
+                flag = 0;
+            }
         }
 
-        return answer;
+        return -1;
     }
 
     int MyString::LastIndexOf(const char* s)
     {
-        int answer = -1;
-        unsigned int size = 0;//s 문자열의 문자 갯수
-        while (1)//길이 확인
+        unsigned int sSize = 0;//문자 갯수
+        while (1)
         {
-            if (s[size] == '\0')
-            {
+            if (s[sSize] == '\0')
                 break;
-            }
 
-            size++;
+            sSize++;
         }
-        
-        if (size == 0)
-        {
-            return -1;
-        }
- 
-        unsigned int sNum = size - 1;//s문자열의 마지막 문자 인덱스
 
+        if (sSize == 0)
+            return mLength;
 
-        for (int i = mLength - 1; i >= 0; i--)//뒤에서부터 찾아 들어가
+        int checkSIndexNum = -1;
+        int flag = 0;
+
+        for (size_t i = 0; i < mLength; i++)
         {
-            if (mString[i] == s[sNum])//젤 뒷 문자가 같으면 내부탐색 시작
+            if (s[0] == mString[i])
             {
-                sNum = size - 1;
-                for (unsigned int j = i; j > (i - size); j--)
+                for (size_t j = 0; j < sSize; j++)
                 {
-                    if (s[sNum] != mString[j])
+                    if (mString[i + j] != s[j])
                     {
+                        flag = -1;
                         break;
                     }
 
-                    if (sNum == 0)
-                    {
-                        answer = j;
-                        break;
-                    }
-                    sNum--;
                 }
 
+                if (flag != -1)
+                {
+                    checkSIndexNum = i;
+                }
+
+                flag = 0;
             }
-            if (answer != -1)
-                break;
         }
-        return answer;
+
+        if (checkSIndexNum != -1)
+            return checkSIndexNum;
+
+        return -1;
     }
 
     void MyString::Interleave(const char* s)
@@ -490,9 +486,9 @@ namespace assignment1
     {
         delete[] mString;
         mLength = rhs.mLength;
-        mString = new char[mLength];
+        mString = new char[mLength + 1];
 
-        for (size_t i = 0; i < mLength; i++)
+        for (size_t i = 0; i <= mLength; i++)
         {
             mString[i] = rhs.mString[i];
         }

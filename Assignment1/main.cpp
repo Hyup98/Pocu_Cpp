@@ -187,6 +187,7 @@ void test() {
 
 int main()
 {
+
 	test();
 
 	//	메모리 체크용 변수
@@ -280,9 +281,30 @@ int main()
 	testString1.Interleave("");
 	assert(beforeAddress1 == (int)testString1.GetCString());
 	cout << "M3_NoMallocInInterleaveEmpty 통과" << endl;
+	
+	//////////////////////////////////////////////////////
 
 
+	assignment1::MyString my1("pope pope");
+	std::string s1("pope pope");
 
+	const char* cString = my1.GetCString();
+	assignment1::MyString copied(my1);
+	assignment1::MyString my2("hello how are you");
+	// E0, E1
+	
+	assert(my1.LastIndexOf("pope ") == s1.rfind("pope "));
+
+	// E2, E3
+	assert(my1.IndexOf("") == s1.find(""));
+	assert(my1.LastIndexOf("") == s1.rfind(""));
+
+	// E4
+	assert(my1 == copied);					// value
+	assert(my1.GetCString() == cString);				// reference
+
+
+	test();
 
 	int a;
 	std::cin >> a;
