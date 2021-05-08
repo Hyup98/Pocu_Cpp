@@ -207,7 +207,8 @@ namespace assignment1
 
     void MyString::Interleave(const char* s)
     {
-        unsigned int sSize = 0;//s의 문자열 개수 널문자 제외
+
+        unsigned int sSize = 0;//문자 갯수
         while (1)
         {
             if (s[sSize] == '\0')
@@ -217,54 +218,61 @@ namespace assignment1
         }
 
         if (sSize == 0)
-        {
             return;
-        }
 
-        char* tem = new char[mLength + 1];//널 문자 빼고 복사본
+        char* tem = new char[mLength + 1];
 
-        for (unsigned int i = 0; i <= mLength; i++)
+        for (size_t i = 0; i <= mLength; i++)
         {
             tem[i] = mString[i];
         }
 
-        unsigned int size = mLength + sSize + 1;
-        mString = new char[size];
-        unsigned int mNum = 0;
-        unsigned int sNum = 0;
+        delete[] mString;
+        unsigned int totalSize = mLength + sSize;
+        mString = new char[totalSize + 1];
+        unsigned int temIndex = 0;
+        unsigned int sIndex = 0;
 
-        for (unsigned int i = 0; i < size - 1  ; i++)
+        for (size_t i = 0; i < totalSize; i++)
         {
-            if (i % 2 == 0)//짝수
+            if (i % 2 == 0)//짝수번에는 mString이 들어가야됨
             {
-                if (mNum > mLength - 1)
+                if (temIndex <= mLength - 1)
                 {
-                    mString[i] = s[sNum];
-                    sNum++;
+                    mString[i] = tem[temIndex];
+                    temIndex++;
                 }
                 else
                 {
-                    mString[i] = tem[mNum];
-                    mNum++;
+                    mString[i] = s[sIndex];
+                    sIndex++;
                 }
             }
-            else//홀수
+
+            else//s가 들어간다 단 개수가 안맞으면 딴거
             {
-                if (sNum > sSize - 1)
+                if (sIndex < sSize)
                 {
-                    mString[i] = tem[mNum];
-                    mNum++ ;
+                    mString[i] = s[sIndex];
+                    sIndex++;
                 }
                 else
                 {
-                    mString[i] = s[sNum];
-                    sNum++;
+                    mString[i] = tem[temIndex];
+                    temIndex++;
                 }
+                
             }
         }
-        mLength = size - 1;
-        mString[size - 1] = '\0';
+
+        mString[totalSize] = '\0';
         delete[] tem;
+        mLength = totalSize;
+
+
+
+
+
     }
 
     bool MyString::RemoveAt(unsigned int i)
