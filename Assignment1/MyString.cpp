@@ -508,7 +508,7 @@ namespace assignment1
 
 	bool MyString::operator==(const MyString& rhs) const
 	{
-		bool answer = true;
+		bool bAnswer = true;
 
 		if (mLength != rhs.mLength)
 		{
@@ -519,11 +519,11 @@ namespace assignment1
 		{
 			if (mString[i] != rhs.mString[i])
 			{
-				answer = false;
+				bAnswer = false;
 				break;
 			}
 		}
-		return answer;
+		return bAnswer;
 	}
 
 	MyString& MyString::operator=(const MyString& rhs)
