@@ -64,6 +64,8 @@ namespace assignment1
 
             flag++;
         }
+        if (flag == 0)
+            return;
          
         char* tem = new char[mLength + 1];
 
@@ -98,7 +100,7 @@ namespace assignment1
     MyString MyString::operator+(const MyString& other) const
     {
         unsigned int size = mLength + other.mLength + 1;
-        char* string = (char*)malloc(sizeof(char) * size);
+        char* string = new char[size];
 
         for (size_t i = 0; i < mLength ; i++)
         {
@@ -219,6 +221,19 @@ namespace assignment1
 
         if (sSize == 0)
             return;
+
+        if (mLength == 0)
+        {
+            mLength = sSize;
+            mString = new char[sSize + 1];
+            for (size_t i = 0; i <= sSize; i++)
+            {
+                mString[i] = s[i];
+            }
+
+            return;
+        }
+
 
         char* tem = new char[mLength + 1];
 
@@ -492,7 +507,6 @@ namespace assignment1
 
     MyString& MyString::operator=(const MyString& rhs)
     {
-        delete[] mString;
         mLength = rhs.mLength;
         mString = new char[mLength + 1];
 
