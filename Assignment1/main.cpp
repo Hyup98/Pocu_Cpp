@@ -187,7 +187,7 @@ void test() {
 
 int main()
 {
-	/*
+	
 	test();
 
 	//	메모리 체크용 변수
@@ -303,13 +303,7 @@ int main()
 	assert(my1 == copied);					// value
 	assert(my1.GetCString() == cString);				// reference
 
-	*/
 
-cout << "-----------------------" << endl;
-cout << "Interleave()" << endl;
-MyString s7("");
-s7.Interleave("asdfa");
-cout << s7.GetCString() << endl;  //H eWlolrold
 
 int a;
 	std::cin >> a;

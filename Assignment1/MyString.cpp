@@ -96,25 +96,27 @@ namespace assignment1
         mLength = flag + mLength;
 
     }
-    /* +연산자는 한번 더 확인 필요함 반환형에 대한 이해 부족*/
+    
     MyString MyString::operator+(const MyString& other) const
     {
-        unsigned int size = mLength + other.mLength + 1;
-        char* string = new char[size];
+        char* temArry = new char[other.mLength + mLength + 1];
+        unsigned int totalSize = other.mLength + mLength;
 
-        for (size_t i = 0; i < mLength ; i++)
+        for (size_t i = 0; i < mLength; i++)
         {
-            string[i] = mString[i];
+            temArry[i] = mString[i];
         }
 
-        for (size_t i = mLength; i < size - 1; i++)
+        for (size_t i = mLength; i <totalSize ; i++)
         {
-            string[i] = other.mString[i];
+            temArry[i] = other.mString[i - mLength];
         }
-   
-        string[size - 1] = '\0';
         
-        return MyString(string);
+        temArry[totalSize] = '\0';
+
+        MyString str = MyString(temArry);
+        delete[] temArry;
+        return str;
     }
 
     int MyString::IndexOf(const char* s)
@@ -507,6 +509,11 @@ namespace assignment1
 
     MyString& MyString::operator=(const MyString& rhs)
     {
+        if (*this == rhs)
+            return *this;
+
+        delete[] mString;
+
         mLength = rhs.mLength;
         mString = new char[mLength + 1];
 
