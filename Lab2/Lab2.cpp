@@ -1,13 +1,14 @@
 #include "Lab2.h"
 #include<iostream>
 #include<iomanip>
+#include<string>
 
 namespace lab2
 {
     void PrintIntegers(std::istream& in, std::ostream& out)
     {
         int tem;
-        char trash;
+        std::string trash;
         out << std::setfill(' ') << std::setw(12) << std::right << "oct" << ' '
             << std::setw(10) << std::right << "dec" << ' '
             << std::setw(8) << std::right << "hex"  << std::endl;
@@ -24,21 +25,76 @@ namespace lab2
             if (in.fail())
             {
                 in.clear();
-                in >> trash;
+                std::getline(in, trash, ' ');//수정 필요 할 수도
             }
             else
             {
-                out << std::setfill('.') << std::setw(12) << std::right << std::oct << tem << '.'
-                    << std::setfill('.') << std::setw(10) << std::right << std::dec << tem << '.'
-                    << std::setfill('.') << std::setw(8) << std::right << std::hex << tem << '.' << std::endl;
+                out << std::setfill(' ') << std::setw(12) << std::right << std::oct << tem << '.'
+                    << std::setfill(' ') << std::setw(10) << std::right << std::dec << tem << '.'
+                    << std::setfill(' ') << std::setw(8) << std::right << std::hex << tem  << std::endl;
             }
         }
     }
 
-    /*
     void PrintMaxFloat(std::istream& in, std::ostream& out)
     {
+        float max;
+        float tem;
+        char sign;
+        char maxSign = '+';
+        std::string trash;
+        int flag = 0;
+        while (!in.eof())
+        {
+            in >> tem;
+            if (flag == 0)
+            {
+                max = tem;
+                flag++;
+            }
+
+            else if (flag != 0)
+            {
+                if (max <= tem)
+                {
+                    max = tem;
+                    if (max < 0)
+                    {
+                        maxSign = '-';
+                    }
+                }
+            }
+
+            if (tem >= 0)
+            {
+                sign = '+';
+            }
+
+            else if (tem < 0)
+            {
+                sign = '-';
+            }
+
+            if (in.fail())
+            {
+                in.clear();
+                std::getline(in, trash, ' ');//수정 필요 할 수도
+            }
+
+            else
+            {
+                out << std::setfill(' ') << std::setw(5) <<std::left << "" 
+                    << sign
+                    << std::setfill(' ') << std::setw(10) << std::right << std::noshowpoint << (int)tem << '.'
+                    << std::setfill('0') << std::setw(3) << std::left << (max - (int)max) * 1000 << std::endl;
+            }
+        }
+
+        out << std::setfill(' ') << std::setw(5) << std::left << "max:"
+            << maxSign
+            << std::setfill(' ') << std::setw(10) << std::right<< std::noshowpoint << (int)max << '.'
+            << std::setfill('0') << std::setw(3) << std::left << (max - (int)max) * 1000;
 
     }
-    */
+
 }
