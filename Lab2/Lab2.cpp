@@ -71,16 +71,15 @@ namespace lab2
             else
             {
                 out.fixed;
-                out.precision(5);
-                out << std::showpoint << std::showpos << std::setfill(' ') << std::setw(5) << std::left << ""
-                    << std::setfill(' ') << std::setw(15) << std::internal << tem;
-                    
+                out.precision(3);
+                out << std::showpoint << std::fixed << std::showpos << std::setfill(' ') << std::setw(5) << std::left << ""
+                    << std::setfill(' ') << std::setw(15) << std::internal << tem << "\n";
             }
         }
        
         out.fixed;
         out.precision(3);
-        out << std::showpoint << std::showpos << std::setfill(' ') << std::setw(5) << std::left << ""
+        out << std::showpoint << std::fixed << std::showpos << std::setfill(' ') << std::setw(5) << std::left << ""
             << std::setfill(' ') << std::setw(15) << std::internal << max;
 
     }
