@@ -29,9 +29,10 @@ namespace lab2
             }
             else
             {
+                out.uppercase;
                 out << std::setfill(' ') << std::setw(12) << std::right << std::oct << tem << ' '
                     << std::setfill(' ') << std::setw(10) << std::right << std::dec << tem << ' '
-                    << std::setfill(' ') << std::setw(8) << std::right << std::hex << tem  << std::endl;
+                    << std::setfill(' ') << std::setw(8) << std::right <<std::hex << tem  << std::endl;
             }
         }
     }
@@ -103,7 +104,7 @@ namespace lab2
                 out.precision(3);
                 out << std::setfill(' ') << std::setw(5) << std::left << ""
                     << sign
-                    << std::setfill(' ') << std::setw(15) << std::right << std::noshowpoint << std::noshowpos << (int)tem << '.'
+                    << std::setfill(' ') << std::setw(10) << std::right << std::noshowpoint << std::noshowpos << (int)tem << '.'
                     << std::setfill('0') << std::setw(3) << std::left << decNum << std::endl;
                     
             }
