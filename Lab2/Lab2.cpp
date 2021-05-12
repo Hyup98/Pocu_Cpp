@@ -39,16 +39,15 @@ namespace lab2
 
     void PrintMaxFloat(std::istream& in, std::ostream& out)
     {
-        float max;
+        float max = 0;
         float tem;
-        char sign;
-        char maxSign = '+';
         std::string trash;
         int flag = 0;
 
         while (!in.eof())
         {
             in >> tem;
+
             if (flag == 0)
             {
                 max = tem;
@@ -60,22 +59,7 @@ namespace lab2
                 if (max <= tem)
                 {
                     max = tem;
-                    if (max < 0)
-                    {
-                        maxSign = '-';
-                        max *= -1;
-                    }
                 }
-            }
-
-            if (tem >= 0)
-            {
-                sign = '+';
-            }
-
-            else if (tem < 0)
-            {
-                sign = '-';
             }
 
             if (in.fail())
@@ -86,40 +70,18 @@ namespace lab2
 
             else
             {
-                if (tem < 0)
-                {
-                    tem *= -1;
-                }
-
-                int decNum;
-                double temDec = tem - (int)tem;
-                if (temDec < 0)
-                {
-                    temDec *= -1;
-                }
-                temDec *= 1000;
-                decNum = temDec;
-                
                 out.fixed;
-                out.precision(3);
-                out << std::setfill(' ') << std::setw(5) << std::left << ""
-                    << sign
-                    << std::setfill(' ') << std::setw(10) << std::right << std::noshowpoint << std::noshowpos << (int)tem << '.'
-                    << std::setfill('0') << std::setw(3) << std::left << decNum << std::endl;
+                out.precision(5);
+                out << std::showpoint << std::showpos << std::setfill(' ') << std::setw(5) << std::left << ""
+                    << std::setfill(' ') << std::setw(15) << std::internal << tem;
                     
             }
         }
-        int decMaxNum;
-        double temMaxDec = max - (int)max;
-        
-        temMaxDec *= 1000;
-        decMaxNum = temMaxDec;
+       
         out.fixed;
         out.precision(3);
-        out << std::setfill(' ') << std::setw(5) << std::left << "max:"
-            << maxSign
-            << std::setfill(' ') << std::setw(10) << std::right<< std::noshowpoint << (int)max << '.'
-            << std::setfill('0') << std::setw(3) << std::left << decMaxNum;
+        out << std::showpoint << std::showpos << std::setfill(' ') << std::setw(5) << std::left << ""
+            << std::setfill(' ') << std::setw(15) << std::internal << max;
 
     }
 
