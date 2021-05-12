@@ -48,20 +48,6 @@ namespace lab2
         {
             in >> tem;
 
-            if (flag == 0)
-            {
-                max = tem;
-                flag++;
-            }
-
-            else if (flag != 0)
-            {
-                if (max <= tem)
-                {
-                    max = tem;
-                }
-            }
-
             if (in.fail())
             {
                 in.clear();
@@ -70,6 +56,21 @@ namespace lab2
 
             else
             {
+
+                if (flag == 0)
+                {
+                    max = tem;
+                    flag++;
+                }
+
+                else if (flag != 0)
+                {
+                    if (max <= tem)
+                    {
+                        max = tem;
+                    }
+                }
+
                 out << std::showpoint << std::fixed << std::setprecision(3) << std::showpos << std::setfill(' ') << std::setw(5) << std::left << ""
                     << std::setfill(' ') << std::setw(15) << std::internal << tem << "\n";
             }
