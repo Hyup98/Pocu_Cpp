@@ -29,8 +29,8 @@ namespace lab2
             }
             else
             {
-                out << std::setfill(' ') << std::setw(12) << std::right << std::oct << tem << '.'
-                    << std::setfill(' ') << std::setw(10) << std::right << std::dec << tem << '.'
+                out << std::setfill(' ') << std::setw(12) << std::right << std::oct << tem << ' '
+                    << std::setfill(' ') << std::setw(10) << std::right << std::dec << tem << ' '
                     << std::setfill(' ') << std::setw(8) << std::right << std::hex << tem  << std::endl;
             }
         }
@@ -44,6 +44,7 @@ namespace lab2
         char maxSign = '+';
         std::string trash;
         int flag = 0;
+
         while (!in.eof())
         {
             in >> tem;
@@ -61,6 +62,7 @@ namespace lab2
                     if (max < 0)
                     {
                         maxSign = '-';
+                        max *= -1;
                     }
                 }
             }
@@ -83,17 +85,40 @@ namespace lab2
 
             else
             {
-                out << std::setfill(' ') << std::setw(5) <<std::left << "" 
+                if (tem < 0)
+                {
+                    tem *= -1;
+                }
+
+                int decNum;
+                double temDec = tem - (int)tem;
+                if (temDec < 0)
+                {
+                    temDec *= -1;
+                }
+                temDec *= 1000;
+                decNum = temDec;
+                
+                out.fixed;
+                out.precision(3);
+                out << std::setfill(' ') << std::setw(5) << std::left << ""
                     << sign
-                    << std::setfill(' ') << std::setw(10) << std::right << std::noshowpoint << (int)tem << '.'
-                    << std::setfill('0') << std::setw(3) << std::left << (max - (int)max) * 1000 << std::endl;
+                    << std::setfill(' ') << std::setw(15) << std::right << std::noshowpoint << std::noshowpos << (int)tem << '.'
+                    << std::setfill('0') << std::setw(3) << std::left << decNum << std::endl;
+                    
             }
         }
-
+        int decMaxNum;
+        double temMaxDec = max - (int)max;
+        
+        temMaxDec *= 1000;
+        decMaxNum = temMaxDec;
+        out.fixed;
+        out.precision(3);
         out << std::setfill(' ') << std::setw(5) << std::left << "max:"
             << maxSign
             << std::setfill(' ') << std::setw(10) << std::right<< std::noshowpoint << (int)max << '.'
-            << std::setfill('0') << std::setw(3) << std::left << (max - (int)max) * 1000;
+            << std::setfill('0') << std::setw(3) << std::left << decMaxNum;
 
     }
 
