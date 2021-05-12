@@ -75,7 +75,7 @@ namespace lab2
             }
         }
        
-        out << std::showpoint << std::fixed << std::setprecision(3) << std::showpos << std::setfill(' ') << std::setw(5) << std::left << ""
+        out << std::showpoint << std::fixed << std::setprecision(3) << std::showpos << std::setfill(' ') << std::setw(5) << std::left << "max:"
             << std::setfill(' ') << std::setw(15) << std::internal << max;
 
     }
