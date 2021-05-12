@@ -29,8 +29,8 @@ namespace lab2
             }
             else
             {
-                out.uppercase;
-                out << std::setfill(' ') << std::setw(12) << std::right << std::oct << tem << ' '
+                
+                out << std::uppercase << std::setfill(' ') << std::setw(12) << std::right << std::oct << tem << ' '
                     << std::setfill(' ') << std::setw(10) << std::right << std::dec << tem << ' '
                     << std::setfill(' ') << std::setw(8) << std::right <<std::hex << tem  << std::endl;
             }
