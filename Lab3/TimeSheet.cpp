@@ -28,6 +28,7 @@ namespace lab3
 
 	TimeSheet& TimeSheet::operator=(const TimeSheet& rhs)
 	{
+		delete[] mWorkingHours;
 		mEmployee = rhs.mEmployee;
 		mMaxWorkingDay = rhs.mMaxWorkingDay;
 		mWorkedDay = rhs.mWorkedDay;
