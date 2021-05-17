@@ -33,6 +33,7 @@ namespace lab3
 		mMaxWorkingDay = rhs.mMaxWorkingDay;
 		mWorkedDay = rhs.mWorkedDay;
 		mWorkingHours = new int[mMaxWorkingDay];
+
 		if (mWorkedDay != 0)
 		{
 			for (size_t i = 0; i < mMaxWorkingDay; i++)
