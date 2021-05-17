@@ -47,6 +47,14 @@ void test()
 	std::cout << pope.GetStandardDeviation() << std::endl;  // 2.11476(모집단의 표준편차)
 	std::cout << pope.GetName() << std::endl;               // Pope
 
+	lab3::TimeSheet hyup(employee1);
+	std::cout << hyup.GetTotalTime() << std::endl;         // 26
+	std::cout << hyup.GetAverageTime() << std::endl;       // 5.2
+	std::cout << hyup.GetStandardDeviation() << std::endl; // 3.1241
+	std::cout << hyup.GetName() << std::endl;
+
+
+
 	lab3::TimeSheet hulk("HULK", 10);
 	std::cout << hulk.GetStandardDeviation() << std::endl;//0.0
 }
