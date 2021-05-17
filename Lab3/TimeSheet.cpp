@@ -19,7 +19,7 @@ namespace lab3
 		mWorkingHours = new int[mMaxWorkingDay];
 		if (mWorkedDay != 0)
 		{
-			for (size_t i = 0; i < mWorkedDay; i++)
+			for (size_t i = 0; i < mMaxWorkingDay; i++)
 			{
 				mWorkingHours[i] = rhs.mWorkingHours[i];
 			}
