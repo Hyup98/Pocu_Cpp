@@ -8,6 +8,7 @@ namespace lab3
     public:
         TimeSheet(const char* name, unsigned int maxEntries);
         ~TimeSheet();
+        TimeSheet(const TimeSheet& rhs);
         void AddTime(int timeInHours);
         int GetTimeEntry(unsigned int index) const;
         int GetTotalTime() const;
@@ -18,7 +19,7 @@ namespace lab3
     private:
         std::string mEmployee;
         int* workingHours;
-        int workedDay;
-        int maxWorkingDay;
+        unsigned int workedDay;
+        unsigned int maxWorkingDay;
     };
 }
