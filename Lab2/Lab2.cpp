@@ -46,7 +46,7 @@ namespace lab2
 			if (in.fail())
 			{
 				in.clear();
-				std::getline(in, trash, ' ');//수정 필요 할 수도
+				std::getline(in, trash, ' ');
 			}
 
 			else
