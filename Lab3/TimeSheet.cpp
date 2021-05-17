@@ -4,9 +4,9 @@
 namespace lab3
 {
 	TimeSheet::TimeSheet(const char* name, unsigned int maxEntries)
-		:mEmployee(name)
-		, mMaxWorkingDay(maxEntries)
+		:mMaxWorkingDay(maxEntries)
 	{
+		mEmployee = name;
 		mWorkedDay = 0;
 		mWorkingHours = new int[maxEntries];
 	}
@@ -91,7 +91,7 @@ namespace lab3
 		{
 			return answer;
 		}
-		answer = GetTotalTime() / (float)mWorkedDay;
+		answer = GetTotalTime() / mWorkedDay * 1.0f;
 		return answer;
 	}
 
