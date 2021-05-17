@@ -18,8 +18,8 @@ namespace lab3
 
 	private:
 		std::string mEmployee;
-		int* workingHours;
-		unsigned int workedDay;
-		unsigned int maxWorkingDay;
+		int* mWorkingHours;
+		unsigned int mWorkedDay;
+		unsigned int mMaxWorkingDay;
 	};
 }

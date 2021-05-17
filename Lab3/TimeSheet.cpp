@@ -5,30 +5,30 @@ namespace lab3
 {
 	TimeSheet::TimeSheet(const char* name, unsigned int maxEntries)
 		:mEmployee(name)
-		, maxWorkingDay(maxEntries)
+		, mMaxWorkingDay(maxEntries)
 	{
-		workedDay = 0;
-		workingHours = new int[maxEntries];
+		mWorkedDay = 0;
+		mWorkingHours = new int[maxEntries];
 	}
 
 	TimeSheet::TimeSheet(const TimeSheet& rhs)
-		:mEmployee(rhs.mEmployee)
-		, maxWorkingDay(rhs.maxWorkingDay)
-		, workedDay(rhs.workedDay)
 	{
-		workingHours = new int[maxWorkingDay];
-		if (workedDay != 0)
+		mEmployee = rhs.mEmployee;
+		mMaxWorkingDay = rhs.mMaxWorkingDay;
+		mWorkedDay = rhs.mWorkedDay;
+		mWorkingHours = new int[mMaxWorkingDay];
+		if (mWorkedDay != 0)
 		{
-			for (size_t i = 0; i < workedDay; i++)
+			for (size_t i = 0; i < mWorkedDay; i++)
 			{
-				workingHours[i] = rhs.workingHours[i];
+				mWorkingHours[i] = rhs.mWorkingHours[i];
 			}
 		}
 	}
 
 	TimeSheet::~TimeSheet()
 	{
-		delete[] workingHours;
+		delete[] mWorkingHours;
 	}
 
 	void TimeSheet::AddTime(int timeInHours)
@@ -37,10 +37,10 @@ namespace lab3
 		{
 			if (timeInHours > 0)
 			{
-				if (workedDay < maxWorkingDay)
+				if (mWorkedDay < mMaxWorkingDay)
 				{
-					workingHours[workedDay] = timeInHours;
-					workedDay++;
+					mWorkingHours[mWorkedDay] = timeInHours;
+					mWorkedDay++;
 				}
 			}
 		}
@@ -52,11 +52,11 @@ namespace lab3
 	{
 		unsigned int answer = -1;
 
-		if (index < workedDay)
+		if (index < mWorkedDay)
 		{
 			if (index >= 0)
 			{
-				answer = workingHours[index];
+				answer = mWorkingHours[index];
 				return answer;
 			}
 		}
@@ -71,14 +71,14 @@ namespace lab3
 	{
 		int answer = 0
 			;
-		if (workedDay == 0)
+		if (mWorkedDay == 0)
 		{
 			return answer;
 		}
 
-		for (unsigned int i = 0; i < workedDay; i++)
+		for (unsigned int i = 0; i < mWorkedDay; i++)
 		{
-			answer += workingHours[i];
+			answer += mWorkingHours[i];
 		}
 
 		return answer;
@@ -87,11 +87,11 @@ namespace lab3
 	float TimeSheet::GetAverageTime() const
 	{
 		float answer = 0;
-		if (workedDay == 0)
+		if (mWorkedDay == 0)
 		{
 			return answer;
 		}
-		answer = GetTotalTime() / (float)workedDay;
+		answer = GetTotalTime() / (float)mWorkedDay;
 		return answer;
 	}
 
@@ -101,18 +101,18 @@ namespace lab3
 		float answer = 0;
 		float tem = 0;
 
-		if (workedDay == 0)
+		if (mWorkedDay == 0)
 		{
 			return answer;
 		}
 		//step)1
-		for (size_t i = 0; i < workedDay; i++)
+		for (size_t i = 0; i < mWorkedDay; i++)
 		{
-			tem += (workingHours[i] - average) * (workingHours[i] - average);
+			tem += (mWorkingHours[i] - average) * (mWorkingHours[i] - average);
 		}
 
 		//step)2
-		tem /= workedDay;
+		tem /= mWorkedDay;
 
 		//step)3
 		tem = sqrt(tem);
