@@ -91,7 +91,8 @@ namespace lab3
 		{
 			return answer;
 		}
-		answer = GetTotalTime() / mWorkedDay * 1.0f;
+		answer = GetTotalTime() / static_cast<float>(mWorkedDay);
+		answer *= 1.0f;
 		return answer;
 	}
 
