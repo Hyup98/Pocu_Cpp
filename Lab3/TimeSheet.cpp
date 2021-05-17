@@ -29,6 +29,10 @@ namespace lab3
 	TimeSheet& TimeSheet::operator=(const TimeSheet& rhs)
 	{
 		delete[] mWorkingHours;
+		if (&rhs == this)
+		{
+			return *this;
+		}
 		mEmployee = rhs.mEmployee;
 		mMaxWorkingDay = rhs.mMaxWorkingDay;
 		mWorkedDay = rhs.mWorkedDay;
