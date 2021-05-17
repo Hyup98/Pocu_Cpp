@@ -8,6 +8,7 @@ namespace lab3
 	public:
 		TimeSheet(const char* name, unsigned int maxEntries);
 		~TimeSheet();
+		TimeSheet& operator=(const TimeSheet& rhs);
 		TimeSheet(const TimeSheet& rhs);
 		void AddTime(int timeInHours);
 		int GetTimeEntry(unsigned int index) const;

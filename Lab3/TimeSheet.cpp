@@ -26,6 +26,23 @@ namespace lab3
 		}
 	}
 
+	TimeSheet& TimeSheet::operator=(const TimeSheet& rhs)
+	{
+		delete[] mWorkingHours;
+		mEmployee = rhs.mEmployee;
+		mMaxWorkingDay = rhs.mMaxWorkingDay;
+		mWorkedDay = rhs.mWorkedDay;
+		mWorkingHours = new int[mMaxWorkingDay];
+		if (mWorkedDay != 0)
+		{
+			for (size_t i = 0; i < mMaxWorkingDay; i++)
+			{
+				mWorkingHours[i] = rhs.mWorkingHours[i];
+			}
+		}
+		return *this;
+	}
+
 	TimeSheet::~TimeSheet()
 	{
 		delete[] mWorkingHours;
