@@ -17,31 +17,35 @@ namespace lab3
 
     void TimeSheet::AddTime(int timeInHours)
     {
-        if (timeInHours <= 10 && timeInHours >= 1) 
+        if (timeInHours <= 10)
         {
-            if (workedDay < maxWorkingDay)
+            if (timeInHours > 0)
             {
-                workingHours[workedDay] = timeInHours;
-                workedDay++;
+                if (workedDay < maxWorkingDay)
+                {
+                    workingHours[workedDay] = timeInHours;
+                    workedDay++;
+                }
             }
         }
 
-        else
-        {
-            return;
-        }
+        return;
     }
 
     int TimeSheet::GetTimeEntry(unsigned int index) const
     {
         unsigned int answer = -1;
 
-        if (index > workedDay || index < 0)
+        if (index < workedDay)
         {
-            return answer;
+            if (index >= 0)
+            {
+                answer = workingHours[index];
+                return answer;
+            }
         }
 
-        answer = workingHours[index];
+       
 
 
         return answer;
@@ -77,6 +81,10 @@ namespace lab3
         float answer = 0;
         float tem = 0;
 
+        if (workedDay == 0)
+        {
+            return answer;
+        }
         //step)1
         for (size_t i = 0; i < workedDay; i++)
         {
