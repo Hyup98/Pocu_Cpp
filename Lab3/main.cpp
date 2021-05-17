@@ -49,13 +49,13 @@ void test()
 
 
 	lab3::TimeSheet hyup = employee1;
-	employee1 = employee2;
 	std::cout << hyup.GetTotalTime() << std::endl;         // 26
 	std::cout << hyup.GetAverageTime() << std::endl;       // 5.2
 	std::cout << hyup.GetStandardDeviation() << std::endl; // 3.1241
 	std::cout << hyup.GetName() << std::endl;
 
 	cout << "asdfasdf";
+	hyup = hyup;
 	std::cout << employee1.GetTotalTime() << std::endl;         // 26
 	std::cout << employee1.GetAverageTime() << std::endl;       // 5.2
 	std::cout << employee1.GetStandardDeviation() << std::endl; // 3.1241
