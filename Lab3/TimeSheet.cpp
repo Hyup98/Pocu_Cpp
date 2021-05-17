@@ -1,5 +1,6 @@
 #include "TimeSheet.h"
 #include <cmath>
+
 namespace lab3
 {
     TimeSheet::TimeSheet(const char* name, unsigned int maxEntries)
@@ -8,6 +9,10 @@ namespace lab3
     {
         workedDay = 0;
         workingHours = new int[maxEntries];
+    }
+    TimeSheet::~TimeSheet()
+    {
+        delete[] workingHours;
     }
 
     void TimeSheet::AddTime(int timeInHours)
@@ -44,15 +49,18 @@ namespace lab3
 
     int TimeSheet::GetTotalTime() const
     {
-        int answer = 0;
+        int answer = 0
+            ;
         if (workedDay == 0)
         {
             return answer;
         }
+
         for (size_t i = 0; i < workedDay; i++)
         {
             answer += workingHours[i];
         }
+
         return answer;
     }
 
@@ -68,6 +76,7 @@ namespace lab3
         float average = GetAverageTime();
         float answer = 0;
         float tem = 0;
+
         //step)1
         for (size_t i = 0; i < workedDay; i++)
         {
