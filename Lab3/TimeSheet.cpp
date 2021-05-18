@@ -34,7 +34,6 @@ namespace lab3
 		{
 			if (mWorkedDay != rhs.mWorkedDay)
 			{
-
 				if (mMaxWorkingDay != rhs.mMaxWorkingDay)
 				{
 					for (size_t i = 0; i < mWorkedDay; i++)
@@ -55,6 +54,7 @@ namespace lab3
 		{
 			return *this;
 		}
+		delete[] mWorkingHours;
 		mEmployee = rhs.mEmployee;
 		mMaxWorkingDay = rhs.mMaxWorkingDay;
 		mWorkedDay = rhs.mWorkedDay;
