@@ -28,11 +28,34 @@ namespace lab3
 
 	TimeSheet& TimeSheet::operator=(const TimeSheet& rhs)
 	{
-		delete[] mWorkingHours;
-		if (&rhs == this)
+		bool isSame = true;
+
+		if (mEmployee != rhs.mEmployee)
+		{
+			if (mWorkedDay != rhs.mWorkedDay)
+			{
+
+				if (mMaxWorkingDay != rhs.mMaxWorkingDay)
+				{
+					for (size_t i = 0; i < mWorkedDay; i++)
+					{
+						if (mWorkingHours[i] != rhs.mWorkingHours[i])
+						{
+							isSame = false;
+							break;
+						}
+					}
+					isSame = false;
+				}
+				isSame = false;
+			}
+			isSame = false;
+		}
+		if (isSame)
 		{
 			return *this;
 		}
+		delete[] mWorkingHours;
 		mEmployee = rhs.mEmployee;
 		mMaxWorkingDay = rhs.mMaxWorkingDay;
 		mWorkedDay = rhs.mWorkedDay;
