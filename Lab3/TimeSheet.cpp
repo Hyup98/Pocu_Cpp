@@ -28,7 +28,7 @@ namespace lab3
 
 	TimeSheet& TimeSheet::operator=(const TimeSheet& rhs)
 	{
-		bool isSame = true;
+		bool bIsSame = true;
 
 		if (mEmployee != rhs.mEmployee)
 		{
@@ -41,17 +41,17 @@ namespace lab3
 					{
 						if (mWorkingHours[i] != rhs.mWorkingHours[i])
 						{
-							isSame = false;
+							bIsSame = false;
 							break;
 						}
 					}
-					isSame = false;
+					bIsSame = false;
 				}
-				isSame = false;
+				bIsSame = false;
 			}
-			isSame = false;
+			bIsSame = false;
 		}
-		if (isSame)
+		if (bIsSame)
 		{
 			return *this;
 		}
