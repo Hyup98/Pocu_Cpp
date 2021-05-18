@@ -7,17 +7,15 @@ namespace lab3
 		: mMaxWorkingDay(maxEntries)
 		, mEmployee(name)
 	{
-		mMaxWorkingDay = maxEntries;
-		mEmployee = name;
 		mWorkedDay = 0;
 		mWorkingHours = new int[maxEntries];
 	}
 
 	TimeSheet::TimeSheet(const TimeSheet& rhs)
+		: mMaxWorkingDay(rhs.mMaxWorkingDay)
+		, mEmployee(rhs.mEmployee)
+		, mWorkedDay(rhs.mWorkedDay)
 	{
-		mEmployee = rhs.mEmployee;
-		mMaxWorkingDay = rhs.mMaxWorkingDay;
-		mWorkedDay = rhs.mWorkedDay;
 		mWorkingHours = new int[mMaxWorkingDay];
 		if (mWorkedDay != 0)
 		{
