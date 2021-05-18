@@ -4,6 +4,8 @@
 namespace lab3
 {
 	TimeSheet::TimeSheet(const char* name, unsigned int maxEntries)
+		: mMaxWorkingDay(maxEntries)
+		, mEmployee(name)
 	{
 		mMaxWorkingDay = maxEntries;
 		mEmployee = name;
