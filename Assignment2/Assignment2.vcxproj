@@ -70,7 +70,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Airplane.cpp" />
+    <ClCompile Include="Boat.cpp" />
+    <ClCompile Include="Boatplane.cpp" />
+    <ClCompile Include="DeusExMachina.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Motorcycle.cpp" />
+    <ClCompile Include="Person.cpp" />
+    <ClCompile Include="Sedan.cpp" />
+    <ClCompile Include="Trailer.cpp" />
+    <ClCompile Include="UBoat.cpp" />
+    <ClCompile Include="Vehicle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Airplane.h" />
+    <ClInclude Include="Boat.h" />
+    <ClInclude Include="Boatplane.h" />
+    <ClInclude Include="DeusExMachina.h" />
+    <ClInclude Include="IDivable.h" />
+    <ClInclude Include="IDrivable.h" />
+    <ClInclude Include="IFlyable.h" />
+    <ClInclude Include="ISailable.h" />
+    <ClInclude Include="Motorcycle.h" />
+    <ClInclude Include="Person.h" />
+    <ClInclude Include="Sedan.h" />
+    <ClInclude Include="Trailer.h" />
+    <ClInclude Include="UBoat.h" />
+    <ClInclude Include="Vehicle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
