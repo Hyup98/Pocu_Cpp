@@ -105,48 +105,56 @@ namespace lab4
 
 	bool PolyLine::TryGetMinBoundingRectangle(Point* outMin, Point* outMax) const
 	{
-		bool answer = true;
-		if (mCapacity != 0)
+		if (outMax != nullptr && outMin != nullptr)
 		{
-			float maxX = mPointArray[0]->GetX();
-			float minX = mPointArray[0]->GetX();
-			float maxY = mPointArray[0]->GetY();
-			float minY = mPointArray[0]->GetY();
-
-			for (size_t i = 0; i < mCapacity; i++)
+			bool answer = true;
+			if (mCapacity != 0)
 			{
-				if (maxX < mPointArray[i]->GetX())
+				float maxX = mPointArray[0]->GetX();
+				float minX = mPointArray[0]->GetX();
+				float maxY = mPointArray[0]->GetY();
+				float minY = mPointArray[0]->GetY();
+
+				for (size_t i = 0; i < mCapacity; i++)
 				{
-					maxX = mPointArray[i]->GetX();
+					if (maxX < mPointArray[i]->GetX())
+					{
+						maxX = mPointArray[i]->GetX();
+					}
+
+					if (maxY < mPointArray[i]->GetY())
+					{
+						maxY = mPointArray[i]->GetY();
+					}
+
+					if (minX > mPointArray[i]->GetX())
+					{
+						minX = mPointArray[i]->GetX();
+					}
+
+					if (minY > mPointArray[i]->GetY())
+					{
+						minY = mPointArray[i]->GetY();
+					}
+
 				}
 
-				if (maxY < mPointArray[i]->GetY())
-				{
-					maxY = mPointArray[i]->GetY();
-				}
+				outMin->setPoint(minX, minY);
+				outMax->setPoint(maxX, maxY);
 
-				if (minX > mPointArray[i]->GetX())
-				{
-					minX = mPointArray[i]->GetX();
-				}
 
-				if (minY > mPointArray[i]->GetY())
-				{
-					minY = mPointArray[i]->GetY();
-				}
-
+				return answer;
 			}
-
-			outMin->setPoint(minX, minY);
-			outMax->setPoint(maxX, maxY);
-			
-
-			return answer;
+			else
+			{
+				return false;
+			}
 		}
 		else
 		{
 			return false;
 		}
+		
 	}
 
 	const Point* PolyLine::operator[](unsigned int i) const
