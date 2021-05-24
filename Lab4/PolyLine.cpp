@@ -50,6 +50,20 @@ namespace lab4
 
 	}
 
+	PolyLine& PolyLine::operator=(const PolyLine& other)
+	{
+		if (&other == this)
+		{
+			return *this;
+		}
+		mCapacity = other.mCapacity;
+		mPointArray = new Point*[10];
+		for (size_t i = 0; i < mCapacity; i++)
+		{
+			mPointArray[i] = new Point(other.mPointArray[i]->GetX(), other.mPointArray[i]->GetY());
+		}
+	}
+
 	bool PolyLine::AddPoint(const Point* point)
 	{
 		if (point != nullptr)
