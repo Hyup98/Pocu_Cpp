@@ -12,12 +12,6 @@ namespace lab4
 	{
 	}
 
-	Point::Point()
-	{
-		mXpoint = 0;
-		mYpoint = 0;
-	}
-
 	void Point::setX(float x)
 	{
 		mXpoint = x;
@@ -27,7 +21,7 @@ namespace lab4
 	{
 		mYpoint = y;
 	}
-	
+
 	void Point::setPoint(float x, float y)
 	{
 		mXpoint = x;

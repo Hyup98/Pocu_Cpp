@@ -7,7 +7,6 @@ namespace lab4
 		friend Point operator*(float lhs, const Point& rhs);
 	public:
 		Point(float x, float y);
-		Point();
 		~Point();
 
 		void setX(float x);
@@ -19,6 +18,7 @@ namespace lab4
 		Point operator*(float operand) const;
 		float GetX() const;
 		float GetY() const;
+
 	private:
 		float mXpoint;
 		float mYpoint;
