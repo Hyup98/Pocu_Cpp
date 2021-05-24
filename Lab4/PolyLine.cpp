@@ -13,16 +13,12 @@ namespace lab4
 
 	PolyLine::PolyLine(const PolyLine& other)
 	{
-		if (&other != nullptr)
+		mCapacity = other.mCapacity;
+		mPointArray = new Point * [mMaximumCapacity];
+		for (size_t i = 0; i < mCapacity; i++)
 		{
-			mCapacity = other.mCapacity;
-			mPointArray = new Point * [mMaximumCapacity];
-			for (size_t i = 0; i < mCapacity; i++)
-			{
-				mPointArray[i] = new Point(other.mPointArray[i]->GetX(), other.mPointArray[i]->GetY());
-			}
+			mPointArray[i] = new Point(other.mPointArray[i]->GetX(), other.mPointArray[i]->GetY());
 		}
-	
 	}
 
 	PolyLine::~PolyLine()
