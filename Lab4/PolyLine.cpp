@@ -74,6 +74,7 @@ namespace lab4
 				//생각이 필요함!
 				mPointArray[mCapacity] = new Point(point->GetX(), point->GetY());
 				//mPointArray[mCapacity] = point;
+				delete point;
 				mCapacity++;
 				return true;
 			}
@@ -102,14 +103,13 @@ namespace lab4
 
 		else
 		{
+			delete mPointArray[i];
 			for (unsigned int j = i; j < mCapacity - 1 ; j++)
 			{
-				mPointArray[j]->SetPoint(mPointArray[j + 1]->GetX(), mPointArray[j + 1]->GetY());
+				mPointArray[j] = mPointArray[j + 1];
 			}
 			mCapacity--;
-			delete mPointArray[mCapacity];
 			mPointArray[mCapacity] = nullptr;
-			std::cout << mCapacity << "\n";
 			return true;
 
 		}

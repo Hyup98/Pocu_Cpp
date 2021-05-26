@@ -17,6 +17,7 @@ namespace lab4
 		mXpoint = x;
 	}
 
+
 	void Point::SetY(float y)
 	{
 		mYpoint = y;
