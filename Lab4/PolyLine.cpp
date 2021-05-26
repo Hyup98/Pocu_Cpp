@@ -14,7 +14,7 @@ namespace lab4
 	PolyLine::PolyLine(const PolyLine& other)
 	{
 		mCapacity = other.mCapacity;
-		mPointArray = new const Point * [MAXCAPACITY];
+		mPointArray = new const Point* [MAXCAPACITY];
 		for (size_t i = 0; i < mCapacity; i++)
 		{
 			mPointArray[i] = new Point(other.mPointArray[i]->GetX(), other.mPointArray[i]->GetY());
@@ -58,6 +58,7 @@ namespace lab4
 		{
 			mPointArray[i] = new Point(other.mPointArray[i]->GetX(), other.mPointArray[i]->GetY());
 		}
+		return *this;
 	}
 
 	bool PolyLine::AddPoint(const Point* point)
@@ -71,10 +72,7 @@ namespace lab4
 
 			else
 			{
-				//생각이 필요함!
-				//mPointArray[mCapacity] = new Point(point->GetX(), point->GetY());
 				mPointArray[mCapacity] = point;
-				delete point;
 				mCapacity++;
 				return true;
 			}

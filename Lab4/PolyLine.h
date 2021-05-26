@@ -21,6 +21,6 @@ namespace lab4
 	private:
 		const unsigned int MAXCAPACITY = 10;
 		unsigned int mCapacity;
-	   	const Point* * mPointArray;
+	   	const Point* *mPointArray;
 	};
 }
