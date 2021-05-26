@@ -233,5 +233,8 @@ void TestCaseMain()
 int main()
 {
 	TestCaseMain();
+	int a;
+	cin >> a;
+
 	return 0;
 }

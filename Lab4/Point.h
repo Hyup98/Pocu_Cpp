@@ -9,9 +9,9 @@ namespace lab4
 		Point(float x, float y);
 		~Point();
 
-		void setX(float x);
-		void setY(float y);
-		void setPoint(float x, float y);
+		void SetX(float x);
+		void SetY(float y);
+		void SetPoint(float x, float y);
 		Point operator+(const Point& other) const;
 		Point operator-(const Point& other) const;
 		float Dot(const Point& other) const;

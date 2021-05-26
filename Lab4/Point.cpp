@@ -12,17 +12,17 @@ namespace lab4
 	{
 	}
 
-	void Point::setX(float x)
+	void Point::SetX(float x)
 	{
 		mXpoint = x;
 	}
 
-	void Point::setY(float y)
+	void Point::SetY(float y)
 	{
 		mYpoint = y;
 	}
 
-	void Point::setPoint(float x, float y)
+	void Point::SetPoint(float x, float y)
 	{
 		mXpoint = x;
 		mYpoint = y;

@@ -6,7 +6,7 @@
 namespace lab4
 {
 	PolyLine::PolyLine()
-		:mCapacity(0)
+		:mCapacity (0)
 	{
 		 mPointArray = new Point*[mMaximumCapacity];
 	}
@@ -73,10 +73,9 @@ namespace lab4
 			{
 				//생각이 필요함!
 				mPointArray[mCapacity] = new Point(point->GetX(), point->GetY());
+				//mPointArray[mCapacity] = point;
 				mCapacity++;
-				std::cout << mCapacity<<"\n";
 				return true;
-
 			}
 		}
 		else
@@ -105,7 +104,7 @@ namespace lab4
 		{
 			for (unsigned int j = i; j < mCapacity - 1 ; j++)
 			{
-				mPointArray[j]->setPoint(mPointArray[j + 1]->GetX(), mPointArray[j + 1]->GetY());
+				mPointArray[j]->SetPoint(mPointArray[j + 1]->GetX(), mPointArray[j + 1]->GetY());
 			}
 			mCapacity--;
 			delete mPointArray[mCapacity];
@@ -120,7 +119,7 @@ namespace lab4
 	{
 		if (outMax != nullptr && outMin != nullptr)
 		{
-			bool answer = true;
+			bool bAnswer = true;
 			if (mCapacity != 0)
 			{
 				float maxX = mPointArray[0]->GetX();
@@ -152,11 +151,11 @@ namespace lab4
 
 				}
 
-				outMin->setPoint(minX, minY);
-				outMax->setPoint(maxX, maxY);
+				outMin->SetPoint(minX, minY);
+				outMax->SetPoint(maxX, maxY);
 
 
-				return answer;
+				return bAnswer;
 			}
 			else
 			{
