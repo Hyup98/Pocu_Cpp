@@ -6,15 +6,15 @@
 namespace lab4
 {
 	PolyLine::PolyLine()
-		:mCapacity (0)
+		: mCapacity(0)
 	{
-		 mPointArray = new Point*[mMaximumCapacity];
+		 mPointArray = new const Point * [MAXCAPACITY];
 	}
 
 	PolyLine::PolyLine(const PolyLine& other)
 	{
 		mCapacity = other.mCapacity;
-		mPointArray = new Point * [mMaximumCapacity];
+		mPointArray = new const Point * [MAXCAPACITY];
 		for (size_t i = 0; i < mCapacity; i++)
 		{
 			mPointArray[i] = new Point(other.mPointArray[i]->GetX(), other.mPointArray[i]->GetY());
@@ -53,7 +53,7 @@ namespace lab4
 			return *this;
 		}
 		mCapacity = other.mCapacity;
-		mPointArray = new Point*[10];
+		mPointArray = new const Point*[10];
 		for (size_t i = 0; i < mCapacity; i++)
 		{
 			mPointArray[i] = new Point(other.mPointArray[i]->GetX(), other.mPointArray[i]->GetY());
@@ -72,8 +72,8 @@ namespace lab4
 			else
 			{
 				//생각이 필요함!
-				mPointArray[mCapacity] = new Point(point->GetX(), point->GetY());
-				//mPointArray[mCapacity] = point;
+				//mPointArray[mCapacity] = new Point(point->GetX(), point->GetY());
+				mPointArray[mCapacity] = point;
 				delete point;
 				mCapacity++;
 				return true;

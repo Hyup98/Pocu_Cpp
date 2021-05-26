@@ -19,8 +19,8 @@ namespace lab4
 		const Point* operator[](unsigned int i) const;
 
 	private:
-		const unsigned int mMaximumCapacity = 10;
+		const unsigned int MAXCAPACITY = 10;
 		unsigned int mCapacity;
-	   	Point** mPointArray;
+	   	const Point* * mPointArray;
 	};
 }
