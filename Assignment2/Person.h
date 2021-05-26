@@ -12,5 +12,8 @@ namespace assignment2
 
 		const std::string& GetName() const;
 		unsigned int GetWeight() const;
+	private:
+		char* mName;
+		unsigned int mWeight;
 	};
 }

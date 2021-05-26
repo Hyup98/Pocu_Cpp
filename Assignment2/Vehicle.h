@@ -17,5 +17,11 @@ namespace assignment2
 		const Person* GetPassenger(unsigned int i) const;
 		unsigned int GetPassengersCount() const;
 		unsigned int GetMaxPassengersCount() const;
+		void QuitAll();
+
+	private:
+		unsigned int mMaxPassengersCount;
+		unsigned int onBoardNum;
+		const Person** mPassenger;
 	};
 }

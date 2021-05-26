@@ -3,20 +3,37 @@
 namespace assignment2
 {
 	Person::Person(const char* name, unsigned int weight)
+		: mWeight(weight)
 	{
+		unsigned int count = 0;
+		while (true)
+		{
+			if (name[count] == '\0')
+			{
+				break;
+			}
+			count++;
+		}
+		mName = new char[count + 1];
+		for (size_t i = 0; i < count; i++)
+		{
+			mName[i] = name[i];
+		}
+		mName[count] = '\0';
 	}
 
 	Person::~Person()
 	{
+		delete[] mName;
 	}
 
 	const std::string& Person::GetName() const
 	{
-		return 0;
+		return mName;
 	}
 
 	unsigned int Person::GetWeight() const
 	{
-		return 0;
+		return mWeight;
 	}
 }
