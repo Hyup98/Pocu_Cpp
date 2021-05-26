@@ -8,13 +8,13 @@ namespace lab4
 	PolyLine::PolyLine()
 		: mCapacity(0)
 	{
-		 mPointArray = new const Point * [MAXCAPACITY];
+		mPointArray = new const Point * [MAXCAPACITY];
 	}
 
 	PolyLine::PolyLine(const PolyLine& other)
 	{
 		mCapacity = other.mCapacity;
-		mPointArray = new const Point* [MAXCAPACITY];
+		mPointArray = new const Point * [MAXCAPACITY];
 		for (size_t i = 0; i < mCapacity; i++)
 		{
 			mPointArray[i] = new Point(other.mPointArray[i]->GetX(), other.mPointArray[i]->GetY());
@@ -37,7 +37,7 @@ namespace lab4
 			return false;
 		}
 
-		else 
+		else
 		{
 			mPointArray[mCapacity] = new Point(x, y);
 			mCapacity++;
@@ -53,7 +53,7 @@ namespace lab4
 			return *this;
 		}
 		mCapacity = other.mCapacity;
-		mPointArray = new const Point*[10];
+		mPointArray = new const Point * [10];
 		for (size_t i = 0; i < mCapacity; i++)
 		{
 			mPointArray[i] = new Point(other.mPointArray[i]->GetX(), other.mPointArray[i]->GetY());
@@ -81,12 +81,12 @@ namespace lab4
 		{
 			return false;
 		}
-		
+
 	}
 
 	bool PolyLine::RemovePoint(unsigned int i)
 	{
-		if (i >= mCapacity) 
+		if (i >= mCapacity)
 		{
 			return false;
 		}
@@ -102,7 +102,7 @@ namespace lab4
 		else
 		{
 			delete mPointArray[i];
-			for (unsigned int j = i; j < mCapacity - 1 ; j++)
+			for (unsigned int j = i; j < mCapacity - 1; j++)
 			{
 				mPointArray[j] = mPointArray[j + 1];
 			}
@@ -164,7 +164,7 @@ namespace lab4
 		{
 			return false;
 		}
-		
+
 	}
 
 	const Point* PolyLine::operator[](unsigned int i) const
