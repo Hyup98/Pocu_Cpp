@@ -48,10 +48,17 @@ namespace lab4
 
 	PolyLine& PolyLine::operator=(const PolyLine& other)
 	{
+	
 		if (&other == this)
 		{
 			return *this;
 		}
+
+		for (size_t i = 0; i < mCapacity; i++)
+		{
+			delete mPointArray[i];
+		}
+		delete[] mPointArray;
 		mCapacity = other.mCapacity;
 		mPointArray = new const Point * [10];
 		for (size_t i = 0; i < mCapacity; i++)
