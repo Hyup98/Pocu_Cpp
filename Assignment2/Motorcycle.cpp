@@ -15,10 +15,12 @@ namespace assignment2
 
 	unsigned int Motorcycle::GetDriveSpeed() const
 	{
-		unsigned int tem = (2 * GetTotalWeight()) + 400 - pow(GetTotalWeight(), 3);
-		if (tem > 0)
+		float tem = pow(GetTotalWeight(), 3);
+		unsigned int temNum = 2 * GetTotalWeight() + 400;
+		temNum -= tem;
+		if (temNum > 0)
 		{
-			return tem;
+			return temNum;
 		}
 		else
 		{

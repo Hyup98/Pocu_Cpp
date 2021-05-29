@@ -24,7 +24,7 @@ namespace assignment2
 			{
 				return 480;
 			}
-			else if (totalWeight > 80)
+			else 
 			{
 				if (totalWeight > 160)
 				{
@@ -48,7 +48,7 @@ namespace assignment2
 			{
 				return 480;
 			}
-			else if (totalWeight > 80)
+			else
 			{
 				if (totalWeight > 160)
 				{
@@ -155,6 +155,7 @@ namespace assignment2
 		{
 			delete mTrailer;
 			bIsConect = false;
+			return true;
 		}
 		else
 		{

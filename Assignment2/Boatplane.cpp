@@ -72,22 +72,10 @@ namespace assignment2
 
 	unsigned int Boatplane::GetFlySpeed() const
 	{
-		unsigned int tem = pow(2.71, (500 - GetTotalWeight() / 300));
-		tem *= 150;
-		return tem;
+		unsigned int temNum = 500 - GetTotalWeight();
+		float temNumber = temNum / 300.0;
+		float tem = pow(2.71, temNumber);
+		unsigned int answer = tem * 150;
+		return answer;
 	}
-	/*
-
-	Boatplane& Boatplane::operator=(Boatplane& other)
-	{
-		if (&other == this)
-		{
-			return *this;
-		}
-		for (size_t i = 0; i < GetPassengersCount(); i++)
-		{
-			delete mPassenger[i];
-		}
-	}
-	*/
 }

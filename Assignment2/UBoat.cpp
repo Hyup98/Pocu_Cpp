@@ -14,10 +14,13 @@ namespace assignment2
 
 	unsigned int UBoat::GetDiveSpeed() const
 	{
-		float tem = 550 - (GetTotalWeight() / 10);
-		if (tem > 200)
+		unsigned int temNum = GetTotalWeight();
+		float tem = temNum / 10;
+		temNum = 550 - tem;
+		if (temNum > 200)
 		{
-			return tem;
+			unsigned int answer = temNum;
+			return answer;
 		}
 		else
 		{
@@ -32,12 +35,13 @@ namespace assignment2
 
 	unsigned int UBoat::GetSailSpeed() const
 	{
-		float tem = (GetTotalWeight() + 150);
-		tem /= 150;
+		unsigned int temNum = GetTotalWeight() + 150;
+		float tem = temNum / 150;
 		tem = log(tem);
 		tem *= 500;
 		tem += 30;
-		return tem;
+		unsigned int answer = tem;
+		return answer;
 
 	}
 	void UBoat::Move()

@@ -16,15 +16,15 @@ namespace assignment2
 
 	unsigned int Airplane::GetFlySpeed() const
 	{
-		float temNum = 800 - GetTotalWeight();
+		unsigned int temNum = 800 - GetTotalWeight();
 
-		temNum /= 500;
+	 	float temNumber = temNum / 500.0;
 		
-		float tem = pow((float)2.718281, temNum);
+		float tem = pow(2.718281, temNumber);
 
-		tem *= 200;
+		unsigned int answer = tem * 200;
 
-		return tem;
+		return answer;
 	}
 
 	void Airplane::Move()
@@ -56,11 +56,11 @@ namespace assignment2
 
 	unsigned int Airplane::GetDriveSpeed() const
 	{
-		float temNum = 400 - GetTotalWeight();
-		temNum /= 70;
-		float tem = pow((float)2.718281,temNum);
-		tem *= 4;
-		return tem;
+		unsigned int temNum = 400 - GetTotalWeight();
+		float temNumber = temNum / 70;
+		float tem = pow((float)2.718281,temNumber);
+		unsigned int answer = tem * 4;
+		return answer;
 	}
 
 	unsigned int Airplane::GetMaxSpeed() const
