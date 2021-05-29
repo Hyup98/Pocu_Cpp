@@ -24,10 +24,14 @@ namespace assignment2
 
 	Person::~Person()
 	{
-		delete[] mName;
 	}
 
 	const std::string& Person::GetName() const
+	{
+		return mName;
+	}
+
+	const char* Person::GetNameP() const
 	{
 		return mName;
 	}

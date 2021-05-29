@@ -73,7 +73,9 @@
     <ClCompile Include="Airplane.cpp" />
     <ClCompile Include="Boat.cpp" />
     <ClCompile Include="Boatplane.cpp" />
-    <ClCompile Include="DeusExMachina.cpp" />
+    <ClCompile Include="DeusExMachina.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Motorcycle.cpp" />
     <ClCompile Include="Person.cpp" />
@@ -86,7 +88,9 @@
     <ClInclude Include="Airplane.h" />
     <ClInclude Include="Boat.h" />
     <ClInclude Include="Boatplane.h" />
-    <ClInclude Include="DeusExMachina.h" />
+    <ClInclude Include="DeusExMachina.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="IDivable.h" />
     <ClInclude Include="IDrivable.h" />
     <ClInclude Include="IFlyable.h" />

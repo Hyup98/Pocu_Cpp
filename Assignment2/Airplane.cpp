@@ -2,7 +2,7 @@
 #include "Boat.h"
 #include "Boatplane.h"
 #include<math.h>
-
+#include<iostream>
 namespace assignment2
 {
 	Airplane::Airplane(unsigned int maxPassengersCount)
@@ -16,14 +16,49 @@ namespace assignment2
 
 	unsigned int Airplane::GetFlySpeed() const
 	{
-		unsigned int tem = pow(2.71, (800 - GetPassengersCount() / 500));
+		float temNum = 800 - GetTotalWeight();
+
+		temNum /= 500;
+		
+		float tem = pow((float)2.718281, temNum);
+
 		tem *= 200;
+
+		return tem;
+	}
+
+	void Airplane::Move()
+	{
+		if (mMoveCount == 0)
+		{
+			mMoveCount++;
+		}
+
+		else
+		{
+			if (mRestCount <= 2)
+			{
+				mRestCount++;
+			}
+			else if (mRestCount == 3)
+			{
+				mMoveCount++;
+				mRestCount = 0;
+			}
+		}
+	}
+
+	unsigned int Airplane::GetTraveledDistance()
+	{
+		unsigned int tem = GetMaxSpeed() * mMoveCount;
 		return tem;
 	}
 
 	unsigned int Airplane::GetDriveSpeed() const
 	{
-		unsigned int tem = pow(2.71, (400 - GetPassengersCount() / 70));
+		float temNum = 400 - GetTotalWeight();
+		temNum /= 70;
+		float tem = pow((float)2.718281,temNum);
 		tem *= 4;
 		return tem;
 	}
@@ -43,9 +78,10 @@ namespace assignment2
 		}
 	}
 
-	Boatplane& Airplane::operator+(Boat& boat)
+	Boatplane Airplane::operator+(Boat& boat)
 	{
 		Boatplane bp(GetMaxPassengersCount() + boat.GetMaxPassengersCount());
+
 		unsigned int i = 0;
 		for (i; i < GetPassengersCount(); i++)
 		{
@@ -53,10 +89,11 @@ namespace assignment2
 
 		}
 		QuitAll();
-		
-		unsigned int tem = 0;
 
-		for (i; i < bp.GetMaxPassengersCount(); i++)
+		unsigned int tem = 0;
+		i++;
+		unsigned int temI = i + boat.GetPassengersCount();
+		for (i; i < temI; i++)
 		{
 			bp.AddPassenger(boat.GetPassenger(tem));
 			tem++;
@@ -64,6 +101,6 @@ namespace assignment2
 		boat.QuitAll();
 
 
-		return bp;
+		return bp;;
 	}
 }

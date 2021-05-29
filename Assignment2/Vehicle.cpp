@@ -5,8 +5,30 @@ namespace assignment2
 	Vehicle::Vehicle(unsigned int maxPassengersCount)
 		: mMaxPassengersCount(maxPassengersCount)
 		, onBoardNum(0)
+		, mRestCount(0)
+		, mMoveCount(0)
 	{
 		mPassenger = new const Person * [mMaxPassengersCount];
+	}
+	void Vehicle::SetMoveCount()
+	{
+		mMoveCount = 0;
+		mRestCount = 0;
+	}
+
+	void Vehicle::Move()
+	{
+
+	}
+
+	unsigned int Vehicle::GetMaxSpeed() const
+	{
+		return 0;
+	}
+
+	unsigned int Vehicle::GetTraveledDistance()
+	{
+		return 0;
 	}
 
 	Vehicle::~Vehicle()
@@ -17,6 +39,17 @@ namespace assignment2
 		}
 
 		delete[] mPassenger;
+	}
+
+	Vehicle::Vehicle(Vehicle& rhs)
+		: mMaxPassengersCount(rhs.mMaxPassengersCount)
+		, onBoardNum(rhs.onBoardNum)
+	{
+		mPassenger = new const Person * [mMaxPassengersCount];
+		for (size_t i = 0; i < onBoardNum; i++)
+		{
+			mPassenger[i] = new const Person(rhs.mPassenger[i]->GetNameP(), rhs.mPassenger[i]->GetWeight());
+		}
 	}
 
 	bool Vehicle::AddPassenger(const Person* person)
@@ -56,11 +89,22 @@ namespace assignment2
 			}
 			mPassenger[onBoardNum - 1] = nullptr;
 			onBoardNum--;
+			return true;
 		}
 		else
 		{
 			return false;
 		}
+	}
+
+	unsigned int Vehicle::GetTotalWeight() const
+	{
+		unsigned int tem = 0;
+		for (size_t i = 0; i < GetPassengersCount(); i++)
+		{
+			tem += mPassenger[i]->GetWeight();
+		}
+		return tem;
 	}
 
 	unsigned int Vehicle::GetPassengersCount() const
@@ -85,5 +129,10 @@ namespace assignment2
 			mPassenger[i] = nullptr;
 		}
 		onBoardNum = 0;
+	}
+
+	void Vehicle::SetonBoardNum(unsigned int i)
+	{
+		onBoardNum = i;
 	}
 }

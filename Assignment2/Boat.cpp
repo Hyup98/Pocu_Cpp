@@ -4,6 +4,7 @@ namespace assignment2
 {
 	Boat::Boat(unsigned int maxPassengersCount)
 		: Vehicle(maxPassengersCount)
+
 	{
 	}
 
@@ -11,38 +12,82 @@ namespace assignment2
 	{
 	}
 
-	unsigned int Boat::GetDiveSpeed() const
+	void Boat::Move()
 	{
-		return 0;
+		if (mMoveCount == 0)
+		{
+			mMoveCount++;
+		}
+
+		else
+		{
+			if (mRestCount == 1)
+			{
+				mMoveCount++;
+				mRestCount = 0;
+			}
+			else if (mMoveCount % 2 != 0)
+			{
+				mMoveCount++;
+			}
+			else
+			{
+				mRestCount++;
+			}
+		}
+	}
+	void Boat::SetMoveCount()
+	{
+		mMoveCount = 0;
+	}
+
+	unsigned int Boat::GetTraveledDistance()
+	{
+		unsigned int tem = GetMaxSpeed() * mMoveCount;
+		return tem;
+	}
+
+	unsigned int Boat::GetSailSpeed() const
+	{
+		unsigned int tem = 800 - 10 * (GetTotalWeight());
+		if (tem > 20)
+		{
+			return tem;
+		}
+		else
+		{
+			return 20;
+		}
 	}
 
 	unsigned int Boat::GetMaxSpeed() const
 	{
-		return 0;
+		return GetSailSpeed();
 	}
 
 	Boatplane Boat::operator+(Airplane& plane)
 	{
 		Boatplane bp(GetMaxPassengersCount() + plane.GetMaxPassengersCount());
+
 		unsigned int i = 0;
-		for (i; i < GetPassengersCount(); i++)
+		for (i; i < plane.GetPassengersCount(); i++)
 		{
-			bp.AddPassenger(GetPassenger(i));
+			bp.AddPassenger(plane.GetPassenger(i));
 
-		}
-		QuitAll();
-		delete this;
-		unsigned int tem = 0;
-
-		for (i; i < bp.GetMaxPassengersCount(); i++)
-		{
-			bp.AddPassenger(plane.GetPassenger(tem));
-			tem++;
 		}
 		plane.QuitAll();
-		delete& plane;
+
+		unsigned int tem = 0;
+		i++;
+		unsigned int temI = i + GetPassengersCount();
+		for (i; i < temI; i++)
+		{
+			bp.AddPassenger(GetPassenger(tem));
+			tem++;
+		}
+		QuitAll();
+
 
 		return bp;
-	
 	}
 }
