@@ -10,15 +10,8 @@ namespace lab5
 	unsigned int CircleLawn::GetArea() const
 	{
 		double tem = 3.14 * mRadius * mRadius;
-		int chage = tem;
-		if (chage < tem)
-		{
-			return chage + 1;
-		}
-		else
-		{
-			return chage;
-		}
+		return (int)tem;
+		
 	}
 }
 

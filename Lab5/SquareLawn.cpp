@@ -5,9 +5,10 @@
 using namespace lab5;
 
 SquareLawn::SquareLawn(unsigned int width) 
-	: mWidth(width)
+	: RectangleLawn(width,width)
 {
 }
+/*
 unsigned int SquareLawn::GetMinimumFencesCount() const
 {
 	unsigned int widthTem = mWidth * 4 * 2 * 2;
@@ -30,5 +31,6 @@ unsigned int SquareLawn::GetArea() const
 {
 	return mWidth * mWidth;
 }
+*/
 
 
