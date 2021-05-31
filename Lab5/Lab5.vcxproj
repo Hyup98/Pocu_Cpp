@@ -70,7 +70,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CircleLawn.cpp" />
+    <ClCompile Include="EquilateralTriangleLawn.cpp" />
+    <ClCompile Include="Lawn.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RectangleLawn.cpp" />
+    <ClCompile Include="SquareLawn.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CircleLawn.h" />
+    <ClInclude Include="eFenceType.h" />
+    <ClInclude Include="eGrassType.h" />
+    <ClInclude Include="EquilateralTriangleLawn.h" />
+    <ClInclude Include="IFenceable.h" />
+    <ClInclude Include="Lawn.h" />
+    <ClInclude Include="RectangleLawn.h" />
+    <ClInclude Include="SquareLawn.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

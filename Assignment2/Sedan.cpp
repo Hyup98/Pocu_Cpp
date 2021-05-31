@@ -7,6 +7,7 @@ namespace assignment2
 		:Vehicle(4)
 		, bIsConect(false)
 	{
+		mTrailer = nullptr;
 	}
 
 	Sedan::~Sedan()

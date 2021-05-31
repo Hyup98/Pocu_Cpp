@@ -42,7 +42,6 @@ namespace assignment2
 		tem += 30;
 		unsigned int answer = tem;
 		return answer;
-
 	}
 	void UBoat::Move()
 	{
