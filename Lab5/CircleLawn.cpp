@@ -14,11 +14,11 @@ namespace lab5
 	unsigned int CircleLawn::GetArea() const
 	{
 		double tem = 3.14 * mRadius * mRadius;
-		if ((tem - (int)tem) > 0)
+		if ((tem - static_cast<int>(tem)) > 0)
 		{
-			return (int)++tem;
+			return  static_cast<int>(++tem);
 		}
-		return (int)tem;
+		return  static_cast<int>(tem);
 		
 	}
 }

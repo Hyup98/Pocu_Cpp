@@ -14,11 +14,11 @@ namespace lab5
 	{
 		double tem = GetArea() * grassType;
 		tem /= 100;
-		if ((tem - (int)tem > 0))
+		if ((tem - static_cast<int>(tem) > 0))
 		{
-			return (int)++tem;
+			return  static_cast<int>(++tem);
 		}
-		return tem;
+		return  static_cast<int>(tem);
 
 	}
 
@@ -29,12 +29,12 @@ namespace lab5
 		if (tem == 0)
 		{
 			tem = (GetArea() * 10) / 3;
-			answer = tem;
+			answer = static_cast<int>(tem);
 		}
 		else
 		{
 			tem = (GetArea() * 10) / 3;
-			answer = tem;
+			answer = static_cast<int>(tem);
 			answer++;
 		}
 		return answer;
