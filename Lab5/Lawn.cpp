@@ -12,8 +12,12 @@ namespace lab5
 
 	unsigned int Lawn::GetGrassPrice(eGrassType grassType) const
 	{
-		unsigned int tem = GetArea() * grassType;
+		double tem = GetArea() * grassType;
 		tem /= 100;
+		if ((tem - (int)tem > 0))
+		{
+			return (int)++tem;
+		}
 		return tem;
 
 	}

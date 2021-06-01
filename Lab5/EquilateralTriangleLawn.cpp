@@ -5,7 +5,10 @@ using namespace lab5;
 EquilateralTriangleLawn::EquilateralTriangleLawn(unsigned int width)
 	: mWidth(width)
 {
+}
 
+EquilateralTriangleLawn::~EquilateralTriangleLawn()
+{
 }
 unsigned int EquilateralTriangleLawn::GetMinimumFencesCount() const
 {

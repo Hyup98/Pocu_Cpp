@@ -8,6 +8,10 @@ SquareLawn::SquareLawn(unsigned int width)
 	: RectangleLawn(width,width)
 {
 }
+
+SquareLawn::~SquareLawn()
+{
+}
 /*
 unsigned int SquareLawn::GetMinimumFencesCount() const
 {

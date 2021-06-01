@@ -10,6 +10,7 @@ namespace lab5
 	{
 	public:
 		RectangleLawn(unsigned int width, unsigned int height);
+		~RectangleLawn();
 		unsigned int GetMinimumFencesCount() const;
 		unsigned int GetFencePrice(eFenceType fenceType) const;
 		unsigned int GetArea() const;

@@ -9,6 +9,7 @@ namespace lab5
 	{
 	public:
 		SquareLawn(unsigned int width);
+		~SquareLawn();
 		/*
 		unsigned int GetMinimumFencesCount() const;
 		unsigned int GetFencePrice(eFenceType fenceType) const;
