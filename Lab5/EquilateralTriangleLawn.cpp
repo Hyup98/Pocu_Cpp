@@ -12,7 +12,7 @@ EquilateralTriangleLawn::~EquilateralTriangleLawn()
 }
 unsigned int EquilateralTriangleLawn::GetMinimumFencesCount() const
 {
-	unsigned int widthTem = mWidth * 4 * 4;
+	unsigned int widthTem = mWidth * 4 * 3;
 
 	return widthTem;
 }

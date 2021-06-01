@@ -1,4 +1,5 @@
 #include "CircleLawn.h"
+#include <cmath>
 namespace lab5
 {
 
@@ -14,12 +15,10 @@ namespace lab5
 	unsigned int CircleLawn::GetArea() const
 	{
 		double tem = 3.14 * mRadius * mRadius;
-		if ((tem - static_cast<int>(tem)) > 0)
-		{
-			return  static_cast<int>(++tem);
-		}
-		return  static_cast<int>(tem);
+		
+		return  static_cast<int>(round(tem));
 		
 	}
 }
 
+ 
