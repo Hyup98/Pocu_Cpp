@@ -32,8 +32,8 @@ unsigned int EquilateralTriangleLawn::GetFencePrice(eFenceType fenceType) const
 }
 unsigned int EquilateralTriangleLawn::GetArea() const
 {
-	double tem = mWidth * mWidth / 4 * 1.73;
-	int chage = static_cast<int>(round(tem));
+	double tem = (mWidth * mWidth / 4) * 1.73;
+	int chage = static_cast<int>(tem);
 	return chage;
 	
 }
