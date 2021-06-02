@@ -58,6 +58,13 @@ namespace assignment2
 	{
 		if (person != nullptr)
 		{
+			for (size_t i = 0; i < onBoardNum; i++)
+			{
+				if (mPassenger[i] == person)
+				{
+					return false;
+				}
+			}
 			if (onBoardNum < mMaxPassengersCount)
 			{
 				mPassenger[onBoardNum] = person;
@@ -82,9 +89,8 @@ namespace assignment2
 			return false;
 		}
 
-		if (i < onBoardNum)
+		if (i < onBoardNum && i >= 0)
 		{
-			delete mPassenger[i];
 			for (size_t j = i; j < onBoardNum - 1; j++)
 			{
 				mPassenger[j] = mPassenger[j + 1];

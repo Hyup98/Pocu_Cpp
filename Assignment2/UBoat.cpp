@@ -15,7 +15,7 @@ namespace assignment2
 	unsigned int UBoat::GetDiveSpeed() const
 	{
 		double temNum = GetTotalWeight();
-		double tem = temNum / 10;
+		double tem = temNum / 10.0;
 		temNum = 550 - tem;
 		if (temNum > 200)
 		{

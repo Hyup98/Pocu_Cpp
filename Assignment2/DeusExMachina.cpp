@@ -99,4 +99,16 @@ namespace assignment2
 		}
 		return mVehicle[index];
 	}
+
+	unsigned int DeusExMachina::GetIndex(const Vehicle* other)
+	{
+		for (size_t i = 0; i < mVehicleCount; i++)
+		{
+			if (mVehicle[i] == other )
+			{
+				return i;
+			}
+		}
+	}
 }
+

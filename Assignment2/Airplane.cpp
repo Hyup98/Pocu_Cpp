@@ -22,9 +22,9 @@ namespace assignment2
 		
 		double tem = pow(2.718281, temNumber);
 
-		unsigned int answer = static_cast<unsigned int>(tem) * 200;
+		double answer = tem * 200;
 
-		return answer;
+		return static_cast<unsigned int>(answer);
 	}
 
 	void Airplane::Move()
@@ -57,10 +57,10 @@ namespace assignment2
 	unsigned int Airplane::GetDriveSpeed() const
 	{
 		unsigned int temNum = 400 - GetTotalWeight();
-		double temNumber = temNum / 70;
+		double temNumber = temNum / 70.0;
 		double tem = pow(2.718281,temNumber);
-		unsigned int answer = static_cast<unsigned int>(tem) * 4;
-		return answer;
+		double answer = tem * 4;
+		return static_cast<unsigned int>(round(answer));
 	}
 
 	unsigned int Airplane::GetMaxSpeed() const
