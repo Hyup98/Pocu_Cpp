@@ -5,6 +5,7 @@ namespace assignment2
 	Person::Person(const char* name, unsigned int weight)
 		: mWeight(weight)
 	{
+		/*
 		unsigned int count = 0;
 		while (true)
 		{
@@ -20,18 +21,22 @@ namespace assignment2
 			mName[i] = name[i];
 		}
 		mName[count] = '\0';
+		*/
+		mName = name;
 	}
+
+	Person::Person(std::string name, unsigned int weight)
+		: mWeight(weight)
+	{
+		mName = name;
+	}
+
 
 	Person::~Person()
 	{
 	}
 
 	const std::string& Person::GetName() const
-	{
-		return mName;
-	}
-
-	const char* Person::GetNameP() const
 	{
 		return mName;
 	}

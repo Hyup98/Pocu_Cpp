@@ -13,10 +13,10 @@ namespace assignment2
 
 	unsigned int Boatplane::GetSailSpeed() const
 	{
-		unsigned int tem = 800 - 1.7 * (GetTotalWeight());
+		double tem = 800 - 1.7 * (GetTotalWeight());
 		if (tem > 20)
 		{
-			return tem;
+			return static_cast<unsigned int>(tem);
 		}
 		else
 		{
@@ -33,9 +33,9 @@ namespace assignment2
 	{
 		if (mMoveCount == 0)
 		{
-			mMoveCount++;
 		}
 		else
+			mMoveCount++;
 		{
 			if (mRestCount < 3)
 			{
@@ -72,10 +72,10 @@ namespace assignment2
 
 	unsigned int Boatplane::GetFlySpeed() const
 	{
-		unsigned int temNum = 500 - GetTotalWeight();
-		float temNumber = temNum / 300.0;
-		float tem = pow(2.71, temNumber);
-		unsigned int answer = tem * 150;
-		return answer;
+		double temNum = 500 - GetTotalWeight();
+		double temNumber = temNum / 300.0;
+		double tem = pow(2.71, temNumber);
+		double answer = tem * 150;
+		return static_cast<unsigned int>(answer);
 	}
 }

@@ -44,11 +44,13 @@ namespace assignment2
 	Vehicle::Vehicle(Vehicle& rhs)
 		: mMaxPassengersCount(rhs.mMaxPassengersCount)
 		, onBoardNum(rhs.onBoardNum)
+		, mMoveCount(0)
+		, mRestCount(0)
 	{
 		mPassenger = new const Person * [mMaxPassengersCount];
-		for (size_t i = 0; i < onBoardNum; i++)
+		for (size_t i = 0; i < rhs.onBoardNum; i++)
 		{
-			mPassenger[i] = new const Person(rhs.mPassenger[i]->GetNameP(), rhs.mPassenger[i]->GetWeight());
+			mPassenger[i] = new const Person(rhs.mPassenger[i]->GetName(), rhs.mPassenger[i]->GetWeight());
 		}
 	}
 

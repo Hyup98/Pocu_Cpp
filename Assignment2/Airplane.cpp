@@ -18,11 +18,11 @@ namespace assignment2
 	{
 		unsigned int temNum = 800 - GetTotalWeight();
 
-	 	float temNumber = temNum / 500.0;
+	 	double temNumber = temNum / 500.0;
 		
-		float tem = pow(2.718281, temNumber);
+		double tem = pow(2.718281, temNumber);
 
-		unsigned int answer = tem * 200;
+		unsigned int answer = static_cast<unsigned int>(tem) * 200;
 
 		return answer;
 	}
@@ -57,9 +57,9 @@ namespace assignment2
 	unsigned int Airplane::GetDriveSpeed() const
 	{
 		unsigned int temNum = 400 - GetTotalWeight();
-		float temNumber = temNum / 70;
-		float tem = pow((float)2.718281,temNumber);
-		unsigned int answer = tem * 4;
+		double temNumber = temNum / 70;
+		double tem = pow(2.718281,temNumber);
+		unsigned int answer = static_cast<unsigned int>(tem) * 4;
 		return answer;
 	}
 
