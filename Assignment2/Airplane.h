@@ -17,7 +17,7 @@ namespace assignment2
 		Airplane(unsigned int maxPassengersCount);
 		~Airplane();
 		unsigned int GetFlySpeed() const;
-	    unsigned int GetMaxSpeed() const;
+		unsigned int GetMaxSpeed() const;
 		unsigned int GetDriveSpeed() const;
 		void Move();
 		unsigned int GetTraveledDistance();

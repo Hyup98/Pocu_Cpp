@@ -16,11 +16,11 @@ namespace assignment2
 	unsigned int Motorcycle::GetDriveSpeed() const
 	{
 		double tem = pow(GetTotalWeight(), 3);
-		unsigned int temNum = 2 * GetTotalWeight() + 400;
-		temNum -= static_cast<unsigned int>(tem);
+		double temNum = 2 * GetTotalWeight() + 400;
+		temNum -= tem;
 		if (temNum > 0)
 		{
-			return static_cast<unsigned int>(temNum);
+			return static_cast<unsigned int>(round(temNum));
 		}
 		else
 		{

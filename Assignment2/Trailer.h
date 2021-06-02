@@ -13,6 +13,6 @@ namespace assignment2
 		unsigned int GetWeight() const;
 	private:
 		unsigned int mWeight;
-		bool bIsConect;
+		bool mBIsConect;
 	};
 }

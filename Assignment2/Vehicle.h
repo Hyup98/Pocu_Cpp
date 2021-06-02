@@ -30,7 +30,7 @@ namespace assignment2
 
 	private:
 		unsigned int mMaxPassengersCount;
-		unsigned int onBoardNum;
+		unsigned int mOnBoardNum;
 		const Person** mPassenger; 
 
 	};

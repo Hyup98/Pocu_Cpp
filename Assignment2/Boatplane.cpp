@@ -16,7 +16,7 @@ namespace assignment2
 		double tem = 800 - 1.7 * (GetTotalWeight());
 		if (tem > 20)
 		{
-			return static_cast<unsigned int>(tem);
+			return static_cast<unsigned int>(round(tem));
 		}
 		else
 		{
@@ -57,16 +57,16 @@ namespace assignment2
 
 	unsigned int Boatplane::GetMaxSpeed() const
 	{
-		unsigned int tem_1 = GetSailSpeed();
-		unsigned int tem_2 = GetFlySpeed();
-		if (tem_1 > tem_2)
+		unsigned int tem1 = GetSailSpeed();
+		unsigned int tem2 = GetFlySpeed();
+		if (tem1 > tem2)
 		{
-			return tem_1;
+			return tem1;
 		}
 
 		else
 		{
-			return tem_2;
+			return tem2;
 		}
 	}
 
@@ -76,6 +76,6 @@ namespace assignment2
 		double temNumber = temNum / 300.0;
 		double tem = pow(2.71, temNumber);
 		double answer = tem * 150;
-		return static_cast<unsigned int>(answer);
+		return static_cast<unsigned int>(round(answer));
 	}
 }

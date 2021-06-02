@@ -5,7 +5,7 @@ namespace assignment2
 	Trailer::Trailer(unsigned int weight)
 		: mWeight(weight)
 	{
-		bIsConect = false;
+		mBIsConect = false;
 	}
 
 	Trailer::~Trailer()
@@ -14,12 +14,12 @@ namespace assignment2
 
 	bool Trailer::IsConect() const
 	{
-		return bIsConect;
+		return mBIsConect;
 	}
 
 	void Trailer::Conect()
 	{
-		bIsConect = true;
+		mBIsConect = true;
 	}
 
 	unsigned int Trailer::GetWeight() const

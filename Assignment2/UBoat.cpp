@@ -19,7 +19,7 @@ namespace assignment2
 		temNum = 550 - tem;
 		if (temNum > 200)
 		{
-			unsigned int answer = static_cast<unsigned int>(temNum);
+			unsigned int answer = static_cast<unsigned int>(round(temNum));
 			return answer;
 		}
 		else
@@ -40,7 +40,7 @@ namespace assignment2
 		tem = log(tem);
 		tem *= 500;
 		tem += 30;
-		unsigned int answer = static_cast<unsigned int>(tem);
+		unsigned int answer = static_cast<unsigned int>(round(tem));
 		return answer;
 	}
 	void UBoat::Move()
@@ -75,15 +75,15 @@ namespace assignment2
 
 	unsigned UBoat::GetMaxSpeed() const
 	{
-		unsigned int tem_1 = GetDiveSpeed();
-		unsigned int tem_2 = GetSailSpeed();
-		if (tem_1 > tem_2)
+		unsigned int tem1 = GetDiveSpeed();
+		unsigned int tem2 = GetSailSpeed();
+		if (tem1 > tem2)
 		{
-			return tem_1;
+			return tem1;
 		}
 		else
 		{
-			return tem_2;
+			return tem2;
 		}
 	}
 }

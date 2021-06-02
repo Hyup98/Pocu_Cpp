@@ -13,7 +13,7 @@
 
 namespace assignment2
 {
-	DeusExMachina* DeusExMachina::Instance = nullptr;
+	DeusExMachina* DeusExMachina::mInstance = nullptr;
 
 	DeusExMachina::DeusExMachina()
 	{
@@ -26,14 +26,14 @@ namespace assignment2
 
 	DeusExMachina* DeusExMachina::GetInstance()
 	{
-		if (Instance == NULL)
+		if (mInstance == NULL)
 		{
-			Instance = new DeusExMachina();
-			return Instance;
+			mInstance = new DeusExMachina();
+			return mInstance;
 		}
 		else
 		{
-			return Instance;
+			return mInstance;
 		}
 	}
 
@@ -98,17 +98,6 @@ namespace assignment2
 			}
 		}
 		return mVehicle[index];
-	}
-
-	unsigned int DeusExMachina::GetIndex(const Vehicle* other)
-	{
-		for (size_t i = 0; i < mVehicleCount; i++)
-		{
-			if (mVehicle[i] == other )
-			{
-				return i;
-			}
-		}
 	}
 }
 

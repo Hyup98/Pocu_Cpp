@@ -4,8 +4,8 @@
 namespace assignment2
 {
 	Sedan::Sedan()
-		:Vehicle(4)
-		, bIsConect(false)
+		: Vehicle(4)
+		, mBIsConect(false)
 	{
 		mTrailer = nullptr;
 	}
@@ -17,7 +17,7 @@ namespace assignment2
 	unsigned int Sedan::GetDriveSpeed() const
 	{
 		unsigned int totalWeight = 0;
-		if (bIsConect)
+		if (mBIsConect)
 		{
 			totalWeight += GetTotalWeight();
 			totalWeight += mTrailer->GetWeight();
@@ -71,7 +71,7 @@ namespace assignment2
 
 	bool Sedan::AddTrailer(const Trailer* trailer)
 	{
-		if (bIsConect)
+		if (mBIsConect)
 		{
 			return false;
 		}
@@ -79,7 +79,7 @@ namespace assignment2
 		{
 			trailer->IsConect();
 			mTrailer = trailer;
-			bIsConect = true;
+			mBIsConect = true;
 			return true;
 		}
 		else
@@ -94,7 +94,7 @@ namespace assignment2
 
 	void Sedan::Move()
 	{
-		if (bIsConect)
+		if (mBIsConect)
 		{
 			if (mMoveCount == 0)
 			{
@@ -152,10 +152,10 @@ namespace assignment2
 
 	bool Sedan::RemoveTrailer()
 	{
-		if (bIsConect)
+		if (mBIsConect)
 		{
 			delete mTrailer;
-			bIsConect = false;
+			mBIsConect = false;
 			return true;
 		}
 		else

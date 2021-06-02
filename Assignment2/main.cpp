@@ -112,7 +112,6 @@ int main()
 	deusExMachina1->Travel(); // Boat, Motorcycle, 두 Sedan이 이동
 	deusExMachina1->Travel(); // Boat, Motorcycle, 두 Sedan이 이동
 	deusExMachina1->Travel(); // 트레일러 달린 Sedan만 이동
-	std::cout << deusExMachina1->GetIndex(deusExMachina1->GetFurthestTravelled());
 	assert(deusExMachina1->GetFurthestTravelled() == boat);
 
 	return 0;

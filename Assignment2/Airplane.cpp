@@ -2,7 +2,7 @@
 #include "Boat.h"
 #include "Boatplane.h"
 #include<math.h>
-#include<iostream>
+
 namespace assignment2
 {
 	Airplane::Airplane(unsigned int maxPassengersCount)
@@ -18,13 +18,13 @@ namespace assignment2
 	{
 		unsigned int temNum = 800 - GetTotalWeight();
 
-	 	double temNumber = temNum / 500.0;
+		double temNumber = temNum / static_cast<double>(500);
 		
 		double tem = pow(2.718281, temNumber);
 
 		double answer = tem * 200;
 
-		return static_cast<unsigned int>(answer);
+		return static_cast<unsigned int>(round(answer));
 	}
 
 	void Airplane::Move()
@@ -58,7 +58,7 @@ namespace assignment2
 	{
 		unsigned int temNum = 400 - GetTotalWeight();
 		double temNumber = temNum / 70.0;
-		double tem = pow(2.718281,temNumber);
+		double tem = pow(2.718281, temNumber);
 		double answer = tem * 4;
 		return static_cast<unsigned int>(round(answer));
 	}

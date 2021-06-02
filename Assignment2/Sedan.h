@@ -21,7 +21,7 @@ namespace assignment2
 		void SetMoveCount();
 	private:
 		const Trailer* mTrailer;
-		bool bIsConect;
+		bool mBIsConect;
 
 	};
 }

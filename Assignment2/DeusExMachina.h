@@ -23,12 +23,11 @@ namespace assignment2
 		bool AddVehicle(Vehicle* vehicle);
 		bool RemoveVehicle(unsigned int i);
 		const Vehicle* GetFurthestTravelled() const;
-		unsigned int GetIndex(const Vehicle* other);
 
 	private:
 		DeusExMachina();
 		~DeusExMachina();
-		static DeusExMachina* Instance;
+		static DeusExMachina* mInstance;
 		Vehicle** mVehicle;
 		unsigned int mVehicleCount;
 	};
