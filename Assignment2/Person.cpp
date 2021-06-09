@@ -1,28 +1,14 @@
 #include "Person.h"
+#include "Vehicle.h"
 
 namespace assignment2
 {
 	Person::Person(const char* name, unsigned int weight)
 		: mWeight(weight)
+		, mOnBoardVechicle(nullptr)
 	{
-		/*
-		unsigned int count = 0;
-		while (true)
-		{
-			if (name[count] == '\0')
-			{
-				break;
-			}
-			count++;
-		}
-		mName = new char[count + 1];
-		for (size_t i = 0; i < count; i++)
-		{
-			mName[i] = name[i];
-		}
-		mName[count] = '\0';
-		*/
 		mName = name;
+		//mOnBoardVechicle = nullptr;
 	}
 
 	Person::Person(std::string name, unsigned int weight)
@@ -36,6 +22,16 @@ namespace assignment2
 	{
 	}
 
+	Vehicle* Person::GetBoardVehicle() const
+	{
+		return mOnBoardVechicle;
+	}
+
+	void Person::SetBoardVehicle(Vehicle* t)
+	{
+		mOnBoardVechicle = t;
+	}
+
 	const std::string& Person::GetName() const
 	{
 		return mName;
@@ -45,4 +41,18 @@ namespace assignment2
 	{
 		return mWeight;
 	}
+	/*
+	Vehicle* Person::GetBoardVehicle() const
+	{
+		return mOnBoardVechicle;
+	}
+
+	void Person::SetBoardVehicle(Vehicle* i) 
+	{
+		if (i != nullptr)
+		{
+			mOnBoardVechicle = i;
+		}
+	}
+	*/
 }

@@ -73,6 +73,10 @@ namespace assignment2
 	unsigned int Boatplane::GetFlySpeed() const
 	{
 		double temNum = 500 - GetTotalWeight();
+		if (temNum <= 0)
+		{
+			return 0;
+		}
 		double temNumber = temNum / 300.0;
 		double tem = pow(2.71, temNumber);
 		double answer = tem * 150;

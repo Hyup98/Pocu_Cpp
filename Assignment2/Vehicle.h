@@ -16,6 +16,7 @@ namespace assignment2
 		virtual unsigned int GetTraveledDistance();
 		bool AddPassenger(const Person* person);
 		bool RemovePassenger(unsigned int i);
+		void RemovePassenger(const Person* person);
 		const Person* GetPassenger(unsigned int i) const;
 		unsigned int GetPassengersCount() const;
 		unsigned int GetMaxPassengersCount() const;

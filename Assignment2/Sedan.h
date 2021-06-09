@@ -10,6 +10,7 @@ namespace assignment2
 	{
 	public:
 		Sedan();
+		Sedan(Sedan* other);
 		~Sedan();
 
 		bool AddTrailer(const Trailer* trailer);

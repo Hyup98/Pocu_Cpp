@@ -17,6 +17,10 @@ namespace assignment2
 	unsigned int Airplane::GetFlySpeed() const
 	{
 		unsigned int temNum = 800 - GetTotalWeight();
+		if (temNum <= 0)
+		{
+			return 0;
+		}
 
 		double temNumber = temNum / static_cast<double>(500);
 		
@@ -57,6 +61,10 @@ namespace assignment2
 	unsigned int Airplane::GetDriveSpeed() const
 	{
 		unsigned int temNum = 400 - GetTotalWeight();
+		if (temNum <= 0)
+		{
+			return 0;
+		}
 		double temNumber = temNum / 70.0;
 		double tem = pow(2.718281, temNumber);
 		double answer = tem * 4;

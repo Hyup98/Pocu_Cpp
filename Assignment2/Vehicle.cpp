@@ -47,7 +47,7 @@ namespace assignment2
 		, mMoveCount(0)
 		, mRestCount(0)
 	{
-		mPassenger = new const Person * [mMaxPassengersCount];
+		mPassenger = new const Person * [rhs.mMaxPassengersCount];
 		for (size_t i = 0; i < rhs.mOnBoardNum; i++)
 		{
 			mPassenger[i] = new const Person(rhs.mPassenger[i]->GetName(), rhs.mPassenger[i]->GetWeight());
@@ -58,28 +58,67 @@ namespace assignment2
 	{
 		if (person != nullptr)
 		{
-			for (size_t i = 0; i < mOnBoardNum; i++)
+			if (person->GetBoardVehicle() == nullptr)
 			{
-				if (mPassenger[i] == person)
+				for (size_t i = 0; i < mOnBoardNum; i++)
+				{
+					if (mPassenger[i] == person)
+					{
+						return false;
+					}
+				}
+				if (mOnBoardNum < mMaxPassengersCount)
+				{
+					mPassenger[mOnBoardNum] = person;
+					mOnBoardNum++;
+					return true;
+				}
+				else
 				{
 					return false;
 				}
 			}
-			if (mOnBoardNum < mMaxPassengersCount)
-			{
-				mPassenger[mOnBoardNum] = person;
-				mOnBoardNum++;
-				return true;
-			}
+						
 			else
 			{
-				return false;
+				person->GetBoardVehicle()->RemovePassenger(person);
+				for (size_t i = 0; i < mOnBoardNum; i++)
+				{
+					if (mPassenger[i] == person)
+					{
+						return false;
+					}
+				}
+				if (mOnBoardNum < mMaxPassengersCount)
+				{
+					mPassenger[mOnBoardNum] = person;
+					mOnBoardNum++;
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
+			
 		}
 		else
 		{
 			return false;
 		}
+	}
+
+	void Vehicle::RemovePassenger(const Person* person)
+	{
+		for (size_t i = 0; i < mOnBoardNum; i++)
+		{
+			if (mPassenger[i] == person)
+			{
+				RemovePassenger(i);
+				return;
+			}
+		}
+		
 	}
 
 	bool Vehicle::RemovePassenger(unsigned int i)
