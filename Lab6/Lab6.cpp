@@ -107,6 +107,10 @@ namespace lab6
 
 	void SortDescending(std::vector<int>& v)
 	{
+		if (v.size() == 0)
+		{
+			return;
+		}
 		int tem;
 		for (unsigned int i = 0; i < v.size() - 1; i++)
 		{
