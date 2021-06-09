@@ -57,6 +57,10 @@ namespace lab6
 
 	float Average(const std::vector<int>& v)
 	{
+		if (v.size() == 0)
+		{
+			return 0;
+		}
 		float ave = 0;
 
 		for (unsigned int i = 0; i < v.size(); i++)
@@ -87,6 +91,7 @@ namespace lab6
 				}
 			}
 		}
+
 		int index = 0;
 		for (unsigned int i = 0; i < v.size(); i++)
 		{
