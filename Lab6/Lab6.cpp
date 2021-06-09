@@ -95,7 +95,7 @@ namespace lab6
 				index = i;
 			}
 		}
-;
+
 		delete[] count;
 		return v[index];
 	}
