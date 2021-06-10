@@ -5,6 +5,8 @@
 
 namespace assignment2
 {
+	class Vehicle;
+
 	class Person
 	{
 	public:
