@@ -1,4 +1,5 @@
 #include "Vehicle.h"
+#include "Person.h"
 
 namespace assignment2
 {
@@ -81,7 +82,7 @@ namespace assignment2
 						
 			else
 			{
-				person->GetBoardVehicle()->RemovePassenger(person);
+				person->GetBoardVehicle()->OutPassenger(person);
 				for (size_t i = 0; i < mOnBoardNum; i++)
 				{
 					if (mPassenger[i] == person)
@@ -108,7 +109,7 @@ namespace assignment2
 		}
 	}
 
-	void Vehicle::RemovePassenger(const Person* person)
+	void Vehicle::OutPassenger(const Person* person)
 	{
 		for (size_t i = 0; i < mOnBoardNum; i++)
 		{
