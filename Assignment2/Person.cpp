@@ -27,11 +27,6 @@ namespace assignment2
 		return mOnBoardVechicle;
 	}
 
-	void Person::SetBoardVehicle(Vehicle* t)
-	{
-		mOnBoardVechicle = t;
-	}
-
 	const std::string& Person::GetName() const
 	{
 		return mName;
@@ -41,11 +36,6 @@ namespace assignment2
 	{
 		return mWeight;
 	}
-	/*
-	Vehicle* Person::GetBoardVehicle() const
-	{
-		return mOnBoardVechicle;
-	}
 
 	void Person::SetBoardVehicle(Vehicle* i) 
 	{
@@ -54,5 +44,5 @@ namespace assignment2
 			mOnBoardVechicle = i;
 		}
 	}
-	*/
+
 }
