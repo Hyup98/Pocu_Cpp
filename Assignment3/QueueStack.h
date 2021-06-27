@@ -26,7 +26,7 @@ namespace assignment3
 	private:
 		unsigned int mStackSize;
 		stack<T> t;
-		queue<t> mQueue;
+		queue<stack<T>> mQueue;
 		unsigned int mCount;
 		unsigned int mStackCount;
 		T mMax;
@@ -46,7 +46,7 @@ namespace assignment3
 	{
 		if (mQueue.size() == 0)
 		{
-			stack<T> tem(mStackSize);
+			stack<T> tem;
 			mQueue.push(tem);
 			mQueue.back().push(data);
 			mMax = data;
@@ -65,7 +65,7 @@ namespace assignment3
 				{
 					mMin = data;
 				}
-				stack<T> tem(mStackSize);
+				stack<T> tem;
 				mQueue.push(tem);
 				mQueue.back().push(data);
 				mStackCount++;
@@ -170,7 +170,8 @@ namespace assignment3
 	{
 		T tem = GetSum();
 		tem /= mCount;
-		return static_cast<double>(tem);
+		double a = static_cast<double>(tem);
+		return a;
 	}
 
 	template<typename T>
@@ -204,7 +205,8 @@ namespace assignment3
 			}
 		}
 
-		return static_cast<double>(tem);
+		double a = static_cast<double>(tem);
+		return a;
 	}
 
 	template<typename T>

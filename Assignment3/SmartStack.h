@@ -140,7 +140,8 @@ namespace assignment3
 			temStack.pop();
 		}
 
-		return static_cast<double>(tem);
+		double a = static_cast<double>(tem);
+		return a
 	}
 
 	template<typename T>
@@ -148,7 +149,8 @@ namespace assignment3
 	{
 		T tem = GetSum();
 		tem /= mStack.size();
-		return static_cast<double>(tem);
+		double a = static_cast<double>(tem);
+		return a
 	}
 
 	
@@ -171,7 +173,8 @@ namespace assignment3
 		}
 		tem /= mStack.size();
 		tem -= GetAverage() * GetAverage();
-		return static_cast<double>(tem);
+		double a = static_cast<double>(tem);
+		return a
 	}
 
 	template<typename T>
