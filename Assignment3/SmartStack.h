@@ -174,7 +174,7 @@ namespace assignment3
 		tem /= mStack.size();
 		tem -= GetAverage() * GetAverage();
 		double a = static_cast<double>(tem);
-		return a
+		return a;
 	}
 
 	template<typename T>

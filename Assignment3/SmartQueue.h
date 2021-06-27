@@ -149,7 +149,7 @@ namespace assignment3
 
 		double a = static_cast<double>(tem);
 		return a;
-	}
+		}
 
 	template<typename T>
 	double SmartQueue<T>::GetVariance()
@@ -167,8 +167,8 @@ namespace assignment3
 			mQueue.push(temQueue.front());
 			temQueue.pop();
 		}
-		tem /= mQueue.size();
-		tem -= GetAverage() * GetAverage();
+		tem /= static_cast<float>(mQueue.size());
+		tem -= static_cast<float>(GetAverage() * GetAverage());
 		double a = static_cast<double>(tem);
 		return a;
 	}

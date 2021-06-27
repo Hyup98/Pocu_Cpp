@@ -93,7 +93,7 @@ namespace assignment3
 		T tem = mQueue.front().top();
 		mQueue.front().pop();
 		
-		queue<t> temQueue;
+		queue<stack<T>> temQueue;
 
 		while (!mQueue.empty())
 		{
@@ -123,14 +123,14 @@ namespace assignment3
 			{
 				if (temQueue.front().top() > mMax)
 				{
-					mMax = temQueue.front().top();
+					mMax = static_cast<float>(temQueue.front().top());
 				}
 				if (temQueue.front().top() < mMin)
 				{
-					mMin = temQueue.front().top();
+					mMin = static_cast<float>(temQueue.front().top());
 				}
 				mCount++;
-				temQueue.back().push()(mQueue.front().top());
+				temQueue.back().push(mQueue.front().top());
 				mQueue.front().pop();
 			}
 		}
@@ -168,7 +168,7 @@ namespace assignment3
 	template<typename T>
 	double QueueStack<T>::GetAverage()
 	{
-		T tem = GetSum();
+		T tem = static_cast<float>(GetSum());
 		tem /= mCount;
 		double a = static_cast<double>(tem);
 		return a;
@@ -177,8 +177,8 @@ namespace assignment3
 	template<typename T>
 	T QueueStack<T>::GetSum()
 	{
-		T tem = 0;
-		queue<t> temQueue;
+		T tem = 0.0f;
+		queue<stack<T>> temQueue;
 
 		while (!mQueue.empty())
 		{
@@ -200,7 +200,7 @@ namespace assignment3
 			temQueue.push(temStack);
 			while (!mQueue.front().empty())
 			{
-				temQueue.back().push()(mQueue.front().top());
+				temQueue.back().push(mQueue.front().top());
 				mQueue.front().pop();
 			}
 		}
