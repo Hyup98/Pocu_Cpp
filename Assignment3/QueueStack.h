@@ -104,7 +104,7 @@ namespace assignment3
 				temQueue.back().push(mQueue.front().top());
 				mQueue.front().pop();
 			}
-			mQueue.front.pop();
+			mQueue.front().pop();
 
 		}
 

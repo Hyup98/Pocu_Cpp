@@ -141,7 +141,7 @@ namespace assignment3
 		}
 
 		double a = static_cast<double>(tem);
-		return a
+		return a;
 	}
 
 	template<typename T>
@@ -150,7 +150,7 @@ namespace assignment3
 		T tem = GetSum();
 		tem /= mStack.size();
 		double a = static_cast<double>(tem);
-		return a
+		return a;
 	}
 
 	
