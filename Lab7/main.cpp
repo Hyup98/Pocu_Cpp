@@ -1,7 +1,6 @@
 #include <cassert>
 
 #include "Lab7.h"
-
 using namespace lab7;
 
 int main()
@@ -20,6 +19,18 @@ int main()
 	v3.push_back(4);
 	v3.push_back(5);
 	v3.push_back(6);
+
+	std::vector<int> v4;
+	v4.push_back(1);
+	v4.push_back(1);
+	v4.push_back(2);
+	v4.push_back(3);
+
+	std::vector<int> v5;
+	v5.push_back(1);
+	v5.push_back(2);
+	v5.push_back(4);
+	v5.push_back(3);
 
 	std::map<char, int> m1;
 	m1['a'] = 1;
@@ -85,6 +96,21 @@ int main()
 		assert(combinedVector[5] == 6);
 	}
 
+	std::vector<int> v4plusv5 = v4 + v5;   // v4에 중복된 원소가 있을 경우
+	{
+		std::vector<int>::const_iterator it = v4plusv5.begin();
+
+		assert(v4plusv5.size() == 4);
+
+		assert(*it == 1);
+		it++;
+		assert(*it == 2);
+		it++;
+		assert(*it == 3);
+		it++;
+		assert(*it == 4);
+	}
+
 	std::map<char, int> combinedMap = m1 + m2;
 	{
 		std::map<char, int>::const_iterator it = combinedMap.begin();
@@ -115,3 +141,4 @@ int main()
 
 	return 0;
 }
+

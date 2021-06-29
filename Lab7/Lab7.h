@@ -73,17 +73,17 @@ namespace lab7
 	std::vector<T> operator+(const std::vector<T>& v1, const std::vector<T>& v2)
 	{
 		std::vector<T> combined;
-		for (int i = 0; i < v1.size(); i++)
+		for (unsigned int i = 0; i < v1.size(); i++)
 		{
-			bool isThere = false;
+			bool bIsThere = false;
 			for (int j = i - 1; j >= 0; j--)
 			{
 				if (v1[i] == v1[j])
 				{
-					isThere == true;
+					bIsThere = true;
 				}
 			}
-			if (isThere == false)
+			if (bIsThere == false)
 			{
 				combined.push_back(v1[i]);
 			}
@@ -91,23 +91,23 @@ namespace lab7
 
 		for (size_t i = 0; i < v2.size(); i++)
 		{
-			bool isThere = false;
+			bool bIsThere = false;
 			for (int j = i - 1; j >= 0; j--)
 			{
 				if (v2[i] == v2[j])
 				{
-					isThere == true;
+					bIsThere = true;
 				}
 			}
 
-			for (int k = 0; k < combined.size(); k++)
+			for (unsigned int k = 0; k < combined.size(); k++)
 			{
-				if (combined[i] == v2[i])
+				if (combined[k] == v2[i])
 				{
-					isThere = true;
+					bIsThere = true;
 				}
 			}
-			if (isThere == false)
+			if (bIsThere == false)
 			{
 				combined.push_back(v2[i]);
 			}
@@ -122,12 +122,12 @@ namespace lab7
 		std::map<K, V> combined(m1);
 		for (auto iter1 = m2.begin(); iter1 != m2.end(); ++iter1)
 		{
-			bool isThere = false;
+			bool bIsThere = false;
 			for (auto iter2 = combined.begin(); iter2 != combined.end(); ++iter2)
 			{
 				if (iter1->first == iter2 -> first)
 				{
-					isThere = true;
+					bIsThere = true;
 				}
 			}
 			combined.insert(std::pair<K, V>(iter1->first, iter1->second));
