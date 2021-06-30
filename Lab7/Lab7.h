@@ -157,6 +157,7 @@ namespace lab7
 	template <typename K, class V>
 	std::ostream& operator<<(std::ostream& os, const std::map<K, V>& m)
 	{
+		;
 		for (auto it = m.begin(); it != m.end(); ++it)
 		{
 			os << "{ ";
