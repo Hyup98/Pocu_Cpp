@@ -58,11 +58,11 @@ namespace lab8
 	template<typename T, size_t N>
 	bool FixedVector<T, N>::Remove(const T& data)
 	{
-		for (size_t i = 0; i <= mSize; i++)
+		for (size_t i = 0; i < mSize; i++)
 		{
 			if (mArray[i] == data)
 			{
-				for (size_t j = i; j < mSize; j++)
+				for (size_t j = i; j < mSize - 1; j++)
 				{
 					mArray[j] = mArray[j + 1];
 				}
@@ -76,6 +76,7 @@ namespace lab8
 	template<typename T, size_t N>
 	const T& FixedVector<T, N>::Get(unsigned  int i) const
 	{
+
 		return mArray[i];
 	}
 
