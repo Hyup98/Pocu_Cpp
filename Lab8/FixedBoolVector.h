@@ -23,7 +23,7 @@ namespace lab8
 	};
 
 	template<size_t N>
-	class FixedBoolVector<bool , N>
+	class FixedBoolVector<bool, N>
 	{
 	public:
 		FixedBoolVector();
@@ -196,5 +196,4 @@ namespace lab8
 		}
 		return -1;
 	}
-
-}
+};
