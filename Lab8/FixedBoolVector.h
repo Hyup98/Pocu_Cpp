@@ -11,9 +11,9 @@ namespace lab8
 		FixedBoolVector();
 		bool Add(const T& data);
 		bool Remove(const T& data);
-		const T Get(unsigned  int i) const;
+		const T& Get(unsigned  int i) const;
 		int GetIndex(const T& data) const;
-		T operator[](unsigned int i);
+		T& operator[](unsigned int i);
 		size_t GetSize() const;
 		size_t GetCapacity() const;
 
@@ -29,9 +29,9 @@ namespace lab8
 		FixedBoolVector();
 		bool Add(bool data);
 		bool Remove(bool data);
-		const bool Get(unsigned  int i) const;
+		const bool& Get(unsigned  int i) const;
 		int GetIndex(bool data) const;
-		const bool operator[](unsigned int i);
+		const bool& operator[](unsigned int i);
 		size_t GetSize() const;
 		size_t GetCapacity() const;
 
@@ -137,7 +137,7 @@ namespace lab8
 	}
 
 	template<size_t N>
-	const bool FixedBoolVector<bool, N>::Get(unsigned  int i) const
+	const bool& FixedBoolVector<bool, N>::Get(unsigned  int i) const
 	{
 		if ((mArray &= (1 << i)) == 0)
 		{
@@ -150,7 +150,7 @@ namespace lab8
 	}
 
 	template<size_t N>
-	const bool FixedBoolVector<bool, N>::operator[](unsigned  int i)
+	const bool& FixedBoolVector<bool, N>::operator[](unsigned  int i)
 	{
 		if ((mArray &= (1 << i)) == 0)
 		{
