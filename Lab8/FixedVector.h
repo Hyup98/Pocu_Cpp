@@ -46,9 +46,6 @@ namespace lab8
 		if (mSize < N)
 		{
 			mArray[mSize] = data;
-			mArray[mSize] = data;
-			mArray[mSize] = data;
-			mArray[mSize] = data;
 			mSize++;
 			return true;
 		}

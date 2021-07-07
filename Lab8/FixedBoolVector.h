@@ -15,10 +15,10 @@ namespace lab8
 	{
 	public:
 		FixedVector();
-		bool Add(bool data);
-		bool Remove(bool data);
+		bool Add(bool bData);
+		bool Remove(bool bData);
 		const bool& Get(unsigned  int i);
-		int GetIndex(bool data);
+		int GetIndex(bool bData);
 		const bool& operator[](unsigned int i);
 		size_t GetSize() const;
 		size_t GetCapacity() const;
@@ -47,12 +47,12 @@ namespace lab8
 	}
 
 	template<size_t N>
-	bool FixedVector<bool, N>::Add(bool data)
+	bool FixedVector<bool, N>::Add(bool bData)
 	{
 		if (mSize < N)
 		{
 			unsigned int tem = (mSize) / 32;
-			if (data)
+			if (bData)
 			{
 				mArray[tem] |= (1 << mSize++%32);
 				cout << mSize << "   ->" << bitset<32>(mArray[tem]) << endl;
@@ -71,9 +71,9 @@ namespace lab8
 	}
 
 	template<size_t N>
-	bool FixedVector<bool, N>::Remove(bool data)
+	bool FixedVector<bool, N>::Remove(bool bData)
 	{
-		if (data == true)
+		if (bData == true)
 		{
 			int tem = 1;
 		}
@@ -82,7 +82,7 @@ namespace lab8
 			int tem = 0;
 		}
 
-		if (data == true)
+		if (bData == true)
 		{
 			unsigned int index = (mSize) % 32;
 
@@ -108,7 +108,7 @@ namespace lab8
 		else
 		{
 			unsigned int index = (mSize) % 32;
-			for (size_t i = 0; i <= mSize; i++)
+			for (size_t i = 0; i <= mSize % 32; i++)
 			{
 				if ((mArray[index] &= (1 << i)) == 0)
 				{
@@ -158,12 +158,12 @@ namespace lab8
 	}
 
 	template<size_t N>
-	int FixedVector<bool, N>::GetIndex(bool data) 
+	int FixedVector<bool, N>::GetIndex(bool bData)
 	{
 		int index = 0;
 		for (int i = mSize / 32; i >= 0; i--)
 		{
-			if (data == true)
+			if (bData == true)
 			{
 				for (size_t j = 0; j <= mSize; j++)
 				{
