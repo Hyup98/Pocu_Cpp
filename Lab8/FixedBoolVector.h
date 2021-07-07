@@ -1,5 +1,6 @@
 #pragma once
 
+#include<cmath>
 #include <iostream>
 
 namespace lab8
@@ -37,13 +38,12 @@ namespace lab8
 
 	private:
 		size_t mSize;
-		int mArray;
+		int mArray[N/32.0];
 	};
 
 	template<size_t N>
 	FixedBoolVector<bool, N>::FixedBoolVector()
 		: mSize(0)
-		, mArray(0)
 	{
 	}
 
