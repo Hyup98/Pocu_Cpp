@@ -22,7 +22,7 @@ namespace lab8
 
 	private:
 		size_t mSize;
-		int mArray;
+		uint32_t mArray[N / 32+1;
 	};
 
 	template<size_t N>
