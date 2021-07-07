@@ -51,16 +51,16 @@ namespace lab8
 	{
 		if (mSize < N)
 		{
-			unsigned int tem = (mSize + 1) / 32;
+			unsigned int tem = (mSize) / 32;
 			if (data)
 			{
-				mArray[tem] |= (1 << mSize++);
-				cout << mSize << bitset<32>(mArray[tem]) << endl;
+				mArray[tem] |= (1 << mSize++%32);
+				cout << mSize << "   ->" << bitset<32>(mArray[tem]) << endl;
 			}
 			else
 			{
-				mArray[tem] &= ~(1 << mSize++);
-				cout << mSize << bitset<32>(mArray[tem]) << endl;
+				mArray[tem] &= ~(1 << mSize++&32);
+				cout << mSize << "   ->" << bitset<32>(mArray[tem]) << endl;
 			}
 			return true;
 		}
@@ -84,7 +84,7 @@ namespace lab8
 
 		if (data == true)
 		{
-			unsigned int index = (mSize - 1) / 32;
+			unsigned int index = (mSize) % 32;
 
 			for (size_t i = 0; i <= mSize; i++)
 			{
@@ -107,7 +107,7 @@ namespace lab8
 		}
 		else
 		{
-			unsigned int index = (mSize - 1) / 32;
+			unsigned int index = (mSize) % 32;
 			for (size_t i = 0; i <= mSize; i++)
 			{
 				if ((mArray[index] &= (1 << i)) == 0)
@@ -160,33 +160,29 @@ namespace lab8
 	template<size_t N>
 	int FixedVector<bool, N>::GetIndex(bool data) 
 	{
-		if (data == true)
+		int index = 0;
+		for (int i = mSize / 32; i >= 0; i--)
 		{
-			int tem = 1;
-		}
-		else
-		{
-			int tem = 0;
-		}
-		unsigned int index = (mSize) / 32;
-		if (data == true)
-		{
-			for (size_t i = 0; i <= mSize; i++)
+			if (data == true)
 			{
-				if ((mArray[index] &= (1 << i)) != 0)
+				for (size_t j = 0; j <= mSize; j++)
 				{
-					return i;
+					if ((mArray[i] &= (1 << j)) != 0)
+					{
+						return index;
+					}
+					index++;
 				}
 			}
-			return -1;
-		}
-		else
-		{
-			for (size_t i = 0; i <= mSize; i++)
+			else
 			{
-				if ((mArray[index] &= (1 << i)) == 0)
+				for (size_t j = 0; j <= mSize; j++)
 				{
-					return i;
+					if ((mArray[i] &= (1 << j)) == 0)
+					{
+						return index;
+					}
+					index++;
 				}
 			}
 		}

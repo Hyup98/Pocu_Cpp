@@ -58,7 +58,7 @@ int main()
 	assert(integerVector1.GetSize() == INTEGER_VECTOR1_SIZE - 4);
 	std::cout << "Test FixedVector Remove() - empty array: PASS" << std::endl;
 
-	enum { BOOL_VECTOR1_SIZE = 7 };
+	enum { BOOL_VECTOR1_SIZE = 40 };
 	bool boolArray1[] = {
 		true,	/* 0 */
 		true,	/* 1 */
@@ -79,6 +79,7 @@ int main()
 
 	std::cout << "Test FixedBoolVector constructor - fit memroy: PASS" << std::endl;
 
+	/*
 	boolVector1.Add(boolArray1[0]) == true;
 	boolVector1.Add(boolArray1[1]) == true;
 	boolVector1.Add(boolArray1[2]) == true;
@@ -87,8 +88,12 @@ int main()
 	boolVector1.Add(boolArray1[5]) == true;
 	boolVector1.Add(boolArray1[6]) == true;
 	boolVector1.GetSize() == 7;
-	
-
+	*/
+	for (size_t i = 0; i < 40; i++)
+	{
+		boolVector1.Add(true);
+	}
+	/*
 	cout << boolVector1.Get(0) << endl;
 	cout << boolVector1.Get(1) << endl;
 	cout << boolVector1.Get(2) << endl;
@@ -96,6 +101,7 @@ int main()
 	cout << boolVector1.Get(4) << endl;
 	cout << boolVector1.Get(5) << endl;
 	cout << boolVector1.Get(6) << endl;
+	*/
 	int a;
 	cin >> a;
 
