@@ -2,65 +2,50 @@
 
 #include<cmath>
 #include <iostream>
+#include"FixedVector.h"
 
 namespace lab8
 {
-	template<typename T, size_t N>
-	class FixedBoolVector
-	{
-	public:
-		FixedBoolVector();
-		bool Add(const T& data);
-		bool Remove(const T& data);
-		const T& Get(unsigned  int i) const;
-		int GetIndex(const T& data) const;
-		T& operator[](unsigned int i);
-		size_t GetSize() const;
-		size_t GetCapacity() const;
-
-	private:
-		size_t mSize;
-		T mArray[N];
-	};
-
+	
 	template<size_t N>
-	class FixedBoolVector<bool, N>
+	class FixedVector<bool, N>
 	{
 	public:
-		FixedBoolVector();
+		FixedVector();
 		bool Add(bool data);
 		bool Remove(bool data);
-		const bool& Get(unsigned  int i) const;
-		int GetIndex(bool data) const;
+		const bool& Get(unsigned  int i);
+		int GetIndex(bool data);
 		const bool& operator[](unsigned int i);
 		size_t GetSize() const;
 		size_t GetCapacity() const;
 
 	private:
 		size_t mSize;
-		int mArray[N/32.0];
+		int mArray;
 	};
 
 	template<size_t N>
-	FixedBoolVector<bool, N>::FixedBoolVector()
+	FixedVector<bool, N>::FixedVector()
 		: mSize(0)
+		, mArray(0)
 	{
 	}
 
 	template<size_t N>
-	size_t FixedBoolVector<bool, N>::GetCapacity() const
+	size_t FixedVector<bool, N>::GetCapacity() const
 	{
 		return N;
 	}
 
 	template<size_t N>
-	size_t FixedBoolVector<bool, N>::GetSize() const
+	size_t FixedVector<bool, N>::GetSize() const
 	{
 		return mSize;
 	}
 
 	template<size_t N>
-	bool FixedBoolVector<bool, N>::Add(bool data)
+	bool FixedVector<bool, N>::Add(bool data)
 	{
 		if (mSize < N)
 		{
@@ -81,7 +66,7 @@ namespace lab8
 	}
 
 	template<size_t N>
-	bool FixedBoolVector<bool, N>::Remove(bool data)
+	bool FixedVector<bool, N>::Remove(bool data)
 	{
 		if (data == true)
 		{
@@ -98,7 +83,7 @@ namespace lab8
 			{
 				if ((mArray &= (1 << i)) != 0)
 				{
-					FixedBoolVector save;
+					FixedVector save;
 					for (size_t k = 0; k < i; k++)
 					{
 						save.Add(Get(k));
@@ -119,7 +104,7 @@ namespace lab8
 			{
 				if ((mArray &= (1 << i)) == 0)
 				{
-					FixedBoolVector save;
+					FixedVector save;
 					for (size_t k = 0; k < i; k++)
 					{
 						save.Add(Get(k));
@@ -137,7 +122,7 @@ namespace lab8
 	}
 
 	template<size_t N>
-	const bool& FixedBoolVector<bool, N>::Get(unsigned  int i) const
+	const bool& FixedVector<bool, N>::Get(unsigned  int i)
 	{
 		if ((mArray &= (1 << i)) == 0)
 		{
@@ -150,7 +135,7 @@ namespace lab8
 	}
 
 	template<size_t N>
-	const bool& FixedBoolVector<bool, N>::operator[](unsigned  int i)
+	const bool& FixedVector<bool, N>::operator[](unsigned  int i)
 	{
 		if ((mArray &= (1 << i)) == 0)
 		{
@@ -163,7 +148,7 @@ namespace lab8
 	}
 
 	template<size_t N>
-	int FixedBoolVector<bool, N>::GetIndex(bool data) const
+	int FixedVector<bool, N>::GetIndex(bool data) 
 	{
 		if (data == true)
 		{
