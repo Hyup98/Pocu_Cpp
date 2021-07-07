@@ -22,13 +22,12 @@ namespace lab8
 
 	private:
 		size_t mSize;
-		uint32_t mArray[N / 32+1;
+		uint32_t mArray[N / 32 + 1] = { 0, };
 	};
 
 	template<size_t N>
 	FixedVector<bool, N>::FixedVector()
 		: mSize(0)
-		, mArray(0)
 	{
 	}
 
@@ -49,13 +48,14 @@ namespace lab8
 	{
 		if (mSize < N)
 		{
+			unsigned int tem = (mSize + 1) / 32;
 			if (data)
 			{
-				mArray |= (1 << mSize++);
+				mArray[tem] |= (1 << mSize++);
 			}
 			else
 			{
-				mArray &= ~(1 << mSize++);
+				mArray[tem] &= ~(1 << mSize++);
 			}
 			return true;
 		}
@@ -79,16 +79,18 @@ namespace lab8
 
 		if (data == true)
 		{
+			unsigned int index = (mSize - 1) / 32;
+
 			for (size_t i = 0; i <= mSize; i++)
 			{
-				if ((mArray &= (1 << i)) != 0)
+				if ((mArray[index] &= (1 << i)) != 0)
 				{
 					FixedVector save;
 					for (size_t k = 0; k < i; k++)
 					{
 						save.Add(Get(k));
 					}
-					mArray >> (i + 1);
+					mArray[index] >> (i + 1);
 					for (size_t j = 0; j < i; j++)
 					{
 						Add(save.Get(i - j - 1));
@@ -100,16 +102,17 @@ namespace lab8
 		}
 		else
 		{
+			unsigned int index = (mSize - 1) / 32;
 			for (size_t i = 0; i <= mSize; i++)
 			{
-				if ((mArray &= (1 << i)) == 0)
+				if ((mArray[index] &= (1 << i)) == 0)
 				{
 					FixedVector save;
 					for (size_t k = 0; k < i; k++)
 					{
 						save.Add(Get(k));
 					}
-					mArray >> (i + 1);
+					mArray[index] >> (i + 1);
 					for (size_t j = 0; j < i; j++)
 					{
 						Add(save.Get(i - j - 1));
@@ -124,7 +127,8 @@ namespace lab8
 	template<size_t N>
 	const bool& FixedVector<bool, N>::Get(unsigned  int i)
 	{
-		if ((mArray &= (1 << i)) == 0)
+		unsigned int index = (mSize) / 32;
+		if ((mArray[index] &= (1 << i)) == 0)
 		{
 			return false;
 		}
@@ -137,7 +141,8 @@ namespace lab8
 	template<size_t N>
 	const bool& FixedVector<bool, N>::operator[](unsigned  int i)
 	{
-		if ((mArray &= (1 << i)) == 0)
+		unsigned int index = (mSize) / 32;
+		if ((mArray[index] &= (1 << i)) == 0)
 		{
 			return false;
 		}
@@ -158,11 +163,12 @@ namespace lab8
 		{
 			int tem = 0;
 		}
+		unsigned int index = (mSize) / 32;
 		if (data == true)
 		{
 			for (size_t i = 0; i <= mSize; i++)
 			{
-				if ((mArray &= (1 << i)) != 0)
+				if ((mArray[index] &= (1 << i)) != 0)
 				{
 					return i;
 				}
@@ -173,7 +179,7 @@ namespace lab8
 		{
 			for (size_t i = 0; i <= mSize; i++)
 			{
-				if ((mArray &= (1 << i)) == 0)
+				if ((mArray[index] &= (1 << i)) == 0)
 				{
 					return i;
 				}
