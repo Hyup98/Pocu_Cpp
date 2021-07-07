@@ -2,7 +2,10 @@
 
 #include<cmath>
 #include <iostream>
+#include<bitset>
 #include"FixedVector.h"
+
+using namespace std;
 
 namespace lab8
 {
@@ -52,10 +55,12 @@ namespace lab8
 			if (data)
 			{
 				mArray[tem] |= (1 << mSize++);
+				cout << mSize << bitset<32>(mArray[tem]) << endl;
 			}
 			else
 			{
 				mArray[tem] &= ~(1 << mSize++);
+				cout << mSize << bitset<32>(mArray[tem]) << endl;
 			}
 			return true;
 		}
@@ -128,7 +133,7 @@ namespace lab8
 	const bool& FixedVector<bool, N>::Get(unsigned  int i)
 	{
 		unsigned int index = (mSize) / 32;
-		if ((mArray[index] &= (1 << i)) == 0)
+		if ((mArray[index] & (1 << i)) == 0)
 		{
 			return false;
 		}

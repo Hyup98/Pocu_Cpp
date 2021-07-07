@@ -5,6 +5,7 @@
 #include "FixedBoolVector.h"
 
 using namespace lab8;
+using namespace std;
 
 int main()
 {
@@ -78,21 +79,26 @@ int main()
 
 	std::cout << "Test FixedBoolVector constructor - fit memroy: PASS" << std::endl;
 
-	assert(boolVector1.Add(boolArray1[0]) == true);
-	assert(boolVector1.Add(boolArray1[1]) == true);
-	assert(boolVector1.Add(boolArray1[2]) == true);
-	assert(boolVector1.Add(boolArray1[3]) == true);
-	assert(boolVector1.Add(boolArray1[4]) == true);
-	assert(boolVector1.Add(boolArray1[5]) == true);
-	assert(boolVector1.Add(boolArray1[6]) == true);
-	assert(boolVector1.GetSize() == 7);
-	assert(boolVector1.Get(0) == boolArray1[0]);
-	assert(boolVector1.Get(1) == boolArray1[1]);
-	assert(boolVector1.Get(2) == boolArray1[2]);
-	assert(boolVector1.Get(3) == boolArray1[3]);
-	assert(boolVector1.Get(4) == boolArray1[4]);
-	assert(boolVector1.Get(5) == boolArray1[5]);
-	assert(boolVector1.Get(6) == boolArray1[6]);
+	boolVector1.Add(boolArray1[0]) == true;
+	boolVector1.Add(boolArray1[1]) == true;
+	boolVector1.Add(boolArray1[2]) == true;
+	boolVector1.Add(boolArray1[3]) == true;
+	boolVector1.Add(boolArray1[4]) == true;
+	boolVector1.Add(boolArray1[5]) == true;
+	boolVector1.Add(boolArray1[6]) == true;
+	boolVector1.GetSize() == 7;
+	
+
+	cout << boolVector1.Get(0) << endl;
+	cout << boolVector1.Get(1) << endl;
+	cout << boolVector1.Get(2) << endl;
+	cout << boolVector1.Get(3) << endl;
+	cout << boolVector1.Get(4) << endl;
+	cout << boolVector1.Get(5) << endl;
+	cout << boolVector1.Get(6) << endl;
+	int a;
+	cin >> a;
+
 	std::cout << "Test FixedBoolVector Add(): PASS" << std::endl;
 	assert(boolVector1.Add(boolArray1[7]) == false);
 	assert(boolVector1.GetSize() == 7);
@@ -138,6 +144,7 @@ int main()
 	assert(boolVector2.GetSize() == 65);
 	assert(boolVector2.GetIndex(true) == -1);
 	std::cout << "Test FixedBoolVector GetIndex(): PASS" << std::endl;
+
 
 	return 0;
 }
