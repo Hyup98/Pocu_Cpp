@@ -89,10 +89,12 @@ int main()
 	boolVector1.Add(boolArray1[6]) == true;
 	boolVector1.GetSize() == 7;
 	*/
-	for (size_t i = 0; i < 40; i++)
+	for (size_t i = 0; i < 31; i++)
 	{
 		boolVector1.Add(true);
 	}
+	boolVector1.Add(false);
+	cout << boolVector1.GetIndex(false);
 	/*
 	cout << boolVector1.Get(0) << endl;
 	cout << boolVector1.Get(1) << endl;

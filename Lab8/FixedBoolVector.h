@@ -147,7 +147,7 @@ namespace lab8
 	const bool& FixedVector<bool, N>::operator[](unsigned  int i)
 	{
 		unsigned int index = (mSize) / 32;
-		if ((mArray[index] &= (1 << i)) == 0)
+		if ((mArray[index] & (1 << i)) == 0)
 		{
 			return false;
 		}
@@ -161,13 +161,24 @@ namespace lab8
 	int FixedVector<bool, N>::GetIndex(bool bData)
 	{
 		int index = 0;
-		for (int i = mSize / 32; i >= 0; i--)
+		for (int i = 0; i <= mSize / 32; i++)
 		{
+			size_t k;
+			if ((i + 1) * 32 < mSize)
+			{
+				k = 32;
+			}
+			else if((i + 1) * 32 >= mSize)
+			{
+				k = mSize % 33;
+			}
+
 			if (bData == true)
 			{
-				for (size_t j = 0; j <= mSize; j++)
+				
+				for (size_t j = 0; j < k; j++)
 				{
-					if ((mArray[i] &= (1 << j)) != 0)
+					if ((mArray[i] & (1 << j)) != 0)
 					{
 						return index;
 					}
@@ -176,9 +187,10 @@ namespace lab8
 			}
 			else
 			{
-				for (size_t j = 0; j <= mSize; j++)
+				
+				for (size_t j = 0; j < k; j++)
 				{
-					if ((mArray[i] &= (1 << j)) == 0)
+					if ((mArray[i] & (1 << j)) == 0)
 					{
 						return index;
 					}
