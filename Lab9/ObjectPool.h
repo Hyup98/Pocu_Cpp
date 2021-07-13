@@ -80,7 +80,7 @@ namespace lab9
 	template<class T>
 	size_t ObjectPool<T>::GetMaxFreeObjectCount()
 	{
-		return mMaxPoolSize - mObjectSize;
+		return mMaxPoolSize;
 	}
 
 
