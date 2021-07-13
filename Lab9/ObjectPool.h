@@ -9,6 +9,9 @@ namespace lab9
 	{
 	public:
 		ObjectPool(size_t maxPoolSize);
+		ObjectPool(ObjectPool<T>& other) = delete;
+		ObjectPool<T>& operator=(ObjectPool<T>& other) = delete;
+
 		~ObjectPool();
 		T* Get();
 		void Return(T* input);
@@ -33,7 +36,7 @@ namespace lab9
 	template<class T>
 	ObjectPool<T>::~ObjectPool()
 	{
-		for (size_t i = 0; i < mObjects.size(); i++)
+		for (size_t i = 0; i < mObjectSize; i++)
 		{
 			delete mObjects.front();
 			mObjects.pop();
