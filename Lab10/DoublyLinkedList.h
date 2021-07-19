@@ -27,7 +27,7 @@ namespace lab10
 
 	template<typename T>
 	DoublyLinkedList<T>::DoublyLinkedList()
-		:mSize (0)
+		: mSize (0)
 	{
 		mRoot = nullptr;
 	}
@@ -119,13 +119,13 @@ namespace lab10
 	template<typename T>
 	bool DoublyLinkedList<T>::Delete(const T& data)
 	{
-		bool answer = false;
+		bool bAnswer = false;
 		std::shared_ptr<Node<T>> tem = mRoot;
 		while (true)
 		{
 			if (*tem->Data == data)
 			{
-				answer = true;
+				bAnswer = true;
 				std::shared_ptr<Node<T>> front = mRoot;
 				while (true)
 				{
@@ -148,7 +148,7 @@ namespace lab10
 			}
 			tem = tem->Next;
 		}
-		return answer;
+		return bAnswer;
 	}
 
 	template<typename T>
