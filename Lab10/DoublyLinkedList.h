@@ -141,7 +141,7 @@ namespace lab10
 				}
 				if (tem->Next == nullptr)
 				{
-					/*
+					
 					std::shared_ptr<Node<T>> front = mRoot;
 					while (true)
 					{
@@ -151,8 +151,8 @@ namespace lab10
 						}
 						front = front->Next;
 					}
-					fread->Next = nullptr;
-					*/
+					front->Next = nullptr;
+					
 					tem.reset();
 					mSize--;
 					break;
