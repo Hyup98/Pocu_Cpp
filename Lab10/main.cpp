@@ -8,13 +8,13 @@ int main()
 {
 	DoublyLinkedList<int> list;
 
-	list.Insert(std::make_unique<int>(1));
-	list.Insert(std::make_unique<int>(2));
-	list.Insert(std::make_unique<int>(3));
-	list.Insert(std::make_unique<int>(4));
-	list.Insert(std::make_unique<int>(5));
-	list.Insert(std::make_unique<int>(6));
-	list.Insert(std::make_unique<int>(7));
+	list.Insert(std::make_unique<int>(1));//0
+	list.Insert(std::make_unique<int>(2));//1
+	list.Insert(std::make_unique<int>(3));//
+	list.Insert(std::make_unique<int>(4));//2
+	list.Insert(std::make_unique<int>(5));//4
+	list.Insert(std::make_unique<int>(6));//5
+	list.Insert(std::make_unique<int>(7));//6
 
 	bool bSearched = list.Search(4);
 	assert(bSearched);

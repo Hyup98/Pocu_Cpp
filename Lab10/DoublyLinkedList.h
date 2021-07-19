@@ -68,7 +68,7 @@ namespace lab10
 			mSize++;
 			return;
 		}
-		if (index == 0)
+		else if (index == 0)
 		{
 			std::shared_ptr<Node<T>> tem = mRoot;
 			mRoot = temNode;
@@ -89,18 +89,29 @@ namespace lab10
 					std::shared_ptr<Node<T>> flag = tem;
 					tem = temNode;
 					tem->Next = flag;
-					tem ->Previous = flag->Previous;
-					flag->Previous = tem;
-					break;
+					std::shared_ptr<Node<T>> front = mRoot;
+					while (true)
+					{
+						if (front->Next == flag)
+						{
+							break;
+						}
+						front = front->Next;
+					}
+					front->Next = tem;
+					tem->Previous = front;
+					flag-> Previous = tem;
+					return;
 				}
 				if (tem->Next == nullptr)
 				{
 					tem->Next = temNode;
 					temNode->Previous = tem;
 					mSize++;
-					break;
+					return;
 				}
 				tem = tem->Next;
+				count++;
 			}
 		}
 	}
@@ -172,20 +183,20 @@ namespace lab10
 		auto x = std::make_unique<T>();
 		std::shared_ptr<Node<T>> temp = std::make_shared<Node<T>>(std::move(x));
 		*/
+		std::shared_ptr<Node<T>> tem = mRoot;
+		int count = 0;
 		while (true)
-		{
-			std::shared_ptr<Node<T>> tem = mRoot;
-			int count = 0;
+		{			
 			if (count == index)
 			{
 				return tem;
-				count++;
 			}
 			if (tem->Next == nullptr)
 			{
 				break;
 			}
 			tem = tem->Next;
+			count++;
 		}
 		return nullptr;
 	}
