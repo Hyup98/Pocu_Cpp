@@ -21,6 +21,7 @@ namespace lab10
 		: Data(std::move(data))
 	{
 		Next = nullptr;
+		Previous.reset();
 	}
 
 	template<typename T>
