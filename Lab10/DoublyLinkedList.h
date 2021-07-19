@@ -27,7 +27,7 @@ namespace lab10
 
 	template<typename T>
 	DoublyLinkedList<T>::DoublyLinkedList()
-		: mSize (0)
+		: mSize(0)
 	{
 		mRoot = nullptr;
 	}
