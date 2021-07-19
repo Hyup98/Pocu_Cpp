@@ -86,6 +86,7 @@ namespace lab10
 			{
 				if (count == index)
 				{
+					mSize++;
 					std::shared_ptr<Node<T>> flag = tem;
 					tem = temNode;
 					tem->Next = flag;
@@ -119,6 +120,10 @@ namespace lab10
 	template<typename T>
 	bool DoublyLinkedList<T>::Delete(const T& data)
 	{
+		if (mSize == 0)
+		{
+			return false;
+		}
 		bool bAnswer = false;
 		std::shared_ptr<Node<T>> tem = mRoot;
 		while (true)
@@ -126,6 +131,32 @@ namespace lab10
 			if (*tem->Data == data)
 			{
 				bAnswer = true;
+				if (tem == mRoot)
+				{
+					mRoot = tem->Next;
+					tem->Next = nullptr;
+					tem.reset();
+					mSize--;
+					break;
+				}
+				if (tem->Next == nullptr)
+				{
+					/*
+					std::shared_ptr<Node<T>> front = mRoot;
+					while (true)
+					{
+						if (front->Next == tem)
+						{
+							break;
+						}
+						front = front->Next;
+					}
+					fread->Next = nullptr;
+					*/
+					tem.reset();
+					mSize--;
+					break;
+				}
 				std::shared_ptr<Node<T>> front = mRoot;
 				while (true)
 				{
@@ -154,6 +185,10 @@ namespace lab10
 	template<typename T>
 	bool DoublyLinkedList<T>::Search(const T& data) const
 	{
+		if (mSize == 0)
+		{
+			return false;
+		}
 		std::shared_ptr<Node<T>> tem = mRoot;
 		while (true)
 		{
