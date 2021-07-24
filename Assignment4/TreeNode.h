@@ -27,9 +27,9 @@ namespace assignment4
 
 	template<typename T>
 	TreeNode<T>::TreeNode(std::shared_ptr<TreeNode<T>> parent, std::unique_ptr<T> data)
-		: Parent(parent)
-		, Data(std::move(data))
+		: Data(std::move(data))
 	{
+		Parent = parent;
 		Left = nullptr;
 		Right = nullptr;
 	}
