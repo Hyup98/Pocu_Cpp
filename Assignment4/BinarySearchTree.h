@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <vector>
+#include <iostream>
 
 namespace assignment4
 {
@@ -46,7 +47,7 @@ namespace assignment4
 				{
 					if (search->Right == nullptr)
 					{
-						std::shared_ptr<TreeNode<T>> tem = std::make_shared<TreeNode<T>>(tem,std::move(data));
+						std::shared_ptr<TreeNode<T>> tem = std::make_shared<TreeNode<T>>(search,std::move(data));
 						search->Right = tem;
 						return;
 					}
@@ -56,7 +57,7 @@ namespace assignment4
 				{
 					if (search->Left == nullptr)
 					{
-						std::shared_ptr<TreeNode<T>> tem = std::make_shared<TreeNode<T>>(tem,std::move(data));
+						std::shared_ptr<TreeNode<T>> tem = std::make_shared<TreeNode<T>>(search,std::move(data));
 						search->Left = tem;
 						return;
 					}
@@ -148,55 +149,116 @@ namespace assignment4
 					tem = tem->Right;
 				}
 			}
+			//////////////////////////////////////
+
+			if (tem->Left == nullptr)
+			{
+				std::shared_ptr check = tem->Parent.lock();
+				check->Right = tem;
+				tem->Right->Parent = check;
+				tem->Right = nullptr;
+				tem.reset();
+
+			}
 
 			std::shared_ptr<TreeNode<T>> flag = tem;
-
+			tem = tem->Left;
 			while (true)
 			{
-				if (tem->Right == nullptr && tem->Left == nullptr)
+				if (tem->Right == nullptr)
 				{
-					if (flag->Left != nullptr)
+					//대체 노그가 자식이 없을 경우
+					//check ->지울 노드의 조상
+					//tem ->가져올 노드
+					//flag ->지을 노드
+					if (tem->Left == nullptr)
 					{
-						tem->Left = flag->Left;
-						tem->Left->Parent = tem;
-					}
+						std::shared_ptr check = tem->Parent.lock();
+						
+											
+						check = flag->Parent.lock();
 
-					if (flag->Right != nullptr)
-					{
-						tem->Right = flag->Right;
-						tem->Right->Parent = tem;
-					}
-					flag->Left = nullptr;
-					flag->Right = nullptr;
-					std::shared_ptr<TreeNode<T>>pNode = flag->Parent.lock();
-					if (pNode == nullptr)
-					{
-						flag.reset();
+						if (check->Left == flag)
+						{
+							check->Left = tem;
+							tem->Parent = check;
+							if (tem != flag->Left)
+							{
+								tem->Left = flag->Left;
+								flag->Left = nullptr;
+							}
+							if (tem != flag->Right)
+							{
+								tem->Right = flag->Right;
+								flag->Right = nullptr;
+							}
+							flag.reset();
+						}
+						else if (check->Right == flag)
+						{
+							check->Right = tem;
+							tem->Parent = check;
+							if (tem != flag->Left)
+							{
+								tem->Left = flag->Left;
+								flag->Left = nullptr;
+							}
+							if (tem != flag->Right)
+							{
+								tem->Right = flag->Right;
+								flag->Right = nullptr;
+							}
+							flag.reset();
+						}
 						return true;
 					}
+					//대체 노드가 왼쪽 자식이 존재할때
 					else
 					{
-						if (pNode->Left == flag)
-						{
-							pNode->Left = tem;
-						}
-						else
-						{
-							pNode->Right = tem;
-						}
-					}
-					flag.reset();
-					return true;
+						std::shared_ptr check = tem->Parent.lock();
+						
+						check->Right = nullptr;
 
+						tem->Left->Parent = check;
+
+						check = flag->Parent.lock();
+
+						if (check->Left == flag)
+						{
+							check->Left = tem;
+							tem->Parent = check;
+							if (tem != flag->Left)
+							{
+								tem->Left = flag->Left;
+								flag->Left = nullptr;
+							}
+							if (tem != flag->Right)
+							{
+								tem->Right = flag->Right;
+								flag->Right = nullptr;
+							}
+							flag.reset();
+						}
+						else if (check->Right == flag)
+						{
+							check->Right = tem;
+							tem->Parent = check;
+							if (tem != flag->Left)
+							{
+								tem->Left = flag->Left;
+								flag->Left = nullptr;
+							}
+							if (tem != flag->Right)
+							{
+								tem->Right = flag->Right;
+								flag->Right = nullptr;
+							}
+							flag.reset();
+						}
+						return true;
+					}
 				}
-				else if (tem->Right != nullptr)
-				{
-					tem = tem->Right;
-				}
-				else if (tem->Left != nullptr)
-				{
-					tem = tem->Left;
-				}
+				tem = tem->Right;
 			}
 
 		}

@@ -20,11 +20,13 @@ int main()
 	tree.Insert(std::make_unique<int>(12));
 	
 	std::vector<int> v = tree.TraverseInOrder(tree.GetRootNode().lock());
+	/*
 	for (int i = 0; i < v.size(); i++)
 	{
 		std::cout << v[i] << std::endl;
 	}
-	/*
+	*/
+	
 	assert(v.size() == 8);
 	assert(v[0] == 4);
 	assert(v[1] == 5);
@@ -49,6 +51,11 @@ int main()
 
 	v = tree.TraverseInOrder(tree.GetRootNode().lock());
 
+	for (int i = 0; i < v.size(); i++)
+	{
+		std::cout << v[i] << std::endl;
+	}
+
 	assert(v.size() == 7);
 	assert(v[0] == 4);
 	assert(v[1] == 5);
@@ -60,6 +67,6 @@ int main()
 
 	bSearched = tree.Search(15);
 	assert(!bSearched);
-	*/
+	
 	return 0;
 }
