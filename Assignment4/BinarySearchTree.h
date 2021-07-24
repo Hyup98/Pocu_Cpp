@@ -118,151 +118,104 @@ namespace assignment4
 	template<typename T>
 	bool BinarySearchTree<T>::Delete(const T& data)
 	{
-		/////////////////////노드 탐색//////////////////////
+		
 		if (mRoot == nullptr)
 		{
 			return false;
 		}
-		else
+
+		/////////////////////노드 탐색//////////////////////
+		std::shared_ptr<TreeNode<T>> tem = mRoot;
+		while (true)
 		{
-			std::shared_ptr<TreeNode<T>> tem = mRoot;
-			while (true)
+			if (*tem->Data == data)
 			{
-				if (*tem->Data == data)
-				{
-					break;
-				}
-				else if (*tem->Data > data)
-				{
-					if (tem->Left == nullptr)
-					{
-						return false;
-					}
-					tem = tem->Left;
-				}
-				else
-				{
-					if (tem->Right == nullptr)
-					{
-						return false;
-					}
-					tem = tem->Right;
-				}
+				break;
 			}
-			//////////////////////////////////////
-
-			if (tem->Left == nullptr)
+			else if (*tem->Data > data)
 			{
-				std::shared_ptr check = tem->Parent.lock();
-				check->Right = tem;
-				tem->Right->Parent = check;
-				tem->Right = nullptr;
-				tem.reset();
-
+				if (tem->Left == nullptr)
+				{
+					return false;
+				}
+				tem = tem->Left;
 			}
+			else
+			{
+				if (tem->Right == nullptr)
+				{
+					return false;
+				}
+				tem = tem->Right;
+			}
+		}
+		//////////////////////////////////////////////////////////
+		
+		std::shared_ptr<T> removeNode = tem;
 
-			std::shared_ptr<TreeNode<T>> flag = tem;
+		//root를 지울 경우
+		if (tem == mRoot)
+		{
+
+		}
+		
+		//지울 노드의 왼쪽에 자식이 존재하지 않는 경우 -> 이어 붙이기만 하면 된다
+		else if(tem->Left == nullptr)
+		{
+			std::shared_ptr grandNode = removeNode->Parent.lock();
+			grandNode->Right = removeNode->Right;
+			removeNode->Right->Parent = grandNode;
+			removeNode->Right = nullptr;
+			removeNode.reset();
+			return true;
+		}
+
+		//지울 노드의 왼쪽에 자식이 존재 -> 
+		else if (tem->Left != nullptr)
+		{
 			tem = tem->Left;
 			while (true)
 			{
 				if (tem->Right == nullptr)
 				{
-					//대체 노그가 자식이 없을 경우
-					//check ->지울 노드의 조상
-					//tem ->가져올 노드
-					//flag ->지을 노드
-					if (tem->Left == nullptr)
+					std::shared_ptr grandNode = tem->Parent.lock();
+					//자식이 있을때(왼쪽)
+					if (tem->Right != nullptr)
 					{
-						std::shared_ptr check = tem->Parent.lock();
-						
-											
-						check = flag->Parent.lock();
-
-						if (check->Left == flag)
+						std::shared_ptr<T> parentNode = tem->Parent.lock();
+						parentNode->Right = tem->Left;
+						tem->Left->Parent = parentNode;
+						tem->Parent = grandNode;
+						grandNode->Left = tem;
+						tem->Left = 
+					}
+					//자식이 없을때
+					else 
+					{
+						if(grandNode->Left == removeNode)
 						{
-							check->Left = tem;
-							tem->Parent = check;
-							if (tem != flag->Left)
-							{
-								tem->Left = flag->Left;
-								flag->Left = nullptr;
-							}
-							if (tem != flag->Right)
-							{
-								tem->Right = flag->Right;
-								flag->Right = nullptr;
-							}
-							flag.reset();
+							grandNode->Left = tem;
+							std::shared_ptr<T> parentNode = tem->Parent.lock();
+							parentNode->Right = nullptr;
+							tem->Parent = grandNode;
+							
 						}
-						else if (check->Right == flag)
+						else if (grandNode->Right == removeNode)
 						{
-							check->Right = tem;
-							tem->Parent = check;
-							if (tem != flag->Left)
-							{
-								tem->Left = flag->Left;
-								flag->Left = nullptr;
-							}
-							if (tem != flag->Right)
-							{
-								tem->Right = flag->Right;
-								flag->Right = nullptr;
-							}
-							flag.reset();
+							grandNode->Right = tem;
+							std::shared_ptr<T> parentNode = tem->Parent.lock();
+							parentNode->Right = nullptr;
+							tem->Parent = grandNode;
+							
 						}
 						return true;
-					}
-					//대체 노드가 왼쪽 자식이 존재할때
-					else
-					{
-						std::shared_ptr check = tem->Parent.lock();
-						
-						check->Right = nullptr;
-
-						tem->Left->Parent = check;
-
-						check = flag->Parent.lock();
-
-						if (check->Left == flag)
-						{
-							check->Left = tem;
-							tem->Parent = check;
-							if (tem != flag->Left)
-							{
-								tem->Left = flag->Left;
-								flag->Left = nullptr;
-							}
-							if (tem != flag->Right)
-							{
-								tem->Right = flag->Right;
-								flag->Right = nullptr;
-							}
-							flag.reset();
-						}
-						else if (check->Right == flag)
-						{
-							check->Right = tem;
-							tem->Parent = check;
-							if (tem != flag->Left)
-							{
-								tem->Left = flag->Left;
-								flag->Left = nullptr;
-							}
-							if (tem != flag->Right)
-							{
-								tem->Right = flag->Right;
-								flag->Right = nullptr;
-							}
-							flag.reset();
-						}
-						return true;
-					}
 				}
 				tem = tem->Right;
 			}
 
+
 		}
-		//////////////////////////////////////////////////////////
+
 		
 	}
 
