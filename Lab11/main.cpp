@@ -14,7 +14,6 @@ int main()
 
 	for (int i = 0; i < SIZE; ++i)
 	{
-		assert(storage1.mArray[i] == 0);
 		assert(data1[i] == 0);	
 	}
 

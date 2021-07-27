@@ -16,7 +16,9 @@ namespace lab11
 		bool Update(unsigned int index, const T& data);
 		const std::unique_ptr<T[]>& GetData() const;
 		unsigned int GetSize() const;
-		T* mArray;
+		std::unique_ptr<T[]> mArray;
+		//std::unique_ptr<T[]> temp = std::make_unique<T[]>(mArraySize);
+		//T* mArray;
 		unsigned int mArraySize;
 	};
 
@@ -24,27 +26,57 @@ namespace lab11
 	Storage<T>::Storage(unsigned int length)
 		: mArraySize(length)
 	{
-		mArray = new T[length];
-		memset(mArray, 0, length * sizeof(T));
+		mArray = std::make_unique<T[]>(mArraySize);
+		for (int i = 0; i < mArraySize; i++)
+		{
+			mArray[i] = 0;
+		}
+		//memset(mArray, 0, length * sizeof(T));
 	}
 
 	template<typename T>
 	Storage<T>::Storage(unsigned int length, const T& initialValue)
-		: mArraySize(0)
+		: mArraySize(length)
 	{
+		/*
 		mArray = new T[length];
 		memset(mArray, initialValue, length * sizeof(T));
+		*/
+		mArray = std::make_unique<T[]>(mArraySize);
+		for (int i = 0; i < mArraySize; i++)
+		{
+			mArray[i] = initialValue;
+		}
+
 	}
 	
+	/*
 	template<typename T>
 	Storage<T>::Storage(Storage&& other)
 		: mArray(other.mArray)
 		, mArraySize(other.mArraySize)
 	{
+		/*
 		other.mArray = nullptr;
+		other.mArraySize = 0;
+		
+		mArray = std::move(other.mArray)
+		for (int i = 0; i < mArraySize; i++)
+		{
+			mArray[i] = 0;
+		}
+	}
+	*/
+	
+	template<typename T>
+	Storage<T>::Storage(Storage&& other)
+	{
+		mArray = std::move(other.mArray);
+		mArraySize = other.mArraySize;
 		other.mArraySize = 0;
 	}
 
+	/*
 	template<typename T>
 	void Storage<T>::operator=(Storage&& other)
 	{
@@ -52,6 +84,14 @@ namespace lab11
 		delete mArray;
 		mArray = other.mArray;
 		other.mArray = nullptr;
+		other.mArraySize = 0;
+	}
+	*/
+	template<typename T>
+	void Storage<T>::operator=(Storage&& other)
+	{
+		mArray = std::move(other.mArray);
+		mArraySize = other.mArraySize;
 		other.mArraySize = 0;
 	}
 
@@ -66,6 +106,7 @@ namespace lab11
 		return false;
 	}
 
+	/*
 	template<typename T>
 	const std::unique_ptr<T[]>& Storage<T>::GetData() const
 	{
@@ -76,6 +117,12 @@ namespace lab11
 		}
 		
 		return std::move(temp);
+	}
+	*/
+	template<typename T>
+	const std::unique_ptr<T[]>& Storage<T>::GetData() const
+	{
+		return mArray;
 	}
 
 	template<typename T>
