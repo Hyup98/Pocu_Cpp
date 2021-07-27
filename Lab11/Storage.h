@@ -122,6 +122,12 @@ namespace lab11
 	template<typename T>
 	const std::unique_ptr<T[]>& Storage<T>::GetData() const
 	{
+		std::unique_ptr<T[]> temp = std::make_unique<T[]>(mArraySize);
+		for (int i = 0; i < mArraySize; i++)
+		{
+			temp[i] = mArray[i];
+		}
+
 		return mArray;
 	}
 
