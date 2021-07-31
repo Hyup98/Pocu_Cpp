@@ -29,7 +29,7 @@ namespace assignment4
 	{
 		mRoot = nullptr;
 	}
-	
+
 	template<typename T>
 	void BinarySearchTree<T>::Insert(std::unique_ptr<T> data)
 	{
@@ -47,7 +47,7 @@ namespace assignment4
 				{
 					if (search->Right == nullptr)
 					{
-						std::shared_ptr<TreeNode<T>> tem = std::make_shared<TreeNode<T>>(search,std::move(data));
+						std::shared_ptr<TreeNode<T>> tem = std::make_shared<TreeNode<T>>(search, std::move(data));
 						search->Right = tem;
 						return;
 					}
@@ -57,7 +57,7 @@ namespace assignment4
 				{
 					if (search->Left == nullptr)
 					{
-						std::shared_ptr<TreeNode<T>> tem = std::make_shared<TreeNode<T>>(search,std::move(data));
+						std::shared_ptr<TreeNode<T>> tem = std::make_shared<TreeNode<T>>(search, std::move(data));
 						search->Left = tem;
 						return;
 					}
@@ -70,14 +70,14 @@ namespace assignment4
 			}
 		}
 	}
-	
+
 
 	template<typename T>
 	const std::weak_ptr<TreeNode<T>> BinarySearchTree<T>::GetRootNode() const
 	{
-		
+
 		return mRoot;
- 	}
+	}
 
 	template<typename T>
 	bool BinarySearchTree<T>::Search(const T& data)
@@ -118,7 +118,7 @@ namespace assignment4
 	template<typename T>
 	bool BinarySearchTree<T>::Delete(const T& data)
 	{
-		
+
 		if (mRoot == nullptr)
 		{
 			return false;
@@ -150,73 +150,154 @@ namespace assignment4
 			}
 		}
 		//////////////////////////////////////////////////////////
-		
-		std::shared_ptr<T> removeNode = tem;
+
+		std::shared_ptr<TreeNode<T>> removeNode = tem;
 
 		//root를 지울 경우
 		if (tem == mRoot)
-		{
-
-		}
-		
-		//지울 노드의 왼쪽에 자식이 존재하지 않는 경우 -> 이어 붙이기만 하면 된다
-		else if(tem->Left == nullptr)
-		{
-			std::shared_ptr grandNode = removeNode->Parent.lock();
-			grandNode->Right = removeNode->Right;
-			removeNode->Right->Parent = grandNode;
-			removeNode->Right = nullptr;
-			removeNode.reset();
-			return true;
-		}
-
-		//지울 노드의 왼쪽에 자식이 존재 -> 
-		else if (tem->Left != nullptr)
 		{
 			tem = tem->Left;
 			while (true)
 			{
 				if (tem->Right == nullptr)
 				{
-					std::shared_ptr grandNode = tem->Parent.lock();
-					//자식이 있을때(왼쪽)
-					if (tem->Right != nullptr)
-					{
-						std::shared_ptr<T> parentNode = tem->Parent.lock();
-						parentNode->Right = tem->Left;
-						tem->Left->Parent = parentNode;
-						tem->Parent = grandNode;
-						grandNode->Left = tem;
-						tem->Left = 
-					}
-					//자식이 없을때
-					else 
-					{
-						if(grandNode->Left == removeNode)
-						{
-							grandNode->Left = tem;
-							std::shared_ptr<T> parentNode = tem->Parent.lock();
-							parentNode->Right = nullptr;
-							tem->Parent = grandNode;
-							
-						}
-						else if (grandNode->Right == removeNode)
-						{
-							grandNode->Right = tem;
-							std::shared_ptr<T> parentNode = tem->Parent.lock();
-							parentNode->Right = nullptr;
-							tem->Parent = grandNode;
-							
-						}
-						return true;
+					break;
 				}
 				tem = tem->Right;
 			}
-
-
+			std::shared_ptr<TreeNode<T>> grandNode = removeNode->Parent.lock();
+			grandNode->Right = nullptr;
+			tem->Left = removeNode->Left;
+			removeNode->Left->Parent = tem;
+			removeNode->Left = nullptr;
+			tem->Right = removeNode->Right;
+			removeNode->Right->Parent = tem;
+			removeNode->Right = nullptr;
+			mRoot = tem;
+			tem->Parent.reset();
+			removeNode.reset();
+		}
+		/////////////////////////////////////////////////////////
+		if (removeNode->Right == nullptr && removeNode->Left == nullptr)
+		{
+			std::shared_ptr<TreeNode<T>> grandNode = removeNode->Parent.lock();
+			if (grandNode->Left == removeNode)
+			{
+				grandNode->Left = nullptr;
+				removeNode.reset();
+			}
+			else
+			{
+				grandNode->Right = nullptr;
+				removeNode.reset();
+			}
 		}
 
+		else if (removeNode->Right != nullptr && removeNode->Left == nullptr)
+		{
+			std::shared_ptr<TreeNode<T>> grandNode = removeNode->Parent.lock();
+			if (grandNode->Left == removeNode)
+			{
+				grandNode->Left = removeNode->Right;
+				removeNode->Right->Parent = grandNode;
+
+				removeNode.reset();
+			}
+			else
+			{
+				grandNode->Right = removeNode->Right;
+				removeNode->Right->Parent = grandNode;
 		
+				removeNode.reset();
+			}
+
+		}
+		else if (removeNode->Left != nullptr && removeNode->Right == nullptr)
+		{
+			std::shared_ptr<TreeNode<T>> grandNode = removeNode->Parent.lock();
+			if (grandNode->Left == removeNode)
+			{
+				grandNode->Left = removeNode->Left;
+				removeNode->Left->Parent = grandNode;
+				grandNode->Left = removeNode->Right;
+				removeNode->Right->Parent = grandNode;
+
+				removeNode.reset();
+			}
+			else
+			{
+				grandNode->Right = removeNode->Left;
+				removeNode->Left->Parent = grandNode;
+				grandNode->Right = removeNode->Right;
+				removeNode->Right->Parent = grandNode;
+
+				removeNode.reset();
+			}
+		}
+		else
+		{
+			tem = tem->Left;
+			while (true)
+			{
+				if (tem->Right == nullptr)
+				{
+					break;
+				}
+				tem = tem->Right;
+			}
+			std::shared_ptr<TreeNode<T>> grandNode = removeNode->Parent.lock();
+
+			if (grandNode->Left == removeNode)
+			{
+				grandNode->Left = tem;
+				tem->Parent = grandNode;
+				if (removeNode->Right != tem)
+				{
+					tem->Right = removeNode->Right;
+				}
+				std::shared_ptr<TreeNode<T>> par = removeNode->Right->Parent.lock();
+				if (par != nullptr && par != tem)
+				{
+					removeNode->Right->Parent = tem;
+				}
+				if (removeNode->Left != tem)
+				{
+					tem->Left = removeNode->Left;
+				}
+				par = removeNode->Left->Parent.lock();
+				if (par != nullptr && par != tem)
+				{
+					removeNode->Left->Parent = tem;
+				}
+				removeNode.reset();
+				
+			}
+			else
+			{
+				grandNode->Right = tem;
+				tem->Parent = grandNode;
+				if (removeNode->Right != tem)
+				{
+					tem->Right = removeNode->Right;
+				}
+				std::shared_ptr<TreeNode<T>> par = removeNode->Right->Parent.lock();
+				if (par != nullptr && par != tem)
+				{
+					removeNode->Right->Parent = tem;
+				}
+				if (removeNode->Left != tem)
+				{
+					tem->Left = removeNode->Left;
+				}
+				par = removeNode->Left->Parent.lock();
+				if (par != nullptr && par != tem)
+				{
+					removeNode->Left->Parent = tem;
+				}
+				removeNode.reset();
+			}
+
+		}
 	}
 
 	template<typename T>
@@ -229,7 +310,7 @@ namespace assignment4
 			tem = TraverseInOrder(startNode->Left);
 			if (tem.size() > 0)
 			{
-				for (int i = 0; i < tem.size(); i++)
+				for (unsigned int i = 0; i < tem.size(); i++)
 				{
 					v.push_back(tem[i]);
 				}
@@ -238,14 +319,14 @@ namespace assignment4
 
 			tem = TraverseInOrder(startNode->Right);
 
-			if(tem.size() > 0)
+			if (tem.size() > 0)
 			{
-				for (int i = 0; i < tem.size(); i++)
+				for (unsigned int i = 0; i < tem.size(); i++)
 				{
 					v.push_back(tem[i]);
 				}
 			}
-			
+
 		}
 		return v;
 	}

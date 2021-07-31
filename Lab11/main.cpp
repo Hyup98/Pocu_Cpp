@@ -15,6 +15,7 @@ int main()
 	for (int i = 0; i < SIZE; ++i)
 	{
 		assert(data1[i] == 0);	
+		assert(storage1.mArray[i] == 0);
 	}
 
 
@@ -22,7 +23,7 @@ int main()
 	const std::unique_ptr<int[]>& data2 = storage2.GetData();
 
 	for (int i = 0; i < SIZE; ++i)
-	{
+	{ 
 		assert(data2[i] == 100);
 	}
 
