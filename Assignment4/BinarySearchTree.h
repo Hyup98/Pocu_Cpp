@@ -40,7 +40,7 @@ namespace assignment4
 		}
 		else
 		{
-			std::shared_ptr search = mRoot;
+			std::shared_ptr<TreeNode<T>> search = mRoot;
 			while (true)
 			{
 				if (*search->Data < *data)
