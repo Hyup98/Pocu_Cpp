@@ -165,17 +165,25 @@ namespace assignment4
 				}
 				tem = tem->Right;
 			}
-			std::shared_ptr<TreeNode<T>> grandNode = removeNode->Parent.lock();
-			grandNode->Right = nullptr;
-			tem->Left = removeNode->Left;
-			removeNode->Left->Parent = tem;
+			std::shared_ptr<TreeNode<T>> grandNode = tem->Parent.lock();
+			if (removeNode->Left != tem)
+			{
+				tem->Left = removeNode->Left;
+				removeNode->Left->Parent = tem;
+			}
+
 			removeNode->Left = nullptr;
-			tem->Right = removeNode->Right;
-			removeNode->Right->Parent = tem;
+			if (removeNode->Right != tem)
+			{
+				tem->Right = removeNode->Right;
+				removeNode->Right->Parent = tem;
+			}
+
 			removeNode->Right = nullptr;
 			mRoot = tem;
 			tem->Parent.reset();
 			removeNode.reset();
+			return true;
 		}
 		/////////////////////////////////////////////////////////
 		if (removeNode->Right == nullptr && removeNode->Left == nullptr)
@@ -191,6 +199,7 @@ namespace assignment4
 				grandNode->Right = nullptr;
 				removeNode.reset();
 			}
+			return true;
 		}
 
 		else if (removeNode->Right != nullptr && removeNode->Left == nullptr)
@@ -210,6 +219,7 @@ namespace assignment4
 		
 				removeNode.reset();
 			}
+			return true;
 
 		}
 		else if (removeNode->Left != nullptr && removeNode->Right == nullptr)
@@ -233,6 +243,7 @@ namespace assignment4
 
 				removeNode.reset();
 			}
+			return true;
 		}
 		else
 		{
@@ -296,7 +307,7 @@ namespace assignment4
 				}
 				removeNode.reset();
 			}
-
+			return true;
 		}
 	}
 
