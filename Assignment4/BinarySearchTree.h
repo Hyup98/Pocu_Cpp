@@ -20,27 +20,27 @@ namespace assignment4
 		const std::weak_ptr<TreeNode<T>> GetRootNode() const;
 
 		static std::vector<T> TraverseInOrder(const std::shared_ptr<TreeNode<T>> startNode);
-		std::shared_ptr<TreeNode<T>> mRoot;
+		std::shared_ptr<TreeNode<T>> Root;
 
 	};
 
 	template<typename T>
 	BinarySearchTree<T>::BinarySearchTree()
 	{
-		mRoot = nullptr;
+		Root = nullptr;
 	}
 
 	template<typename T>
 	void BinarySearchTree<T>::Insert(std::unique_ptr<T> data)
 	{
-		if (mRoot == nullptr)
+		if (Root == nullptr)
 		{
 			std::shared_ptr<TreeNode<T>> tem = std::make_shared<TreeNode<T>>(std::move(data));
-			mRoot = tem;
+			Root = tem;
 		}
 		else
 		{
-			std::shared_ptr<TreeNode<T>> search = mRoot;
+			std::shared_ptr<TreeNode<T>> search = Root;
 			while (true)
 			{
 				if (*search->Data < *data)
@@ -76,19 +76,19 @@ namespace assignment4
 	const std::weak_ptr<TreeNode<T>> BinarySearchTree<T>::GetRootNode() const
 	{
 
-		return mRoot;
+		return Root;
 	}
 
 	template<typename T>
 	bool BinarySearchTree<T>::Search(const T& data)
 	{
-		if (mRoot == nullptr)
+		if (Root == nullptr)
 		{
 			return false;
 		}
 		else
 		{
-			std::shared_ptr<TreeNode<T>> tem = mRoot;
+			std::shared_ptr<TreeNode<T>> tem = Root;
 			while (true)
 			{
 				if (*tem->Data == data)
@@ -119,13 +119,13 @@ namespace assignment4
 	bool BinarySearchTree<T>::Delete(const T& data)
 	{
 
-		if (mRoot == nullptr)
+		if (Root == nullptr)
 		{
 			return false;
 		}
 
 		/////////////////////노드 탐색//////////////////////
-		std::shared_ptr<TreeNode<T>> tem = mRoot;
+		std::shared_ptr<TreeNode<T>> tem = Root;
 		while (true)
 		{
 			if (*tem->Data == data)
@@ -154,7 +154,7 @@ namespace assignment4
 		std::shared_ptr<TreeNode<T>> removeNode = tem;
 
 		//root를 지울 경우
-		if (tem == mRoot)
+		if (tem == Root)
 		{
 			tem = tem->Left;
 			while (true)
@@ -180,7 +180,7 @@ namespace assignment4
 			}
 
 			removeNode->Right = nullptr;
-			mRoot = tem;
+			Root = tem;
 			tem->Parent.reset();
 			removeNode.reset();
 			return true;
