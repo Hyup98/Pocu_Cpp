@@ -75,7 +75,6 @@ namespace assignment4
 	template<typename T>
 	const std::weak_ptr<TreeNode<T>> BinarySearchTree<T>::GetRootNode() const
 	{
-
 		return Root;
 	}
 
@@ -227,8 +226,6 @@ namespace assignment4
 			std::shared_ptr<TreeNode<T>> grandNode = removeNode->Parent.lock();
 			if (grandNode->Left == removeNode)
 			{
-				grandNode->Left = removeNode->Left;
-				removeNode->Left->Parent = grandNode;
 				grandNode->Left = removeNode->Right;
 				removeNode->Right->Parent = grandNode;
 
@@ -238,8 +235,7 @@ namespace assignment4
 			{
 				grandNode->Right = removeNode->Left;
 				removeNode->Left->Parent = grandNode;
-				grandNode->Right = removeNode->Right;
-				removeNode->Right->Parent = grandNode;
+
 
 				removeNode.reset();
 			}
