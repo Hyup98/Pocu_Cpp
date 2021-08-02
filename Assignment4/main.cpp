@@ -204,7 +204,7 @@ void Test_Traverse()
 	for (size_t i = 0; i < 8; i++)
 	{
 		tree.Delete(arr[i]);
-	}
+ 	}
 
 	// 7만 남기고 모두 삭제된 트리
 	std::vector<int> v7 = tree.TraverseInOrder(tree.GetRootNode().lock());

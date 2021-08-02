@@ -184,7 +184,8 @@ namespace assignment4
 			removeNode.reset();
 			return true;
 		}
-		/////////////////////////////////////////////////////////
+
+		//자식이 없다
 		if (removeNode->Right == nullptr && removeNode->Left == nullptr)
 		{
 			std::shared_ptr<TreeNode<T>> grandNode = removeNode->Parent.lock();
@@ -201,6 +202,7 @@ namespace assignment4
 			return true;
 		}
 
+		//오른쪽 자식만 있다
 		else if (removeNode->Right != nullptr && removeNode->Left == nullptr)
 		{
 			std::shared_ptr<TreeNode<T>> grandNode = removeNode->Parent.lock();
@@ -221,13 +223,15 @@ namespace assignment4
 			return true;
 
 		}
+
+		//왼쪽 자식만 있다
 		else if (removeNode->Left != nullptr && removeNode->Right == nullptr)
 		{
 			std::shared_ptr<TreeNode<T>> grandNode = removeNode->Parent.lock();
 			if (grandNode->Left == removeNode)
 			{
-				grandNode->Left = removeNode->Right;
-				removeNode->Right->Parent = grandNode;
+				grandNode->Left = removeNode->Left;
+				removeNode->Left->Parent = grandNode;
 
 				removeNode.reset();
 			}
@@ -236,11 +240,12 @@ namespace assignment4
 				grandNode->Right = removeNode->Left;
 				removeNode->Left->Parent = grandNode;
 
-
 				removeNode.reset();
 			}
 			return true;
 		}
+
+		//둘다 자식이 있다.
 		else
 		{
 			tem = tem->Left;
@@ -322,8 +327,7 @@ namespace assignment4
 					v.push_back(tem[i]);
 				}
 			}
-			v.push_back(*startNode->Data);
-
+			v.push_back(*startNode->Data); 
 			tem = TraverseInOrder(startNode->Right);
 
 			if (tem.size() > 0)
@@ -333,7 +337,6 @@ namespace assignment4
 					v.push_back(tem[i]);
 				}
 			}
-
 		}
 		return v;
 	}

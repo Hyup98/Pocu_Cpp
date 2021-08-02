@@ -1,31 +1,27 @@
 #pragma once
 
-#include<cmath>
-#include <iostream>
-#include<bitset>
-#include"FixedVector.h"
+#include <bitset>
 
-using namespace std;
 
 namespace lab8
 {
-	
 	template<size_t N>
 	class FixedVector<bool, N>
 	{
 	public:
 		FixedVector();
-		bool Add(bool bData);
-		bool Remove(bool bData);
-		const bool& Get(unsigned  int i);
-		int GetIndex(bool bData);
-		const bool& operator[](unsigned int i);
+
+		bool Add(const bool& b);
+		bool Remove(const bool& b);
+		const bool Get(unsigned int index) const;
+		const bool operator[](unsigned int index) const;
+		int GetIndex(const bool& b) const;
 		size_t GetSize() const;
 		size_t GetCapacity() const;
 
 	private:
 		size_t mSize;
-		uint32_t mArray[N / 32 + 1] = { 0, };
+		std::bitset<N> mArray;
 	};
 
 	template<size_t N>
@@ -35,9 +31,60 @@ namespace lab8
 	}
 
 	template<size_t N>
-	size_t FixedVector<bool, N>::GetCapacity() const
+	bool FixedVector<bool, N>::Add(const bool& b)
 	{
-		return N;
+		if (mSize >= N)
+		{
+			return false;
+		}
+		else
+		{
+			mArray[mSize++] = b;
+			return true;
+		}
+	}
+
+	template<size_t N>
+	bool FixedVector<bool, N>::Remove(const bool& b)
+	{
+		for (unsigned int i = 0; i < mSize; i++)
+		{
+			if (mArray[i] == b)
+			{
+				for (; i < mSize - 1; i++)
+				{
+					mArray[i] = mArray[i + 1];
+				}
+				--mSize;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	template<size_t N>
+	const bool FixedVector<bool, N>::Get(unsigned int index) const
+	{
+		return mArray[index];
+	}
+
+	template<size_t N>
+	const bool FixedVector<bool, N>::operator[](unsigned int index) const
+	{
+		return mArray[index];
+	}
+
+	template<size_t N>
+	int FixedVector<bool, N>::GetIndex(const bool& b) const
+	{
+		for (unsigned int i = 0; i < mSize; i++)
+		{
+			if (mArray[i] == b)
+			{
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	template<size_t N>
@@ -47,157 +94,8 @@ namespace lab8
 	}
 
 	template<size_t N>
-	bool FixedVector<bool, N>::Add(bool bData)
+	size_t FixedVector<bool, N>::GetCapacity() const
 	{
-		if (mSize < N)
-		{
-			unsigned int tem = (mSize) / 32;
-			if (bData)
-			{
-				mArray[tem] |= (1 << mSize++%32);
-				cout << mSize << "   ->" << bitset<32>(mArray[tem]) << endl;
-			}
-			else
-			{
-				mArray[tem] &= ~(1 << mSize++&32);
-				cout << mSize << "   ->" << bitset<32>(mArray[tem]) << endl;
-			}
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return N;
 	}
-
-	template<size_t N>
-	bool FixedVector<bool, N>::Remove(bool bData)
-	{
-		if (bData == true)
-		{
-			int tem = 1;
-		}
-		else
-		{
-			int tem = 0;
-		}
-
-		if (bData == true)
-		{
-			unsigned int index = (mSize) % 32;
-
-			for (size_t i = 0; i <= mSize; i++)
-			{
-				if ((mArray[index] &= (1 << i)) != 0)
-				{
-					FixedVector save;
-					for (size_t k = 0; k < i; k++)
-					{
-						save.Add(Get(k));
-					}
-					mArray[index] >> (i + 1);
-					for (size_t j = 0; j < i; j++)
-					{
-						Add(save.Get(i - j - 1));
-					}
-					return true;
-				}
-			}
-			return false;
-		}
-		else
-		{
-			unsigned int index = (mSize) % 32;
-			for (size_t i = 0; i <= mSize % 32; i++)
-			{
-				if ((mArray[index] &= (1 << i)) == 0)
-				{
-					FixedVector save;
-					for (size_t k = 0; k < i; k++)
-					{
-						save.Add(Get(k));
-					}
-					mArray[index] >> (i + 1);
-					for (size_t j = 0; j < i; j++)
-					{
-						Add(save.Get(i - j - 1));
-					}
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	template<size_t N>
-	const bool& FixedVector<bool, N>::Get(unsigned  int i)
-	{
-		unsigned int index = (mSize) / 32;
-		if ((mArray[index] & (1 << i)) == 0)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-	}
-
-	template<size_t N>
-	const bool& FixedVector<bool, N>::operator[](unsigned  int i)
-	{
-		unsigned int index = (mSize) / 32;
-		if ((mArray[index] & (1 << i)) == 0)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-	}
-
-	template<size_t N>
-	int FixedVector<bool, N>::GetIndex(bool bData)
-	{
-		int index = 0;
-		for (int i = 0; i <= mSize / 32; i++)
-		{
-			size_t k;
-			if ((i + 1) * 32 < mSize)
-			{
-				k = 32;
-			}
-			else if((i + 1) * 32 >= mSize)
-			{
-				k = mSize % 33;
-			}
-
-			if (bData == true)
-			{
-				
-				for (size_t j = 0; j < k; j++)
-				{
-					if ((mArray[i] & (1 << j)) != 0)
-					{
-						return index;
-					}
-					index++;
-				}
-			}
-			else
-			{
-				
-				for (size_t j = 0; j < k; j++)
-				{
-					if ((mArray[i] & (1 << j)) == 0)
-					{
-						return index;
-					}
-					index++;
-				}
-			}
-		}
-		return -1;
-	}
-};
+}
