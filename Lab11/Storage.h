@@ -11,14 +11,16 @@ namespace lab11
 		Storage(unsigned int length);
 		Storage(unsigned int length, const T& initialValue);
 		Storage(Storage&& other);
+		Storage(const Storage& storage);
 
-		void operator=(Storage&& other);
+		Storage<T>& operator=(Storage&& other);
+		Storage<T>& operator=(const Storage& other);
 		bool Update(unsigned int index, const T& data);
 		const std::unique_ptr<T[]>& GetData() const;
 		unsigned int GetSize() const;
+
+	private:
 		std::unique_ptr<T[]> mArray;
-		//std::unique_ptr<T[]> temp = std::make_unique<T[]>(mArraySize);
-		//T* mArray;
 		unsigned int mArraySize;
 	};
 
@@ -27,21 +29,13 @@ namespace lab11
 		: mArraySize(length)
 	{
 		mArray = std::make_unique<T[]>(mArraySize);
-		for (int i = 0; i < mArraySize; i++)
-		{
-			mArray[i] = 0;
-		}
-		//memset(mArray, 0, length * sizeof(T));
 	}
 
 	template<typename T>
 	Storage<T>::Storage(unsigned int length, const T& initialValue)
 		: mArraySize(length)
 	{
-		/*
-		mArray = new T[length];
-		memset(mArray, initialValue, length * sizeof(T));
-		*/
+		
 		mArray = std::make_unique<T[]>(mArraySize);
 		for (int i = 0; i < mArraySize; i++)
 		{
@@ -49,50 +43,60 @@ namespace lab11
 		}
 
 	}
-	
-	/*
+
 	template<typename T>
-	Storage<T>::Storage(Storage&& other)
-		: mArray(other.mArray)
-		, mArraySize(other.mArraySize)
+	Storage<T>::Storage(const Storage& storage)
+		:mArraySize(storage.mArraySize)
 	{
-		/*
-		other.mArray = nullptr;
-		other.mArraySize = 0;
-		
-		mArray = std::move(other.mArray)
-		for (int i = 0; i < mArraySize; i++)
+		mArray = std::make_unique<T[]>(mArraySize);
+		for (size_t i = 0; i < mArraySize; i++)
 		{
-			mArray[i] = 0;
+			mArray[i] = storage.mArray[i];
 		}
 	}
-	*/
+	
 	
 	template<typename T>
-	Storage<T>::Storage(Storage&& other)
+	Storage<T>::Storage(Storage<T>&& other)
 	{
 		mArray = std::move(other.mArray);
 		mArraySize = other.mArraySize;
 		other.mArraySize = 0;
 	}
 
-	/*
 	template<typename T>
-	void Storage<T>::operator=(Storage&& other)
+	Storage<T>& Storage<T>::operator=(Storage&& other)
 	{
-		mArraySize = other.GetSize;
-		delete mArray;
-		mArray = other.mArray;
-		other.mArray = nullptr;
-		other.mArraySize = 0;
-	}
-	*/
-	template<typename T>
-	void Storage<T>::operator=(Storage&& other)
-	{
+		if (this == &other)
+		{
+			return *this;
+		}
+
+		mArray.reset();
+
 		mArray = std::move(other.mArray);
+		
 		mArraySize = other.mArraySize;
 		other.mArraySize = 0;
+		return this;
+	}
+
+	template<typename T>
+	Storage<T>& Storage<T>::operator=(const Storage& other)
+	{
+		if (this == &other)
+		{
+			return *this;
+		}
+
+		mArray.reset();
+
+		mArraySize = other.mArraySize;
+		mArray = std::move(other.mArray);
+
+		other.mArraySize = 0;
+
+		return *this;
 	}
 
 	template<typename T>
@@ -106,29 +110,10 @@ namespace lab11
 		return false;
 	}
 
-	/*
 	template<typename T>
 	const std::unique_ptr<T[]>& Storage<T>::GetData() const
 	{
-		std::unique_ptr<T[]> temp = std::make_unique<T[]>(mArraySize);
-		for (int i = 0; i < mArraySize; i++)
-		{
-			temp[i] = mArray[i];
-		}
-		
-		return std::move(temp);
-	}
-	*/
-	template<typename T>
-	const std::unique_ptr<T[]>& Storage<T>::GetData() const
-	{
-		std::unique_ptr<T[]> temp = std::make_unique<T[]>(mArraySize);
-		for (int i = 0; i < mArraySize; i++)
-		{
-			temp[i] = mArray[i];
-		}
-
-		return mArray;
+		return std::move(mArray);
 	}
 
 	template<typename T>

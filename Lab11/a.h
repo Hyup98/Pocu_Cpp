@@ -1,4 +1,3 @@
-#pragma once
 //
 // Created by Dongsun Kim on 2021-07-31.
 //
