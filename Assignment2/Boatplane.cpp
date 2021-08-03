@@ -13,6 +13,7 @@ namespace assignment2
 
 	unsigned int Boatplane::GetSailSpeed() const
 	{
+		/*
 		double tem = 800 - 1.7 * (GetTotalWeight());
 		if (tem > 20)
 		{
@@ -22,6 +23,8 @@ namespace assignment2
 		{
 			return 20;
 		}
+		*/
+		return std::max(static_cast<int>(round(800.0 - 1.7 * GetTotalWeight())), 20);
 	}
 	void Boatplane::SetMoveCount()
 	{

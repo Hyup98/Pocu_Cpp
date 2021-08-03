@@ -177,6 +177,7 @@ namespace assignment2
 			mPassenger[i] = nullptr;
 		}
 		mOnBoardNum = 0;
+		
 	}
 
 	void Vehicle::SetonBoardNum(unsigned int i)

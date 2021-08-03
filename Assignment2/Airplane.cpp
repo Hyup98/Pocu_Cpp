@@ -16,6 +16,7 @@ namespace assignment2
 
 	unsigned int Airplane::GetFlySpeed() const
 	{
+		/*
 		unsigned int temNum = 800 - GetTotalWeight();
 		if (temNum <= 0)
 		{
@@ -29,6 +30,8 @@ namespace assignment2
 		double answer = tem * 200;
 
 		return static_cast<unsigned int>(round(answer));
+		*/
+		return static_cast<unsigned int>((200.0 * exp((800.0 - GetTotalWeight()) / 500.0)) + 0.5);
 	}
 
 	void Airplane::Move()
@@ -60,6 +63,7 @@ namespace assignment2
 
 	unsigned int Airplane::GetDriveSpeed() const
 	{
+		/*
 		unsigned int temNum = 400 - GetTotalWeight();
 		if (temNum <= 0)
 		{
@@ -69,6 +73,8 @@ namespace assignment2
 		double tem = pow(2.718281, temNumber);
 		double answer = tem * 4;
 		return static_cast<unsigned int>(round(answer));
+		*/
+		return static_cast<unsigned int>(4.0 * exp(((400.0 - GetTotalWeight()) / 70.0)) + 0.5);
 	}
 
 	unsigned int Airplane::GetMaxSpeed() const

@@ -49,6 +49,7 @@ namespace assignment2
 
 	unsigned int Boat::GetSailSpeed() const
 	{
+		/*
 		unsigned int tem = 800 - 10 * (GetTotalWeight());
 		if (tem > 20)
 		{
@@ -58,6 +59,8 @@ namespace assignment2
 		{
 			return 20;
 		}
+		*/
+		return std::max(static_cast<int>(800 - 10 * GetTotalWeight()), 20);
 	}
 
 	unsigned int Boat::GetMaxSpeed() const
