@@ -1,5 +1,6 @@
 #include "Motorcycle.h"
 #include "math.h"
+#include<cassert>
 
 namespace assignment2
 {
@@ -15,17 +16,8 @@ namespace assignment2
 
 	unsigned int Motorcycle::GetDriveSpeed() const
 	{
-		double tem = pow(GetTotalWeight(), 3);
-		double temNum = 2 * GetTotalWeight() + 400;
-		temNum -= tem;
-		if (temNum > 0)
-		{
-			return static_cast<unsigned int>(round(temNum));
-		}
-		else
-		{
-			return 0;
-		}
+		int speed = static_cast<int>(round(-(pow((GetTotalWeight() / 15.0), 3)) + GetTotalWeight() * 2.0 + 400.0));
+		return speed > 0 ? speed : 0;
 	}
 
 	unsigned int Motorcycle::GetMaxSpeed() const
@@ -40,25 +32,22 @@ namespace assignment2
 
 	void Motorcycle::Move()
 	{
-		if (mMoveCount == 0)
+		switch (mMoveCount)
 		{
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+			mMovedLength += GetMaxSpeed();
 			mMoveCount++;
-		}
-		else
-		{
-			if (mRestCount == 1)
-			{
-				mMoveCount++;
-				mRestCount = 0;
-			}
-			else if (mMoveCount % 5 != 0)
-			{
-				mMoveCount++;
-			}
-			else
-			{
-				mRestCount++;
-			}
+			break;
+		case 5:
+			mMoveCount = 0;
+			break;
+		default:
+			assert(false);
+			break;
 		}
 		
 	}

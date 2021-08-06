@@ -1,4 +1,5 @@
 #include "Boat.h"
+#include<cassert>
 
 namespace assignment2
 {
@@ -14,26 +15,19 @@ namespace assignment2
 
 	void Boat::Move()
 	{
-		if (mMoveCount == 0)
+		switch (mMoveCount)
 		{
+		case 0:
+		case 1:
+			mMovedLength += GetMaxSpeed();
 			mMoveCount++;
-		}
-
-		else
-		{
-			if (mRestCount == 1)
-			{
-				mMoveCount++;
-				mRestCount = 0;
-			}
-			else if (mMoveCount % 2 != 0)
-			{
-				mMoveCount++;
-			}
-			else
-			{
-				mRestCount++;
-			}
+			break;
+		case 2:
+			mMoveCount = 0;
+			break;
+		default:
+			assert(false);
+			break;
 		}
 	}
 	void Boat::SetMoveCount()

@@ -2,7 +2,7 @@
 #include "Boat.h"
 #include "Boatplane.h"
 #include<math.h>
-
+#include<cassert>
 namespace assignment2
 {
 	Airplane::Airplane(unsigned int maxPassengersCount)
@@ -36,22 +36,21 @@ namespace assignment2
 
 	void Airplane::Move()
 	{
-		if (mMoveCount == 0)
+		switch (mMoveCount)
 		{
+		case 0:
+			mMovedLength += GetMaxSpeed();
+			[[fallthrough]];
+		case 1:
+		case 2:
 			mMoveCount++;
-		}
-
-		else
-		{
-			if (mRestCount <= 2)
-			{
-				mRestCount++;
-			}
-			else if (mRestCount == 3)
-			{
-				mMoveCount++;
-				mRestCount = 0;
-			}
+			break;
+		case 3:
+			mMoveCount = 0;
+			break;
+		default:
+			assert(false);
+			break;
 		}
 	}
 

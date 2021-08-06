@@ -23,12 +23,14 @@ namespace assignment2
 		bool AddVehicle(Vehicle* vehicle);
 		bool RemoveVehicle(unsigned int i);
 		const Vehicle* GetFurthestTravelled() const;
+		Vehicle** mVehicle;
 
 	private:
 		DeusExMachina();
 		~DeusExMachina();
+		enum { MAX_VEHICLES_COUNT = 10 };
 		static DeusExMachina* mInstance;
-		Vehicle** mVehicle;
+
 		unsigned int mVehicleCount;
 	};
 }

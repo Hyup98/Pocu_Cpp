@@ -14,7 +14,7 @@ namespace assignment2
 		virtual ~Vehicle();
 		Vehicle(Vehicle& rhs);
 		virtual unsigned int GetMaxSpeed() const;
-		virtual void Move();
+		virtual void Move() = 0;
 		virtual unsigned int GetTraveledDistance();
 		bool AddPassenger(const Person* person);
 		bool RemovePassenger(unsigned int i);
@@ -26,10 +26,13 @@ namespace assignment2
 		void SetonBoardNum(unsigned int i);
 		void QuitAll();
 		void SetMoveCount();
+		Vehicle& operator=(const Vehicle& rhs);
+		unsigned int GetMovedLength() const;
 
 	protected:
 		unsigned int mMoveCount;
-		unsigned int mRestCount;
+		//unsigned int mRestCount;
+		unsigned int mMovedLength;
 
 	private:
 		unsigned int mMaxPassengersCount;

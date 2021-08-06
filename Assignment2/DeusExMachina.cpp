@@ -10,6 +10,8 @@
 #include "UBoat.h"
 #include "DeusExMachina.h"
 #include "Person.h"
+#include <cassert>
+#include <iostream>
 
 namespace assignment2
 {
@@ -17,11 +19,15 @@ namespace assignment2
 
 	DeusExMachina::DeusExMachina()
 	{
-		mVehicle = new Vehicle * [10];
+		mVehicle = new Vehicle * [MAX_VEHICLES_COUNT];
 		mVehicleCount = 0;
 	}
 	DeusExMachina::~DeusExMachina()
 	{
+		for (unsigned int i = 0; i < mVehicleCount; i++)
+		{
+			delete mVehicle[i];
+		}
 	}
 
 	DeusExMachina* DeusExMachina::GetInstance()
@@ -29,12 +35,9 @@ namespace assignment2
 		if (mInstance == NULL)
 		{
 			mInstance = new DeusExMachina();
-			return mInstance;
 		}
-		else
-		{
-			return mInstance;
-		}
+		return mInstance;
+
 	}
 
 	void DeusExMachina::Travel() const
@@ -47,6 +50,7 @@ namespace assignment2
 
 	bool DeusExMachina::AddVehicle(Vehicle* vehicle)
 	{
+		assert(vehicle != nullptr);
 		if (mVehicleCount < 10)
 		{
 			mVehicle[mVehicleCount] = vehicle;
@@ -63,8 +67,9 @@ namespace assignment2
 
 	bool DeusExMachina::RemoveVehicle(unsigned int i)
 	{
-		if (i < mVehicleCount)
+		if (i < mVehicleCount && mVehicle[i] != nullptr)
 		{
+			delete mVehicle[i];
 			for (size_t j = i; j < mVehicleCount - 1; j++)
 			{
 				mVehicle[j] = mVehicle[j + 1];
@@ -80,24 +85,21 @@ namespace assignment2
 
 	const Vehicle* DeusExMachina::GetFurthestTravelled() const
 	{
-		if (mVehicleCount == 0)
+		unsigned int max = 0;
+		Vehicle* mostMovedVehicle = nullptr;
+		for (unsigned int i = 0; i < mVehicleCount; i++)
 		{
-			return NULL;
-		}
-
-		unsigned int tem;
-		unsigned int index;
-		tem = mVehicle[0]->GetTraveledDistance();
-		index = 0;
-		for (size_t i = 0; i < mVehicleCount; i++)
-		{
-			if (mVehicle[i]->GetTraveledDistance() > tem)
+			if (max < mVehicle[i]->GetMovedLength())
 			{
-				index = i;
-				tem = mVehicle[i]->GetTraveledDistance();
+				max = mVehicle[i]->GetMovedLength();
+				mostMovedVehicle = mVehicle[i];
 			}
 		}
-		return mVehicle[index];
+		if (max == 0 && mVehicleCount > 0)
+		{
+			mostMovedVehicle = mVehicle[0];
+		}
+		return mostMovedVehicle;
 	}
 }
 

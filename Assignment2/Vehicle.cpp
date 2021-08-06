@@ -6,20 +6,22 @@ namespace assignment2
 	Vehicle::Vehicle(unsigned int maxPassengersCount)
 		: mMaxPassengersCount(maxPassengersCount)
 		, mOnBoardNum(0)
-		, mRestCount(0)
+		, mMovedLength(0)
 		, mMoveCount(0)
 	{
 		mPassenger = new const Person * [mMaxPassengersCount];
+		for (size_t i = 0; i < mMaxPassengersCount; i++)
+		{
+			mPassenger[i] = nullptr;
+		}
 	}
 	void Vehicle::SetMoveCount()
 	{
 		mMoveCount = 0;
-		mRestCount = 0;
 	}
 
 	void Vehicle::Move()
 	{
-
 	}
 
 	unsigned int Vehicle::GetMaxSpeed() const
@@ -46,7 +48,7 @@ namespace assignment2
 		: mMaxPassengersCount(rhs.mMaxPassengersCount)
 		, mOnBoardNum(rhs.mOnBoardNum)
 		, mMoveCount(0)
-		, mRestCount(0)
+		, mMovedLength(0)
 	{
 		mPassenger = new const Person * [rhs.mMaxPassengersCount];
 		for (size_t i = 0; i < rhs.mOnBoardNum; i++)
@@ -54,6 +56,32 @@ namespace assignment2
 			mPassenger[i] = new const Person(rhs.mPassenger[i]->GetName(), rhs.mPassenger[i]->GetWeight());
 		}
 	}
+
+	Vehicle& Vehicle::operator=(const Vehicle& rhs)
+	{
+		if (this == &rhs)
+		{
+			return *this;
+		}
+
+		for (size_t i = 0; i < mMaxPassengersCount; i++)
+		{
+			delete mPassenger[i];
+			mPassenger[i] = nullptr;
+		}
+		
+		mMaxPassengersCount = rhs.mMaxPassengersCount;
+		mOnBoardNum = rhs.mOnBoardNum;
+		mMoveCount = rhs.mMoveCount;
+		mMovedLength = rhs.mMovedLength;
+		mPassenger = new const Person * [rhs.mMaxPassengersCount];
+		for (size_t i = 0; i < rhs.mOnBoardNum; i++)
+		{
+			mPassenger[i] = new const Person(rhs.mPassenger[i]->GetName(), rhs.mPassenger[i]->GetWeight());
+		}
+
+	}
+
 
 	bool Vehicle::AddPassenger(const Person* person)
 	{
@@ -183,5 +211,10 @@ namespace assignment2
 	void Vehicle::SetonBoardNum(unsigned int i)
 	{
 		mOnBoardNum = i;
+	}
+
+	unsigned int Vehicle::GetMovedLength() const
+	{
+		return mMovedLength;
 	}
 }

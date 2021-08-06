@@ -1,3 +1,4 @@
+#include<cassert>
 #include "UBoat.h"
 
 namespace assignment2
@@ -45,25 +46,23 @@ namespace assignment2
 	}
 	void UBoat::Move()
 	{
-		if (mMoveCount == 0)
+		switch (mMoveCount)
 		{
+		case 0:
+		case 1:
+			mMovedLength += GetMaxSpeed();
+			[[fallthrough]];
+		case 2:
+		case 3:
+		case 4:
 			mMoveCount++;
-		}
-		else
-		{
-			if (mMoveCount % 2 != 0)
-			{
-				mMoveCount++;
-			}
-			else if (mRestCount < 4)
-			{
-				mRestCount++;
-			}
-			else if (mRestCount == 4)
-			{
-				mRestCount = 0;
-				mMoveCount++;
-			}
+			break;
+		case 5:
+			mMoveCount = 0;
+			break;
+		default:
+			assert(false);
+			break;
 		}
 	}
 

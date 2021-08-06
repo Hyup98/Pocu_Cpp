@@ -38,7 +38,6 @@ int main()
 	assert(a.GetPassenger(1) == p2);
 	
 	assert(a.GetFlySpeed() == 648);
-	std::cout << a.GetDriveSpeed();
 	assert(a.GetDriveSpeed() == 59);
 	assert(a.GetMaxSpeed() == 648);
 
@@ -112,7 +111,7 @@ int main()
 	deusExMachina1->Travel(); // Boat, Motorcycle, 두 Sedan이 이동
 	deusExMachina1->Travel(); // Boat, Motorcycle, 두 Sedan이 이동
 	deusExMachina1->Travel(); // 트레일러 달린 Sedan만 이동
-	//assert(deusExMachina1->GetFurthestTravelled() == boat);
+	assert(deusExMachina1->GetFurthestTravelled() == boat);
 
 	return 0;
 }

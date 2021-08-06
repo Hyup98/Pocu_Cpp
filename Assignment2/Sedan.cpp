@@ -1,5 +1,6 @@
 #include "Sedan.h"
 #include "Trailer.h"
+#include<cassert>
 
 namespace assignment2
 {
@@ -21,26 +22,28 @@ namespace assignment2
 		{
 			totalWeight += GetTotalWeight();
 			totalWeight += mTrailer->GetWeight();
+
 			if (totalWeight <= 80)
 			{
 				return 480;
 			}
-			else 
+			else if (totalWeight <= 160)
 			{
-				if (totalWeight > 160)
-				{
-					if (totalWeight > 260)
-					{
-						if (totalWeight > 350)
-						{
-							return 400;
-						}
-						return 400;
-					}
-					return 400;
-				}
 				return 458;
 			}
+			else if (totalWeight <= 260)
+			{
+				return 400;
+			}
+			else if (totalWeight <= 350)
+			{
+				return 380;
+			}
+			else
+			{
+				return 300;
+			}
+
 		}
 		else
 		{
@@ -49,21 +52,25 @@ namespace assignment2
 			{
 				return 480;
 			}
+			if (totalWeight <= 80)
+			{
+				return 480;
+			}
+			else if (totalWeight <= 160)
+			{
+				return 458;
+			}
+			else if (totalWeight <= 260)
+			{
+				return 400;
+			}
+			else if (totalWeight <= 350)
+			{
+				return 380;
+			}
 			else
 			{
-				if (totalWeight > 160)
-				{
-					if (totalWeight > 260)
-					{
-						if (totalWeight > 350)
-						{
-							return 400;
-						}
-						return 400;
-					}
-					return 400;
-				}
-				return 458;
+				return 300;
 			}
 
 		}
@@ -94,53 +101,25 @@ namespace assignment2
 
 	void Sedan::Move()
 	{
-		if (mBIsConect)
+		switch (mMoveCount)
 		{
-			if (mMoveCount == 0)
-			{
-				mMoveCount++;
-			}
-
-			else
-			{
-				if (mRestCount == 2)
-				{
-					mRestCount = 0;
-					mMoveCount++;
-				}
-				else if (mMoveCount % 5 != 0)
-				{
-					mMoveCount++;
-				}
-				else
-				{
-					mRestCount++;
-				}
-			}
-		}
-		else
-		{
-			if (mMoveCount == 0)
-			{
-				mMoveCount++;
-			}
-
-			else
-			{
-				if (mRestCount == 1)
-				{
-					mMoveCount++;
-					mRestCount = 0;
-				}
-				else if (mMoveCount % 5 != 0)
-				{
-					mMoveCount++;
-				}
-				else
-				{
-					mRestCount++;
-				}
-			}
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+			mMovedLength += GetMaxSpeed();
+			mMoveCount++;
+			break;
+		case 5:
+			mTrailer == nullptr ? mMoveCount = 0 : mMoveCount = 6;
+			break;
+		case 6:
+			mMoveCount = 0;
+			break;
+		default:
+			assert(false);
+			break;
 		}
 	}
 
