@@ -21,7 +21,7 @@ namespace assignment3
 		double GetAverage();
 		T GetSum();
 		double GetVariance();
-		T GetStandardDeviation();
+		double GetStandardDeviation();
 		unsigned int GetCount();
 
 	private:
@@ -147,7 +147,7 @@ namespace assignment3
 	template<typename T>
 	double SmartStack<T>::GetAverage()
 	{
-		T tem = GetSum();
+		double tem = GetSum();
 		tem /= mStack.size();
 		double a = static_cast<double>(tem);
 		return a;
@@ -159,7 +159,7 @@ namespace assignment3
 	double SmartStack<T>::GetVariance()
 	{
 		stack<T> temStack;
-		T tem = 0;
+		double tem = 0;
 		while (!mStack.empty())
 		{
 			tem += mStack.top() * mStack.top();
@@ -178,7 +178,7 @@ namespace assignment3
 	}
 
 	template<typename T>
-	T SmartStack<T>::GetStandardDeviation()
+	double SmartStack<T>::GetStandardDeviation()
 	{
 		return sqrt(GetVariance());
 	}

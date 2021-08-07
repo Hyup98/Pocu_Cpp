@@ -25,10 +25,9 @@ namespace assignment3
 
 	private:
 		unsigned int mStackSize;
-		stack<T> t;
+		unsigned int mStackCount;
 		queue<stack<T>> mQueue;
 		unsigned int mCount;
-		unsigned int mStackCount;
 		T mMax;
 		T mMin;
 	};
@@ -37,6 +36,7 @@ namespace assignment3
 	QueueStack<T>::QueueStack(unsigned int size)
 		: mStackSize(size)
 		, mCount(0)
+
 		, mStackCount(0)
 	{
 	}
@@ -47,11 +47,12 @@ namespace assignment3
 		if (mQueue.size() == 0)
 		{
 			stack<T> tem;
+			tem.push(data);
 			mQueue.push(tem);
-			mQueue.back().push(data);
 			mMax = data;
 			mMin = data;
 			mStackCount++;
+			mCount++;
 		}
 		else
 		{
@@ -66,15 +67,23 @@ namespace assignment3
 					mMin = data;
 				}
 				stack<T> tem;
+				tem.push(data);
 				mQueue.push(tem);
-				mQueue.back().push(data);
-				mStackCount++;
 				mCount++;
 			}
 			else
 			{
+				if (data > mMax)
+				{
+					mMax = data;
+				}
+				if (data < mMin)
+				{
+					mMin = data;
+				}
 				mQueue.back().push(data);
 				mCount++;
+				mStackCount++;
 			}
 		}
 	}
@@ -88,11 +97,12 @@ namespace assignment3
 	template<typename T>
 	T QueueStack<T>::Dequeue()
 	{
+		/*
 		mStackCount = 0;
 		mCount = 0;
 		T tem = mQueue.front().top();
 		mQueue.front().pop();
-		
+
 		queue<stack<T>> temQueue;
 
 		while (!mQueue.empty())
@@ -118,7 +128,7 @@ namespace assignment3
 			mStackCount++;
 			stack<T> temStack;
 			temQueue.push(temStack);
-			
+
 			while (!mQueue.front().empty())
 			{
 				if (temQueue.front().top() > mMax)
@@ -134,9 +144,101 @@ namespace assignment3
 				mQueue.front().pop();
 			}
 		}
+		*/
+		T tem = mQueue.front().top();
+		if (mQueue.front().size() == 1)
+		{
+			mStackCount--;
+			mCount--;
+			mQueue.pop();
+			queue<stack<T>> temQueue;
+			while (!mQueue.empty())
+			{
+				stack<T> temStack;
+				temQueue.push(temStack);
+				while (!mQueue.front().empty())
+				{
+					temQueue.back().push(mQueue.front().top());
+					mQueue.front().pop();
+				}
+				mQueue.pop();
 
+			}
+
+			while (!temQueue.empty())
+			{
+				if (mQueue.size() == 0)
+				{
+					mMax = temQueue.front().top();
+					mMin = temQueue.front().top();
+				}
+
+				stack<T> temStack;
+				mQueue.push(temStack);
+
+				while (!temQueue.front().empty())
+				{
+					if (temQueue.front().top() > mMax)
+					{
+						mMax = static_cast<float>(temQueue.front().top());
+					}
+					if (temQueue.front().top() < mMin)
+					{
+						mMin = static_cast<float>(temQueue.front().top());
+					}
+					mQueue.back().push(temQueue.front().top());
+					temQueue.front().pop();
+				}
+				temQueue.pop();
+			}
+		}
+		else
+		{
+			mCount--;
+			mQueue.front().pop();
+			queue<stack<T>> temQueue;
+			while (!mQueue.empty())
+			{
+				stack<T> temStack;
+				temQueue.push(temStack);
+				while (!mQueue.front().empty())
+				{
+					temQueue.back().push(mQueue.front().top());
+					mQueue.front().pop();
+				}
+				mQueue.pop();
+
+			}
+
+
+			while (!temQueue.empty())
+			{
+				if (mQueue.size() == 0)
+				{
+					mMax = temQueue.front().top();
+					mMin = temQueue.front().top();
+				}
+
+				stack<T> temStack;
+				mQueue.push(temStack);
+
+				while (!temQueue.front().empty())
+				{
+					if (temQueue.front().top() > mMax)
+					{
+						mMax = static_cast<float>(temQueue.front().top());
+					}
+					if (temQueue.front().top() < mMin)
+					{
+						mMin = static_cast<float>(temQueue.front().top());
+					}
+					mQueue.back().push(temQueue.front().top());
+					temQueue.front().pop();
+				}
+				temQueue.pop();
+			}
+		}
 		return tem;
-
 	}
 
 	template<typename T>
@@ -168,7 +270,7 @@ namespace assignment3
 	template<typename T>
 	double QueueStack<T>::GetAverage()
 	{
-		T tem = static_cast<float>(GetSum());
+		double tem = GetSum();
 		tem /= mCount;
 		double a = static_cast<double>(tem);
 		return a;
@@ -190,19 +292,19 @@ namespace assignment3
 				temQueue.back().push(mQueue.front().top());
 				mQueue.front().pop();
 			}
-			mQueue.front().pop();
-
+			mQueue.pop();
 		}
 
 		while (!temQueue.empty())
 		{
 			stack<T> temStack;
-			temQueue.push(temStack);
-			while (!mQueue.front().empty())
+			mQueue.push(temStack);
+			while (!temQueue.front().empty())
 			{
-				temQueue.back().push(mQueue.front().top());
-				mQueue.front().pop();
+				mQueue.back().push(temQueue.front().top());
+				temQueue.front().pop();
 			}
+			temQueue.pop();
 		}
 
 		double a = static_cast<double>(tem);

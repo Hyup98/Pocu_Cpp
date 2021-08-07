@@ -1,6 +1,7 @@
 #pragma once
 #include<queue>
 #include<cmath>
+#include<iostream>
 #include<limits>
 
 
@@ -22,7 +23,7 @@ namespace assignment3
 		double GetAverage();
 		T GetSum();
 		double GetVariance();
-		T GetStandardDeviation();
+		double GetStandardDeviation();
 		unsigned int GetCount();
 
 	private:
@@ -123,7 +124,7 @@ namespace assignment3
 	template<typename T>
 	double SmartQueue<T>::GetAverage()
 	{
-		T tem = GetSum();
+		double tem = GetSum();
 		tem /= mQueue.size();
 		double a = static_cast<double>(tem);
 		return a;
@@ -155,7 +156,7 @@ namespace assignment3
 	double SmartQueue<T>::GetVariance()
 	{
 		queue<T> temQueue;
-		T tem = 0;
+		double tem = 0;
 		while (!mQueue.empty())
 		{
 			tem += mQueue.front() * mQueue.front();
@@ -174,9 +175,10 @@ namespace assignment3
 	}
 
 	template<typename T>
-	T SmartQueue<T>::GetStandardDeviation()
+	double SmartQueue<T>::GetStandardDeviation()
 	{
-		return sqrt(GetVariance());
+		double tem = sqrt(GetVariance());
+		return static_cast<double>(tem);
 	}
 
 	template<typename T>

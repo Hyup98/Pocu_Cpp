@@ -1,7 +1,11 @@
+#include<iostream>
 #include <cassert>
+#include "QueueStack.h"
+#include "SmartStack.h"
 #include"SmartQueue.h"
-#include"QueueStack.h"
 
+
+using namespace std;
 using namespace assignment3;
 
 int main()
@@ -13,7 +17,10 @@ int main()
     qs.Enqueue(4); // [ [ 1, 2, 3 ], [ 4 ] ]
     qs.Enqueue(5); // [ [ 1, 2, 3 ], [ 4, 5 ] ]
 
-    int peeked = qs.Peek(); // peeked의 값은 3. qs의 요소는 여전히 [ [ 1, 2, 3 ], [ 4, 5 ] ]);
-
+    int dequeued = qs.Dequeue(); // dequeued의 값은 3. qs의 요소: [ [ 1, 2 ], [ 4, 5 ] ]
+    
+    cout<< qs.GetAverage(); 
+    int a;
+    cin >> a;
     return 0;
 }
